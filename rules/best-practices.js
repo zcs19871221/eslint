@@ -1,5 +1,3 @@
-const restrictedGlobals = require("./confusingGlobals.js");
-
 module.exports = {
   rules: {
     // 数组回调必须有return语句 allowImplicit：可以return后面不包含值（return undefined）
@@ -80,6 +78,7 @@ module.exports = {
     "no-multi-str": "error",
 
     // 禁止直接在语法中出现非赋值的new运算符：(const a = new Person()可以，不能直接new Person())
+    // 一般new的对象都要返回，如果只new不返回使用，有可能是写错了，造成意外错误
     "no-new": "error",
 
     // 不允许使用new操作符创建函数(通过解析字符串创建函数，一般也就模板引擎这么干)
@@ -109,15 +108,22 @@ module.exports = {
       {
         props: true,
         ignorePropertyModificationsFor: [
-          "acc", // for reduce accumulators
-          "accumulator", // for reduce accumulators
-          "e", // for e.returnvalue
-          "ctx", // for Koa routing
-          "req", // for Express requests
-          "request", // for Express requests
-          "res", // for Express responses
-          "response", // for Express responses
-          "$scope" // for Angular 1 scopes
+          // for reduce accumulators
+          "acc",
+          // for reduce accumulators
+          "accumulator",
+          // for e.returnvalue
+          "e",
+          // for Koa routing
+          "ctx",
+          // for Express requests
+          "req",
+          // for Express requests
+          "request",
+          // for Express responses
+          "res",
+          // for Express responses
+          "response"
         ]
       }
     ],
@@ -210,14 +216,10 @@ module.exports = {
     // 禁止使用逗号运算符
     "no-sequences": "error",
 
-    // restrict what can be thrown as an exception
+    // throw只允许throw error对象
     "no-throw-literal": "error",
 
-    // disallow unmodified conditions of loops
-    // https://eslint.org/docs/rules/no-unmodified-loop-condition
-    "no-unmodified-loop-condition": "off",
-
-    // disallow usage of expressions in statement position
+    // 禁止出现独立的表达式，包含短路、三目、模板字符（表达式结果没有赋值，有可能会修改变量，造成副作用）
     "no-unused-expressions": [
       "error",
       {
@@ -227,58 +229,36 @@ module.exports = {
       }
     ],
 
-    // disallow unused labels
-    // https://eslint.org/docs/rules/no-unused-labels
-    // 和no-labels重复'no-unused-labels': 'error',
-
-    // disallow useless string concatenation
-    // https://eslint.org/docs/rules/no-useless-concat
+    // 禁止无效的字符串连接('a' + 'b' => 'ab')
     "no-useless-concat": "error",
 
-    // disallow unnecessary string escaping
-    // https://eslint.org/docs/rules/no-useless-escape
+    // 禁止出现无效的转义符号（'a\b'）
     "no-useless-escape": "error",
 
-    // disallow redundant return; keywords
-    // https://eslint.org/docs/rules/no-useless-return
+    // 禁止出现return后面什么都不带（要不return具体值，要不别写return）
     "no-useless-return": "error",
 
-    // disallow use of void operator
-    // https://eslint.org/docs/rules/no-void
+    // 禁止使用void运算符
     "no-void": "error",
 
-    // disallow usage of configurable warning terms in comments: e.g. todo
-    "no-warning-comments": [
-      "off",
-      { terms: ["todo", "fixme", "xxx"], location: "start" }
-    ],
-
-    // disallow use of the with statement
+    // 禁止使用with语法
     "no-with": "error",
 
-    // require using Error objects as Promise rejection reasons
-    // https://eslint.org/docs/rules/prefer-promise-reject-errors
+    // promise reject的必须使用error对象或自定义对象
     "prefer-promise-reject-errors": ["error", { allowEmptyReject: true }],
 
-    // require use of the second argument for parseInt()
+    // parseInt函数必须提供第二个参数-进制基数。
+    // 因为parseInt会根据输入自动检测是属于哪个进制，这可能会造成
+    // 和意图不符合的意外错误，比如：
+    // var num = parseInt("071");      // 57
+    // var num = parseInt("071", 10);  // 71
     radix: "error",
 
-    // require `await` in `async function` (note: this is a horrible rule that should never be used)
-    // https://eslint.org/docs/rules/require-await
-    "require-await": "off",
-
-    // Enforce the use of u flag on RegExp
-    // https://eslint.org/docs/rules/require-unicode-regexp
-    "require-unicode-regexp": "off",
-
-    // requires to declare all vars on top of their containing scope
-    "vars-on-top": "error",
-
-    // require immediate function invocation to be wrapped in parentheses
-    // https://eslint.org/docs/rules/wrap-iife.html
-    "wrap-iife": ["error", "outside", { functionPrototypeMethods: false }],
-
-    // require or disallow Yoda conditions
+    // 要求条件判断语句中先出现变量，后出现常量
+    // good：if (color === 'red')
+    // bad：if ('red' === 'color')
+    // 名字来源于星球大战中的尤达大师，说话
+    // 喜欢这样反着来
     yoda: "error"
   }
 };
