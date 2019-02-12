@@ -1,3 +1,10 @@
+// 未实现规范
+// 1. 尽可能使用箭头函数实现组件，除了使用PureComponent，ref，lifeCyclefunction
+// 2. jsx的事件响应使用onXX的格式，事件响应的回调根据
+//     1. 使用onXX，如果是props
+//     2. 使用handleXX，如果是类方法
+//     正确：<Button onClick={this.handleClick}
+//     正确：<Button onClick={this.props.onClick}
 module.exports = {
   plugins: ["react"],
 
@@ -7,13 +14,8 @@ module.exports = {
     }
   },
 
-  // View link below for react rules documentation
-  // https://github.com/yannickcr/eslint-plugin-react#list-of-supported-rules
   rules: {
-    // Specify whether double or single quotes should be used in JSX attributes
-    // https://eslint.org/docs/rules/jsx-quotes
-    "jsx-quotes": ["error", "prefer-double"],
-
+    // 强制要求非预设方法使用this
     "class-methods-use-this": [
       "error",
       {
@@ -38,12 +40,9 @@ module.exports = {
       }
     ],
 
-    // Prevent missing displayName in a React component definition
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/display-name.md
-    "react/display-name": ["off", { ignoreTranspilerName: false }],
-
-    // Forbid certain propTypes (any, array, object)
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/forbid-prop-types.md
+    // PropTypes禁止使用any
+    // PropTypes禁止使用 array，使用arrayOf替代
+    // PropTypes禁止使用 object，使用shape替代
     "react/forbid-prop-types": [
       "error",
       {
@@ -53,61 +52,25 @@ module.exports = {
       }
     ],
 
-    // Forbid certain props on DOM Nodes
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/forbid-dom-props.md
-    "react/forbid-dom-props": ["off", { forbid: [] }],
-
-    // Enforce boolean attributes notation in JSX
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md
+    // 强制省略jsx中boolean为true的写法
+    // wrong: <Modal isShow={true} />
+    // right: <Modal isShow />
     "react/jsx-boolean-value": ["error", "never", { always: [] }],
 
-    // Validate closing bracket location in JSX
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md
-    "react/jsx-closing-bracket-location": ["error", "line-aligned"],
+    // 数组或循环输出jsx，必须提供唯一的key
+    // 注意这个key要根据内容产生，不能使用index，否则会出现更大的问题
+    "react/jsx-key": "error",
 
-    // Validate closing tag location in JSX
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-tag-location.md
-    "react/jsx-closing-tag-location": "error",
-
-    // Enforce or disallow spaces inside of curly braces in JSX attributes
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-curly-spacing.md
-    "react/jsx-curly-spacing": ["error", "never", { allowMultiline: true }],
-
-    // Enforce event handler naming conventions in JSX
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-handler-names.md
-    "react/jsx-handler-names": [
-      "off",
-      {
-        eventHandlerPrefix: "handle",
-        eventHandlerPropPrefix: "on"
-      }
-    ],
-
-    // Validate props indentation in JSX
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-indent-props.md
-    "react/jsx-indent-props": ["error", 2],
-
-    // Validate JSX has key prop when in array or iterator
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-key.md
-    "react/jsx-key": "off",
-
-    // Limit maximum of props on a single line in JSX
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-max-props-per-line.md
-    "react/jsx-max-props-per-line": [
-      "error",
-      { maximum: 1, when: "multiline" }
-    ],
-
-    // Prevent usage of .bind() in JSX props
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md
+    // 禁止在jsx中使用bind或箭头函数，
+    // 因为每次都会产生一个新的函数，导致每次都会刷新，性能不利
     "react/jsx-no-bind": [
       "error",
       {
-        ignoreRefs: true,
-        allowArrowFunctions: true,
+        ignoreRefs: false,
+        allowArrowFunctions: false,
         allowFunctions: false,
         allowBind: false,
-        ignoreDOMComponents: true
+        ignoreDOMComponents: false
       }
     ],
 
@@ -227,13 +190,6 @@ module.exports = {
     // Require ES6 class declarations over React.createClass
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md
     "react/prefer-es6-class": ["error", "always"],
-
-    // Require stateless functions when not using lifecycle methods, setState or ref
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
-    "react/prefer-stateless-function": [
-      "error",
-      { ignorePureComponents: true }
-    ],
 
     // Prevent missing props validation in a React component definition
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md
