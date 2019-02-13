@@ -12,6 +12,7 @@
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.10.0",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "request": "^2.88.0"
   }
 }

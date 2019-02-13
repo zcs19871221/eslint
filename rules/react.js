@@ -1,10 +1,8 @@
-// 未实现规范
-// 1. 尽可能使用箭头函数实现组件，除了使用PureComponent，ref，lifeCyclefunction
-// 2. jsx的事件响应使用onXX的格式，事件响应的回调根据
-//     1. 使用onXX，如果是props
-//     2. 使用handleXX，如果是类方法
-//     正确：<Button onClick={this.handleClick}
-//     正确：<Button onClick={this.props.onClick}
+// 本规则是react、jsx相关规范
+// 如何查看规则详细：
+// 1. 获取rulesName: 'react/forbid-prop-types'取斜线后边部分forbid-prop-types
+// 2. 地址替换rulesName：
+// `https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/${rulesName}.md`
 module.exports = {
   plugins: ["react"],
 
@@ -74,20 +72,14 @@ module.exports = {
       }
     ],
 
-    // Prevent duplicate props in JSX
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-duplicate-props.md
+    // 禁止在jsx中出现相同的属性名，忽略大小写
+    // wrong：<Hello name='1234' Name='1234'>/
     "react/jsx-no-duplicate-props": ["error", { ignoreCase: true }],
 
-    // Prevent usage of unwrapped JSX strings
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-literals.md
-    "react/jsx-no-literals": ["off", { noStrings: true }],
-
-    // Disallow undeclared variables in JSX
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-undef.md
+    // 禁止在jsx中出现未定义的变量
     "react/jsx-no-undef": "error",
 
-    // Enforce PascalCase for user-defined JSX components
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md
+    // 强制要求自定义组件以大骆驼形式命名
     "react/jsx-pascal-case": [
       "error",
       {
@@ -96,103 +88,55 @@ module.exports = {
       }
     ],
 
-    // Enforce propTypes declarations alphabetical sorting
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-prop-types.md
-    "react/sort-prop-types": [
-      "off",
-      {
-        ignoreCase: true,
-        callbacksLast: false,
-        requiredFirst: false,
-        sortShapeProp: true
-      }
-    ],
-
-    // Deprecated in favor of react/jsx-sort-props
-    "react/jsx-sort-prop-types": "off",
-
-    // Enforce props alphabetical sorting
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-sort-props.md
-    "react/jsx-sort-props": [
-      "off",
-      {
-        ignoreCase: true,
-        callbacksLast: false,
-        shorthandFirst: false,
-        shorthandLast: false,
-        noSortAlphabetically: false,
-        reservedFirst: true
-      }
-    ],
-
-    // Enforce defaultProps declarations alphabetical sorting
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/jsx-sort-default-props.md
-    "react/jsx-sort-default-props": [
-      "off",
-      {
-        ignoreCase: true
-      }
-    ],
-
-    // Prevent React to be incorrectly marked as unused
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-react.md
+    // 禁止出现无效的react引用
+    // 如果没有jsx语法，不要引用react
     "react/jsx-uses-react": ["error"],
 
-    // Prevent variables used in JSX to be incorrectly marked as unused
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-vars.md
+    // 不允许出现定义未使用的组件
     "react/jsx-uses-vars": "error",
 
-    // Prevent usage of dangerous JSX properties
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-danger.md
+    // 使用直接设置innerHTML的react语法时候，
+    // 发出警告
     "react/no-danger": "warn",
 
-    // Prevent usage of deprecated methods
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-deprecated.md
+    // 禁止使用已启用语法
     "react/no-deprecated": ["error"],
 
-    // Prevent usage of setState in componentDidMount
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-did-mount-set-state.md
-    // this is necessary for server-rendering
-    "react/no-did-mount-set-state": "off",
-
-    // Prevent usage of setState in componentDidUpdate
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-did-update-set-state.md
+    // 禁止在componentDidUpdate中调用setState
+    // 这样很可能会导致死循环重复刷新组件
     "react/no-did-update-set-state": "error",
 
-    // Prevent usage of setState in componentWillUpdate
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-will-update-set-state.md
+    // 禁止在willUpdate中使用setState
+    // 实际上，willUpdate已经启用了，并将于react17正式不支持
     "react/no-will-update-set-state": "error",
 
-    // Prevent direct mutation of this.state
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-direct-mutation-state.md
-    "react/no-direct-mutation-state": "off",
+    // 禁止直接改变state，必须使用setState
+    // react的state必须保持纯的，因为react会根据当前state
+    // 和上一个state做一个浅比较，决定是否render，而且state
+    // 如果作为props传到组件里，还会再进行浅比较决定组件是否刷新
+    "react/no-direct-mutation-state": "error",
 
-    // Prevent usage of isMounted
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md
+    // 禁止使用isMounted
+    // isMounted使用场景是为了消除警告：一个组件已经umount但仍然调用了setState
+    // 使用isMounted可能会消除警告，但是警告的目的是让你发现为什么umount了还会调用setState，从而
+    // 发现代码潜在的问题。使用了isMounted没有警告了，也发现不了问题
+    // 绝大多数的问题都发生在异步的回调，你可以通过：在Umount中设置flag，在回调中判断flag来解决。
+    // 更好的方法是在umount的时候取消数据订阅，或者通过实现promise.cancel方法取消promise
     "react/no-is-mounted": "error",
 
-    // Prevent multiple component definition per file
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md
+    // 一个文件中只允许出现一个react组件（使用class定义，函数组件不计算）
     "react/no-multi-comp": ["error", { ignoreStateless: true }],
 
-    // Prevent usage of setState
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-set-state.md
-    "react/no-set-state": "off",
-
-    // Prevent using string references
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md
+    // 禁止使用字符串作为refdom参数
     "react/no-string-refs": "error",
 
-    // Prevent usage of unknown DOM property
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-unknown-property.md
+    // 禁止在原生dom组件中出现非标准（不符合react属性名）的属性
     "react/no-unknown-property": "error",
 
-    // Require ES6 class declarations over React.createClass
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md
+    // 禁止使用createReactClass创建组件，强制使用class
     "react/prefer-es6-class": ["error", "always"],
 
-    // Prevent missing props validation in a React component definition
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md
+    // 强制使用propTypes检查属性
     "react/prop-types": [
       "error",
       {
@@ -202,35 +146,27 @@ module.exports = {
       }
     ],
 
-    // Prevent missing React when using JSX
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md
+    // 如果有jsx语法，那么必须在作用域中引用react
+    // 如果没有jsx语法，不要引用react
     "react/react-in-jsx-scope": "error",
 
-    // Require render() methods to return something
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-render-return.md
+    // 强制要求render方法包含return语句
     "react/require-render-return": "error",
 
-    // Prevent extra closing tags for components without children
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md
+    // 没有children的组件强制要求使用自闭合语法，不要
+    // <Hello />
     "react/self-closing-comp": "error",
 
-    // Enforce component methods order
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/sort-comp.md
+    // 强制要求组件内部按照
+    // 1. 静态方法
+    // 2. 事件循环方法
+    // 3. 其他方法
+    // 4. render方法
+    // 的顺序排列
     "react/sort-comp": [
       "error",
       {
-        order: [
-          "static-methods",
-          "instance-variables",
-          "lifecycle",
-          "/^on.+$/",
-          "getters",
-          "setters",
-          "/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/",
-          "instance-methods",
-          "everything-else",
-          "rendering"
-        ],
+        order: ["static-methods", "lifecycle", "everything-else", "rendering"],
         groups: {
           lifecycle: [
             "displayName",
@@ -258,71 +194,35 @@ module.exports = {
       }
     ],
 
-    // Prevent missing parentheses around multilines JSX
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/jsx-wrap-multilines.md
-    "react/jsx-wrap-multilines": [
-      "error",
-      {
-        declaration: "parens-new-line",
-        assignment: "parens-new-line",
-        return: "parens-new-line",
-        arrow: "parens-new-line",
-        condition: "parens-new-line",
-        logical: "parens-new-line",
-        prop: "parens-new-line"
-      }
-    ],
-
-    // Require that the first prop in a JSX element be on a new line when the element is multiline
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-first-prop-new-line.md
-    "react/jsx-first-prop-new-line": ["error", "multiline-multiprop"],
-
-    // Enforce spacing around jsx equals signs
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-equals-spacing.md
-    "react/jsx-equals-spacing": ["error", "never"],
-
-    // Enforce JSX indentation
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-indent.md
-    "react/jsx-indent": ["error", 2],
-
-    // Disallow target="_blank" on links
-    // https://github.com/yannickcr/eslint-plugin-react/blob/ac102885765be5ff37847a871f239c6703e1c7cc/docs/rules/jsx-no-target-blank.md
+    // 当使用a标签的target='_blank'属性时候，有安全隐患，新开的页面可以通过
+    // window.opener获取原始页面的windows对象，想象你打开了一个连接到一个恶意网站，
+    // 该网站通过window.opener.location='一个高仿钓鱼网站'窃取你的信息
+    // 因此当href是域名开头或者变量的时候，要求必须添加属性rel='noreferrer noopener'
     "react/jsx-no-target-blank": ["error", { enforceDynamicLinks: "always" }],
 
-    // only .jsx files may have JSX
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md
+    // 强制要求.jsx后缀的文件才可以包含jsx语法
     "react/jsx-filename-extension": ["error", { extensions: [".jsx"] }],
 
-    // prevent accidental JS comments from being injected into JSX as text
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-comment-textnodes.md
+    // 禁止在jsx节点中出现//，防止开发者以为注释了，实际上会输出字符串的问题
+    // wrong:
+    // <div>//不需要了。。</div>
+    // right:
+    // <div>/* 不需要了。。 */</div>
     "react/jsx-no-comment-textnodes": "error",
 
-    // disallow using React.render/ReactDOM.render's return value
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-render-return-value.md
+    // 禁止使用React.render/ReactDOM.render的返回值
+    // 这个返回值是对根元素的引用，但是以后有可能会使用异步渲染，再用这个会有问题
+    // 请使用ref获取dom元素
     "react/no-render-return-value": "error",
 
-    // require a shouldComponentUpdate method, or PureRenderMixin
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-optimization.md
-    "react/require-optimization": ["off", { allowDecorators: [] }],
-
-    // warn against using findDOMNode()
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-find-dom-node.md
+    // 禁止使用findDOMNode方法，因为这个方法以后会废弃掉
+    // 使用ref获取dom引用
     "react/no-find-dom-node": "error",
 
-    // Forbid certain props on Components
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/forbid-component-props.md
-    "react/forbid-component-props": ["off", { forbid: [] }],
-
-    // Forbid certain elements
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/forbid-elements.md
-    "react/forbid-elements": ["off", { forbid: [] }],
-
-    // Prevent problem with children and props.dangerouslySetInnerHTML
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-danger-with-children.md
+    // 禁止使用dangerouslySetInnerHTML的同时还包含children
     "react/no-danger-with-children": "error",
 
-    // Prevent unused propType definitions
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-unused-prop-types.md
+    // 禁止定义没有被使用的props
     "react/no-unused-prop-types": [
       "error",
       {
@@ -331,41 +231,30 @@ module.exports = {
       }
     ],
 
-    // Require style prop value be an object or var
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/style-prop-object.md
+    // 强制要求style属性的值必须是对象
     "react/style-prop-object": "error",
 
-    // Prevent invalid characters from appearing in markup
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-unescaped-entities.md
+    // 禁止在jsx标签中出现无效的字符串
+    // 比如意外的闭合，> " ' } 等符号使用转义符号
+    // > -> &gt;
+    // " -> &quot;
+    // ' -> &apos;
+    // } -> &#125;
     "react/no-unescaped-entities": "error",
 
-    // Prevent passing of children as props
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-children-prop.md
+    // 禁止使用props的children属性传递子元素
+    // wrong: <Father children={<Child/>} />
+    // wright: <Father><Child/></Father>
     "react/no-children-prop": "error",
 
-    // Validate whitespace in and around the JSX opening and closing brackets
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/jsx-tag-spacing.md
-    "react/jsx-tag-spacing": [
-      "error",
-      {
-        closingSlash: "never",
-        beforeSelfClosing: "always",
-        afterOpening: "never",
-        beforeClosing: "never"
-      }
-    ],
-
-    // Enforce spaces before the closing bracket of self-closing JSX elements
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-space-before-closing.md
-    // Deprecated in favor of jsx-tag-spacing
-    "react/jsx-space-before-closing": ["off", "always"],
-
-    // Prevent usage of Array index in keys
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md
+    // 禁止使用索引作为属性key的值
     "react/no-array-index-key": "error",
 
-    // Enforce a defaultProps definition for every prop that is not a required prop
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/require-default-props.md
+    // 强制要求每个非必需props都有一个对应的defaultProps属性
+    // why?组件可以看成和js的函数一样的东西，输入就是props，输出就是elements
+    // 一个良好的函数的特点包括，对每个输入值进行类型检查并设置默认值，保证运行时候
+    // 各种边界条件可以运行良好（各种奇怪的传值或不传），同理react组件的props也要
+    // 设置好输入，保证以后各种情况下保持表现的一致。
     "react/require-default-props": [
       "error",
       {
@@ -373,94 +262,81 @@ module.exports = {
       }
     ],
 
-    // Forbids using non-exported propTypes
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/forbid-foreign-prop-types.md
-    // this is intentionally set to "warn". it would be "error",
-    // but it's only critical if you're stripping propTypes in production.
+    // 禁止引用别的组件，后直接使用组件的propTypes作为自己的propTypes
+    // 防止使用babel插件babel-plugin-transform-react-remove-prop-types时候出现问题
     "react/forbid-foreign-prop-types": ["warn", { allowInPropTypes: true }],
 
-    // Prevent void DOM elements from receiving children
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/void-dom-elements-no-children.md
+    // 禁止给自闭合html标签设置children属性
+    // wrong: <img children={} />
     "react/void-dom-elements-no-children": "error",
 
-    // Enforce all defaultProps have a corresponding non-required PropType
-    // https://github.com/yannickcr/eslint-plugin-react/blob/9e13ae2c51e44872b45cc15bf1ac3a72105bdd0e/docs/rules/default-props-match-prop-types.md
+    // 强制要求defaultProps中的属性必须是notRequired
+    // 并且必须在PropTypes中有定义
     "react/default-props-match-prop-types": [
       "error",
       { allowRequiredDefaults: false }
     ],
 
-    // Prevent usage of shouldComponentUpdate when extending React.PureComponent
-    // https://github.com/yannickcr/eslint-plugin-react/blob/9e13ae2c51e44872b45cc15bf1ac3a72105bdd0e/docs/rules/no-redundant-should-component-update.md
+    // 如果继承自PureComponent,禁止使用shouldComponentUpdate方法
     "react/no-redundant-should-component-update": "error",
 
-    // Prevent unused state values
-    // https://github.com/yannickcr/eslint-plugin-react/pull/1103/
+    // 禁止定义未使用的state
     "react/no-unused-state": "error",
 
-    // Enforces consistent naming for boolean props
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/boolean-prop-naming.md
+    // 强制布尔值变量以is或has开始
     "react/boolean-prop-naming": [
-      "off",
+      "error",
       {
-        propTypeNames: ["bool", "mutuallyExclusiveTrueProps"],
+        propTypeNames: ["bool"],
         rule: "^(is|has)[A-Z]([A-Za-z0-9]?)+",
-        message: ""
+        message: "布尔值命名使用is或has开头"
       }
     ],
 
-    // Prevents common casing typos
-    // https://github.com/yannickcr/eslint-plugin-react/blob/73abadb697034b5ccb514d79fb4689836fe61f91/docs/rules/no-typos.md
+    // 保证预留关键字的大小写拼写正确
+    // 检查：1. propTypes 2. lifecycle方法
     "react/no-typos": "error",
 
-    // Enforce curly braces or disallow unnecessary curly braces in JSX props and/or children
-    // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-curly-brace-presence.md
+    // 强制要求不要出现不必要的花括号，比如
+    // <Test p={'1234}>
+    // <Test p='1234'>
     "react/jsx-curly-brace-presence": [
       "error",
       { props: "never", children: "never" }
     ],
 
-    // One JSX Element Per Line
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/jsx-one-expression-per-line.md
-    "react/jsx-one-expression-per-line": ["error", { allow: "single-child" }],
-
-    // Enforce consistent usage of destructuring assignment of props, state, and context
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/destructuring-assignment.md
+    // 强制要求使用解构获取所有props属性，再通过变量在render中使用
+    // wrong: render() { return <div>{this.props.name}</div>}
+    // wright: render() { const {name} = this.props; return <div>{name}</div>}
+    // 这样可读性更好，一下就可看到用了哪些属性，统一位置
     "react/destructuring-assignment": ["error", "always"],
 
-    // Prevent using this.state within a this.setState
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/no-access-state-in-setstate.md
+    // 在setState方法中禁止使用this.state,因为setState是异步、批量处理的，
+    // 使用this.state获取的状态不一定是上一次状态，使用第一个参数获取上一次状态
     "react/no-access-state-in-setstate": "error",
 
-    // Prevent usage of button elements without an explicit type attribute
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/button-has-type.md
-    "react/button-has-type": [
+    // 强制要求button标签设置type属性
+    // 因为button默认属性是submit，可能会导致意外现象
+    "react/button-has-type": "error",
+
+    // sfc==stateless function component===无状态组件===函数组件
+    // 禁止在sfc中出现this指针
+    "react/no-this-in-sfc": "error",
+
+    // 禁止使用废弃的Unsafe方法
+    "react/no-unsafe": "error",
+
+    // 强制要求jsx中onXXX的对应类的方法前缀必须是handleXXX
+    "react/jsx-handler-names": [
       "error",
       {
-        button: true,
-        submit: true,
-        reset: false
+        eventHandlerPrefix: "handle",
+        eventHandlerPropPrefix: "on"
       }
     ],
 
-    // Ensures inline tags are not rendered without spaces between them
-    "react/jsx-child-element-spacing": "off",
-
-    // Prevent this from being used in stateless functional components
-    // https://github.com/yannickcr/eslint-plugin-react/blob/843d71a432baf0f01f598d7cf1eea75ad6896e4b/docs/rules/no-this-in-sfc.md
-    "react/no-this-in-sfc": "error",
-
-    // Validate JSX maximum depth
-    // https://github.com/yannickcr/eslint-plugin-react/blob/abe8381c0d6748047224c430ce47f02e40160ed0/docs/rules/jsx-max-depth.md
-    "react/jsx-max-depth": "off",
-
-    // Disallow multiple spaces between inline JSX props
-    // https://github.com/yannickcr/eslint-plugin-react/blob/ac102885765be5ff37847a871f239c6703e1c7cc/docs/rules/jsx-props-no-multi-spaces.md
-    "react/jsx-props-no-multi-spaces": "error",
-
-    // Prevent usage of UNSAFE_ methods
-    // https://github.com/yannickcr/eslint-plugin-react/blob/157cc932be2cfaa56b3f5b45df6f6d4322a2f660/docs/rules/no-unsafe.md
-    "react/no-unsafe": "off"
+    // 强制fragment语法使用简写<></>
+    "react/jsx-fragments": "error"
   },
 
   settings: {
@@ -471,15 +347,9 @@ module.exports = {
     },
     react: {
       pragma: "React",
-      version: "16.0"
+      version: "16.8"
     },
-    propWrapperFunctions: [
-      // https://www.npmjs.com/package/airbnb-prop-types
-      "forbidExtraProps",
-      // https://www.npmjs.com/package/prop-types-exact
-      "exact",
-      // https://tc39.github.io/ecma262/#sec-object.freeze
-      "Object.freeze"
-    ]
+    // propTypes的包装函数，暂时不需要
+    propWrapperFunctions: []
   }
 };

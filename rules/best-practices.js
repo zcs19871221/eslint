@@ -35,7 +35,12 @@ module.exports = {
     "no-case-declarations": "error",
 
     // 不允许空函数
-    "no-empty-function": "error",
+    "no-empty-function": [
+      "error",
+      {
+        allow: ["arrowFunctions"]
+      }
+    ],
 
     // 不允许解构出现空的解构对象
     "no-empty-pattern": "error",
