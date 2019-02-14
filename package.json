@@ -1,5 +1,9 @@
 {
   "name": "eslint-config-zcs1",
+  "scripts": {
+    "checkReact": "node checkRules/checkReactRules.js",
+    "checkAccess": "node checkRules/checkReactAccessRules.js"
+  },
   "version": "1.0.2",
   "description": "",
   "main": "index.js",
@@ -7,6 +11,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^10.0.1",
+    "chalk": "^2.4.2",
     "eslint": "^5.13.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-import": "^2.16.0",
