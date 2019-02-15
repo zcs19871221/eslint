@@ -67,8 +67,6 @@ module.exports = {
      */
     'react/jsx-boolean-value': ['error', 'never', { always: [] }],
 
-    // 数组或循环输出jsx，必须提供唯一的key
-    // 注意这个key要根据内容产生，不能使用index，否则会出现更大的问题
     /**
      * @meaning
      * 循环时组件必须设置key属性
@@ -89,17 +87,16 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止在jsx的属性值中包含bind语法或创建箭头函数字面量
+     * 禁止在jsx的属性值中包含bind语法函数或创建箭头函数字面量
      * @why
      * 每次渲染时候，在{}中执行bind或箭头函数时候都会创建一个全新的函数
-     * 这样这个组件就可能会造成不必要的刷新(这个函数的引用每次都变)
-     * 造成性能问题
+     * 会造成不必要的刷新(这个函数的引用每次都变)，出现性能问题
      * @wrong
      * <Foo onClick={this._handleClick.bind(this)}></Foo>
      * <Foo onClick={() => console.log('Hello!')}></Foo>
      * @right
      * 构造函数时候绑定原型方法到对象属性
-     * 或在使用箭头函数定义利用箭头函数创建时候绑定上下文的特性绑定对象
+     * 或者使用箭头函数定义：利用箭头函数创建时候绑定this的特性绑定对象
      * constructor() {
      *  this.onClick= this.onClick.bind(this);
      * }
@@ -118,8 +115,6 @@ module.exports = {
       },
     ],
 
-    // 禁止在jsx中出现相同的属性名，忽略大小写
-    // wrong：<Hello name='1234' Name='1234'>/
     /**
      * @meaning
      * 禁止在jsx的属性中出现重名，大小写不一样的重名也不行
@@ -132,10 +127,28 @@ module.exports = {
      */
     'react/jsx-no-duplicate-props': ['error', { ignoreCase: true }],
 
-    // 禁止在jsx中出现未定义的变量
+    /**
+     * @meaning
+     * 禁止未定义jsx组件就使用
+     * @why
+     * @wrong
+     * <Hello name="John" />;
+     * @right
+     * const Hello = ({name}) => {
+     *  return <div>{name}</div>
+     * }
+     * <Hello/>
+     */
     'react/jsx-no-undef': 'error',
 
-    // 强制要求自定义组件以大骆驼形式命名
+    /**
+     * @meaning
+     * 强制要求组件以大骆驼形式命名
+     * @why
+     * jsx标签第一个字母大写表示这是一个react组件。
+     * @wrong
+     * @right
+     */
     'react/jsx-pascal-case': [
       'error',
       {
@@ -144,55 +157,156 @@ module.exports = {
       },
     ],
 
-    // 禁止出现无效的react引用
-    // 如果没有jsx语法，不要引用react
+    /**
+     * @meaning
+     * 不使用jsx语法时候不要引用React模块
+     * @why
+     * jsx语法会编译成React.createElement，因此jsx代码范围内必须引用React防止
+     * 执行时候报错
+     * @wrong
+     * @right
+     */
     'react/jsx-uses-react': ['error'],
 
-    // 不允许出现定义未使用的组件
-    'react/jsx-uses-vars': 'error',
-
-    // 使用直接设置innerHTML的react语法时候，
-    // 发出警告
+    /**
+     * @meaning
+     * 使用dangerouslySetInnerHTML时发出警告
+     * @why
+     * react的一大优势就是免去了用户的dom操作，这不仅仅是方便了开发。
+     * 而且因为react自己实现的dom系统可以提升性能和浏览器兼容性，
+     * 并且规避了一些特定浏览器或特定情况下的问题(边界条件，安全性问题等)。
+     * 而dangerouslySetInnerHTML就相当于直接在dom上运行innerHTML，
+     * react没有处理输入的字符串，这就有可能造成Xss攻击(字符串中注入JavaScript代码)
+     * @wrong
+     * @right
+     */
     'react/no-danger': 'warn',
 
-    // 禁止使用已启用语法
+    /**
+     * @meaning
+     * 禁止使用已弃用语法
+     * @why
+     * 弃用语法有的有安全性问题而且以后版本很可能会不支持
+     * @wrong
+     * @right
+     */
     'react/no-deprecated': ['error'],
 
-    // 禁止在componentDidUpdate中调用setState
-    // 这样很可能会导致死循环重复刷新组件
+    /**
+     * @meaning
+     * 禁止在componentDidUpdate中调用setState
+     * @why
+     * 这样很可能会导致死循环重复刷新组件
+     * @wrong
+     * @right
+     */
     'react/no-did-update-set-state': 'error',
 
-    // 禁止在willUpdate中使用setState
-    // 实际上，willUpdate已经启用了，并将于react17正式不支持
+    /**
+     * @meaning
+     * 禁止在willUpdate中使用setState
+     * @why
+     * willUpdate官方文档禁止使用setState，并且
+     * 改语法已经弃用了，并将于react17正式不支持
+     * @wrong
+     * @right
+     */
     'react/no-will-update-set-state': 'error',
 
-    // 禁止直接改变state，必须使用setState
-    // react的state必须保持纯的，因为react会根据当前state
-    // 和上一个state做一个浅比较，决定是否render，而且state
-    // 如果作为props传到组件里，还会再进行浅比较决定组件是否刷新
+    /**
+     * @meaning
+     * 只允许使用setState改变state，不允许改变state属性或改变索引
+     * @why
+     * react的核心思路就是保持一切都是纯的，然后利用持久化数据结构的原理优化性能：
+     * 当有改变发生需要比较状态的时候，找出树状结构上不变和变化的部分，
+     * 然后只替换变化的节点和受影响的所有父节点。
+     * 这个思路体现在每次render后的元素树的比较上，同样体现在state树上。
+     *
+     * react的state必须保持纯的，因为react会把当前state
+     * 和上一个状态state做一个浅比较，决定是否render。
+     * 而且state作为props传到组件的时候，还会再和上一个props进行浅比较决定组件是否刷新
+     * 如果只是改变属性的话，引用不变不会刷新
+     * @wrong
+     * @right
+     */
     'react/no-direct-mutation-state': 'error',
 
-    // 禁止使用isMounted
-    // isMounted使用场景是为了消除警告：一个组件已经umount但仍然调用了setState
-    // 使用isMounted可能会消除警告，但是警告的目的是让你发现为什么umount了还会调用setState，从而
-    // 发现代码潜在的问题。使用了isMounted没有警告了，也发现不了问题
-    // 绝大多数的问题都发生在异步的回调，你可以通过：在Umount中设置flag，在回调中判断flag来解决。
-    // 更好的方法是在umount的时候取消数据订阅，或者通过实现promise.cancel方法取消promise
+    /**
+     * @meaning
+     * 禁止使用isMounted
+     * @why
+     * react已经弃用这个属性了。
+     * 很多人这么用isMounted:
+     * if (this.isMounted()) {
+     *  this.setState({...})
+     * }
+     * 来消除警告：组件已经umount但仍然调用setState。
+     * 这个警告通常表示组件没有卸载干净：卸载后仍然保持对组件的引用，有可能导致内存泄漏。
+     * 使用isMounted可能会消除警告，但警告的目的是让你发现为什么umount了还会调用setState，从而
+     * 发现代码潜在的问题。使用isMounted没有了警告，但你也发现不了问题
+     *
+     * 这个警告主要发生在异步回调的时候，你可以通过：在Umount中设置flag，在回调中判断flag来解决。
+     * 更好的方法是在umount的时候取消数据订阅，或者通过实现promise.cancel方法取消promise
+     * @wrong
+     * @right
+     * @reference
+     * https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html
+     */
     'react/no-is-mounted': 'error',
 
-    // 一个文件中只允许出现一个react组件（使用class定义，函数组件不计算）
+    /**
+     * @meaning
+     * 一个文件中只允许出现一个react class组件（函数组件不计算）
+     * @why
+     * 单一职责原则，功能拆分，更好维护和修改
+     * @wrong
+     * @right
+     */
     'react/no-multi-comp': ['error', { ignoreStateless: true }],
 
-    // 禁止使用字符串作为refdom参数
+    /**
+     * @meaning
+     * 禁止使用字符串ref
+     * @why
+     * react以前的ref形式，已经废弃
+     * 现在使用ref搭配一个函数来获取dom引用
+     * @wrong
+     * @right
+     * <div ref={helloDom => { this.helloDom = helloDom; }}>Hello, world.</div>
+     */
     'react/no-string-refs': 'error',
 
-    // 禁止在原生dom组件中出现非标准（不符合react属性名）的属性
+    /**
+     * @meaning
+     * 禁止在原生dom组件中出现非标准（不符合react属性名）的属性
+     * @why
+     * 具体哪些属性可用见索引
+     * @wrong
+     * @right
+     * @reference
+     * https://reactjs.org/docs/dom-elements.html
+     */
     'react/no-unknown-property': 'error',
 
-    // 禁止使用createReactClass创建组件，强制使用class
+    /**
+     * @meaning
+     * 禁止使用createReactClass创建组件，使用class
+     * @why
+     * 用jsx语法，可读性好
+     * @wrong
+     * @right
+     */
     'react/prefer-es6-class': ['error', 'always'],
 
-    // 强制使用propTypes检查属性
+    /**
+     * @meaning
+     * 强制使用propTypes检查属性
+     * @why
+     * 使用propTypes校验输入属性可以提高组件可用性，
+     * 也相当于一个绝佳的文档，方便维护
+     * @wrong
+     * @right
+     */
     'react/prop-types': [
       'error',
       {
@@ -202,23 +316,56 @@ module.exports = {
       },
     ],
 
-    // 如果有jsx语法，那么必须在作用域中引用react
-    // 如果没有jsx语法，不要引用react
+    /**
+     * @meaning
+     * 使用jsx语法一定要引用react
+     * @why
+     * jsx编译后就是React.createElement,作用域中必须引用React
+     * @wrong
+     * @right
+     */
     'react/react-in-jsx-scope': 'error',
 
-    // 强制要求render方法包含return语句
+    /**
+     * @meaning
+     * render方法必须包含return语句
+     * @why
+     * @wrong
+     * @right
+     */
     'react/require-render-return': 'error',
 
-    // 没有children的组件强制要求使用自闭合语法，不要
-    // <Hello />
+    /**
+     * @meaning
+     * 没有子元素的组件强制自闭合标签
+     * @why
+     * 简洁，统一
+     * @wrong
+     * <Modal></Modal>
+     * @right
+     * <Modal />
+     */
     'react/self-closing-comp': 'error',
 
-    // 强制要求组件内部按照
-    // 1. 静态方法
-    // 2. 事件循环方法
-    // 3. 其他方法
-    // 4. render方法
-    // 的顺序排列
+    /**
+     * @meaning
+     * 类组件的方法按照
+     * 1. 静态方法
+     * 2. 事件循环方法
+     * 3. 其他方法
+     * 4. render方法
+     * 的顺序排列
+     * @why
+     * @wrong
+     * @right
+     * class Ex extends React.Component {
+     *      static propTypes = {};
+     *      static defaultProps = {};
+     *      componentDidmount() {};
+     *      myFunc() {};
+     *      render() {}
+     * }
+     */
     'react/sort-comp': [
       'error',
       {
@@ -254,63 +401,160 @@ module.exports = {
     // window.opener获取原始页面的windows对象，想象你打开了一个连接到一个恶意网站，
     // 该网站通过window.opener.location='一个高仿钓鱼网站'窃取你的信息
     // 因此当href是域名开头或者变量的时候，要求必须添加属性rel='noreferrer noopener'
+    /**
+     * @meaning
+     * 使用有target='_blank'属性的a标签时候，必须加上rel='noreferrer noopener'属性
+     * @why
+     * 安全隐患：钓鱼网站。当使用<a target='_blank'>打开新页面时候，新页面可以通过window.opener
+     * 获得原页面的window对象,然后黑客可以通过执行window.opener.location
+     * 改变你原来的网址重定向到一个相似的钓鱼网站窃取你的信息。添加如上的rel属性可以让window.opener为空
+     * @wrong
+     * @right
+     */
     'react/jsx-no-target-blank': ['error', { enforceDynamicLinks: 'always' }],
 
-    // 强制要求.jsx后缀的文件才可以包含jsx语法
+    /**
+     * @meaning
+     * .jsx后缀的文件才可以包含jsx语法
+     * @why
+     * 可通过文件名快速了解内容
+     * @wrong
+     * @right
+     */
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx'] }],
 
-    // 禁止在jsx节点中出现//，防止开发者以为注释了，实际上会输出字符串的问题
-    // wrong:
-    // <div>//不需要了。。</div>
-    // right:
-    // <div>/* 不需要了。。 */</div>
+    /**
+     * @meaning
+     * 禁止在jsx文本节点中出现注释(行和块注释)
+     * @why
+     * 防止开发者以为注释了内容，实际没有导致输出错误信息的问题
+     * @wrong
+     * @right
+     */
     'react/jsx-no-comment-textnodes': 'error',
 
-    // 禁止使用React.render/ReactDOM.render的返回值
-    // 这个返回值是对根元素的引用，但是以后有可能会使用异步渲染，再用这个会有问题
-    // 请使用ref获取dom元素
+    /**
+     * @meaning
+     * 禁止使用React.render/ReactDOM.render的返回值
+     * @why
+     * 这个返回值是对根元素的引用，但是以后有可能会使用异步渲染
+     * 为了防止以后升级版本可能出现的问题，不要用，如果要获取dom，使用ref
+     * @wrong
+     * const inst = ReactDOM.render(<App />, document.body);
+     * doSomethingWithInst(inst);
+     * @right
+     * ReactDOM.render(<App ref={doSomethingWithInst} />, document.body);
+     */
     'react/no-render-return-value': 'error',
 
-    // 禁止使用findDOMNode方法，因为这个方法以后会废弃掉
-    // 使用ref获取dom引用
+    /**
+     * @meaning
+     * 禁止使用findDOMNode方法
+     * @why
+     * react以后会废弃掉findDOMNode方法
+     * @wrong
+     * @right
+     */
     'react/no-find-dom-node': 'error',
 
-    // 禁止使用dangerouslySetInnerHTML的同时还包含children
+    /**
+     * @meaning
+     * 禁止使用dangerouslySetInnerHTML的同时还包含children
+     * @why
+     * 错误语法
+     * @wrong
+     * @right
+     */
     'react/no-danger-with-children': 'error',
 
-    // 禁止定义没有被使用的props
+    /**
+     * @meaning
+     * 不要定义使用不到的propTypes
+     * @why
+     * 代码越少越好,代码越多,问题越多
+     * @wrong
+     * @right
+     */
     'react/no-unused-prop-types': [
       'error',
       {
         customValidators: [],
+        // 跳过对shape类型的检测,不能准确识别每个属性
         skipShapeProps: true,
       },
     ],
 
     // 强制要求style属性的值必须是对象
+    /**
+     * @meaning
+     * 强制要求style属性的值必须是对象
+     * @why
+     * 错误语法
+     * @wrong
+     * @right
+     */
     'react/style-prop-object': 'error',
 
-    // 禁止在jsx标签中出现无效的字符串
-    // 比如意外的闭合，> " ' } 等符号使用转义符号
-    // > -> &gt;
-    // " -> &quot;
-    // ' -> &apos;
-    // } -> &#125;
+    /**
+     * @meaning
+     * 禁止在jsx文本节点中出现没有转义字符： > " ' }
+     * @why
+     * 这几个字符出现了也没事，react会自动转义。但是大概率这几种字符的出现是由于敲错了，比如：
+     * <Component
+     *   a="b">
+     *   c="d">
+     * >bodytext</Component>
+     * 因为多敲了一个>，输出错误。这个规则就是让你及早发现错误
+     * 如果你需要用到这几个字符，使用转义符号或者通过{}输出：
+     * > -> &gt;
+     * " -> &quot;
+     * ' -> &apos;
+     * } -> &#125;
+     * @wrong
+     * <div> > </div>
+     * @right
+     * <div> &gt; </div>
+     * <div> {'>'} </div>
+     */
     'react/no-unescaped-entities': 'error',
 
-    // 禁止使用props的children属性传递子元素
-    // wrong: <Father children={<Child/>} />
-    // wright: <Father><Child/></Father>
+    /**
+     * @meaning
+     * 禁止使用props的children属性传递子元素
+     * @why
+     * 放到jsx语法里更好理解
+     * @wrong
+     * <Father children={<Child/>} />
+     * @right
+     * <Father><Child/></Father>
+     */
     'react/no-children-prop': 'error',
 
-    // 禁止使用索引作为属性key的值
+    /**
+     * @meaning
+     * 禁止使用索引作为属性key的值
+     * @why
+     * key能告诉react，哪些元素是不变的，哪些元素是变了的从而从新渲染
+     * 如果使用索引作为key，不能唯一标识元素，有可能的后果就是，内容变了，但是没有重新刷新
+     * 使用元素内容唯一标识
+     * @wrong
+     * {list.map((item, index) => <div key={index}>{item}</div>)}
+     * @right
+     * {list.map((item, index) => <div key={item}>{item}</div>)}
+     */
     'react/no-array-index-key': 'error',
 
-    // 强制要求每个非必需props都有一个对应的defaultProps属性
-    // why?组件可以看成和js的函数一样的东西，输入就是props，输出就是elements
-    // 一个良好的函数的特点包括，对每个输入值进行类型检查并设置默认值，保证运行时候
-    // 各种边界条件可以运行良好（各种奇怪的传值或不传），同理react组件的props也要
-    // 设置好输入，保证以后各种情况下保持表现的一致。
+    /**
+     * @meaning
+     * 强制要求每个非必需props都有一个对应的defaultProps
+     * @why
+     * 组件可以看成和js的函数一样的东西，输入就是props，输出就是elements
+     * 一个好的函数应该对每个输入值进行类型检查并设置默认值，运行时候保证
+     * 各种边界条件可以运行良好。
+     * 给所有props设置默认值，也能保证props缺失时组件能正常渲染。
+     * @wrong
+     * @right
+     */
     'react/require-default-props': [
       'error',
       {
@@ -320,26 +564,69 @@ module.exports = {
 
     // 禁止引用别的组件，后直接使用组件的propTypes作为自己的propTypes
     // 防止使用babel插件babel-plugin-transform-react-remove-prop-types时候出现问题
+    /**
+     * @meaning
+     * 禁止直接引用别的组件的proptypes（可以通过import解构重命名使用）
+     * @why
+     * 防止生产环境下使用babel插件babel-plugin-transform-react-remove-prop-types
+     * 去除propTypes时出现问题
+     * @wrong
+     * import SomeComponent from './SomeComponent';
+     * SomeComponent.propTypes;
+     * var { propTypes } = SomeComponent;
+     * SomeComponent['propTypes'];
+     * @right
+     * import SomeComponent, {propTypes as someComponentPropTypes} from './SomeComponent';
+     */
     'react/forbid-foreign-prop-types': ['warn', { allowInPropTypes: true }],
-
-    // 禁止给自闭合html标签设置children属性
-    // wrong: <img children={} />
-    'react/void-dom-elements-no-children': 'error',
 
     // 强制要求defaultProps中的属性必须是notRequired
     // 并且必须在PropTypes中有定义
+    /**
+     * @meaning
+     * 必填(required)的props不允许出现在defaultProps中
+     * 没有在propTypes中定义的属性不允许出现在defaultProps中
+     * @why
+     * 减少冗余
+     * @wrong
+     * @right
+     */
     'react/default-props-match-prop-types': [
       'error',
+      // required props不允许出现在default中
       { allowRequiredDefaults: false },
     ],
 
-    // 如果继承自PureComponent,禁止使用shouldComponentUpdate方法
+    /**
+     * @meaning
+     * PureComponent类型的组件禁止使用shouldComponentUpdate方法
+     * @why
+     * PureComponent默认实现了一个shouldComponentUpdate方法(通过对state和props浅比较决定是否渲染)。
+     * 再定义shouldComponentUpdate仍然会按照你定义的方法来决定是否渲染
+     * 但这样使用PureComponent就没有意义了
+     * @wrong
+     * @right
+     */
     'react/no-redundant-should-component-update': 'error',
 
-    // 禁止定义未使用的state
+    /**
+     * @meaning
+     * 禁止出现未被使用的state属性
+     * @why
+     * 减少冗余
+     * @wrong
+     * @right
+     */
     'react/no-unused-state': 'error',
 
-    // 强制布尔值变量以is或has开始
+    /**
+     * @meaning
+     * 强制布尔值变量命名以is或has开始
+     * @why
+     * 统一规范,帮助理解变量含义
+     * @wrong
+     * @right
+     */
     'react/boolean-prop-naming': [
       'error',
       {
@@ -349,13 +636,29 @@ module.exports = {
       },
     ],
 
-    // 保证预留关键字的大小写拼写正确
-    // 检查：1. propTypes 2. lifecycle方法
+    /**
+     * @meaning
+     * 保证react预留的静态和事件循环方法大小写拼写正确
+     * @why
+     * js属性大小写敏感，写错就不执行了
+     * @wrong
+     * @right
+     */
     'react/no-typos': 'error',
 
     // 强制要求不要出现不必要的花括号，比如
     // <Test p={'1234}>
     // <Test p='1234'>
+    /**
+     * @meaning
+     * 不允许花括号给字符串属性或文本节点使用
+     * @why
+     * 减少冗余
+     * @wrong
+     * <Test name={"zcs"}>{"zcs"}</Test>
+     * @right
+     * <Test name="zcs">zcs</Test>
+     */
     'react/jsx-curly-brace-presence': [
       'error',
       { props: 'never', children: 'never' },
@@ -365,24 +668,107 @@ module.exports = {
     // wrong: render() { return <div>{this.props.name}</div>}
     // wright: render() { const {name} = this.props; return <div>{name}</div>}
     // 这样可读性更好，一下就可看到用了哪些属性，统一位置
+    /**
+     * @meaning
+     * 强制要求使用解构获取所有props属性，再通过变量在render中使用
+     * @why
+     * 1. 减少this.props字符串的书写
+     * 2. 减少对this.props的索引搜索
+     * @wrong
+     * render() {
+     *  <Component name={this.props.name} gender={this.props.gender}/>
+     * }
+     * @right
+     * render() {
+     *  const {name, gender} = this.props;
+     *  <Component name={name} gender={gender}/>
+     * }
+     */
     'react/destructuring-assignment': ['error', 'always'],
 
     // 在setState方法中禁止使用this.state,因为setState是异步、批量处理的，
     // 使用this.state获取的状态不一定是上一次状态，使用第一个参数获取上一次状态
+    /**
+     * @meaning
+     * setState方法中禁止使用this.state
+     * @why
+     * setState中使用this.state都是为了获取上一次的状态，进行下一次的操作。
+     * 但setState有可能是异步的，批量的，因此使用this.state不能准确获取上一次的状态数据
+     * 你可以：
+     * 1. 要不使用回调函数获取修改后的state
+     * 2. 要不通过第一个函数参数获取上一次state
+     * @wrong
+     * onClick() {
+     *    this.setState({
+     *        num: this.state.num + 1,
+     *    })
+     * }
+     * @right
+     * onClick() {
+     *    this.setState(prevState => {
+     *        return {
+     *          num: prevState.num + 1
+     *        }
+     *    })
+     * }
+     * onClick() {
+     *    this.setState(xx, () => {
+     *
+     *    })
+     * }
+     */
     'react/no-access-state-in-setstate': 'error',
 
-    // 强制要求button标签设置type属性
-    // 因为button默认属性是submit，可能会导致意外现象
+    /**
+     * @meaning
+     * button标签必须设置type属性
+     * @why
+     * button的type属性默认值是submit，可能会导致意外现象
+     * @wrong
+     * @right
+     */
     'react/button-has-type': 'error',
 
-    // sfc==stateless function component===无状态组件===函数组件
-    // 禁止在sfc中出现this指针
+    /**
+     * @meaning
+     * 禁止在sfc中出现this指针
+     * @why
+     * sfc==stateless function component===无状态组件===函数组件
+     * 这种组件的this和class组件的不同
+     * @wrong
+     * @right
+     */
     'react/no-this-in-sfc': 'error',
 
-    // 禁止使用废弃的Unsafe方法
+    /**
+     * @meaning
+     * 禁止使用Unsafe方法(componentWillMount,componentWillUpdate,componentWillReceiveProps)
+     * @why
+     * 1. 这些方法将在react17正式不支持。
+     * 2. 这些方法本身就有潜在的问题。
+     *     * willMount和willUpdate都是render前要调用的方法，不能调用setState容易出错
+     *     * componentWillReceiveProps有以下问题：
+     *       1. 你不能直接把props的值一股脑的设置给state，因为这样会把用户原生操作的状态冲掉
+     *       2. 当接收新props时，你需要对内容进行判断，决定更新哪个状态。这是很复杂的，随着props的增多很难维护。而且难以把状态复原
+     *       3. state的来源包括mount时候constructor中的props和willRecive中的判断设置,来源不单一，你可能要写两种情况的代码
+     *     * 解决方法是：
+     *       1. 尽量不设置state，所有组件只是用props，state统一管理(redux的做法)
+     *       2.使用key关联id，当一个组件的key换了，从新mount，避开willReceiveProps
+     * @wrong
+     * @right
+     * @reference
+     * https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
+     */
     'react/no-unsafe': 'error',
 
-    // 强制要求jsx中onXXX的对应类的方法前缀必须是handleXXX
+    /**
+     * @meaning
+     * 强制要求jsx中onXXX的对应类的方法前缀必须是handleXXX
+     * @why
+     * 统一规范，增强可读性
+     * @wrong
+     * @right
+     */
     'react/jsx-handler-names': [
       'error',
       {
@@ -391,7 +777,14 @@ module.exports = {
       },
     ],
 
-    // 强制fragment语法使用简写<></>
+    /**
+     * @meaning
+     * 强制fragment语法使用简写<></>
+     * @why
+     * 统一规范，减少冗余
+     * @wrong
+     * @right
+     */
     'react/jsx-fragments': 'error',
   },
 

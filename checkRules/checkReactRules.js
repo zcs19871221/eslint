@@ -21,6 +21,8 @@ const offRules = {
     'jsx的内容不允许直接使用字符串，必须这样<div>{"显示"}</div>',
   'react/jsx-sort-default-props': '强制要求defaultProps按照字母排序',
   'react/jsx-sort-props': '强制要求jsx中的属性按照字母排序',
+  'react/void-dom-elements-no-children': '有no-children-prop就够了，关闭',
+  'react/jsx-uses-vars': '有no-var规范就够了',
 };
 
 compareRules({
