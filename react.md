@@ -52,7 +52,8 @@
 48. [react/jsx-handler-names](#react/jsx-handler-names)
 49. [react/jsx-fragments](#react/jsx-fragments)
 
-## react/forbid-prop-types<a id='react/forbid-prop-types'></a>
+<a id='react/forbid-prop-types'></a>
+## react/forbid-prop-types
 
 - 规则含义
 

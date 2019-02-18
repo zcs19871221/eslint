@@ -51,7 +51,7 @@ const createContent = file => {
     /\/\*\*([\s\S]*?)\*\/[\s\n]+'(.*?)':/g,
     (match, doc, ruleName) => {
       rulesName.push(ruleName);
-      const ruleTitle = `## ${ruleName}<a id='${ruleName}'></a>`;
+      const ruleTitle = `<a id='${ruleName}'></a>\n## ${ruleName}`;
       content += ruleTitle + '\n\n' + createSubContent(doc, keyMapDocStyle);
     },
   );
