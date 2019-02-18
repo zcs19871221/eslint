@@ -1,6 +1,6 @@
 # React 和 jsx 规范
 
-##目录
+## 目录
 
 1. [react/forbid-prop-types](#react/forbid-prop-types)
 2. [react/jsx-boolean-value](#react/jsx-boolean-value)

@@ -1,6 +1,6 @@
 # React 可访问性规范
 
-##目录
+## 目录
 
 1. [jsx-a11y/anchor-has-content](#jsx-a11y/anchor-has-content)
 2. [jsx-a11y/aria-role](#jsx-a11y/aria-role)
