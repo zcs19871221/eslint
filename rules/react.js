@@ -1,8 +1,4 @@
 // 本规则是react、jsx相关规范
-// 如何查看规则详细：
-// 1. 获取rulesName: 'react/forbid-prop-types'取斜线后边部分forbid-prop-types
-// 2. 地址替换rulesName：
-// `https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/${rulesName}.md`
 module.exports = {
   plugins: ['react'],
 

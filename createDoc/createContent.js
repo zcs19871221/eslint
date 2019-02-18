@@ -26,7 +26,7 @@ const createSubContent = (doc, keyMapDocStyle) => {
   return subStr;
 };
 
-const createContent = file => {
+const createContent = (file, linkTemplate) => {
   const keyMapDocStyle = {
     '@meaning': {
       titleName: '规则含义',
@@ -43,7 +43,7 @@ const createContent = file => {
     '@right': {
       titleName: '正确例子',
       bodyStyle: 'code',
-    },
+    }
   };
   const rulesName = [];
   let content = '';
@@ -51,8 +51,11 @@ const createContent = file => {
     /\/\*\*([\s\S]*?)\*\/[\s\n]+'(.*?)':/g,
     (match, doc, ruleName) => {
       rulesName.push(ruleName);
-      const ruleTitle = `<a id='${ruleName}'></a>\n## ${ruleName}`;
-      content += ruleTitle + '\n\n' + createSubContent(doc, keyMapDocStyle);
+      const ruleTitle = `<a id='${ruleName}'></a>\n## ${ruleName}\n\n`;
+      const ruleContent = createSubContent(doc, keyMapDocStyle);
+      const eslintLink = `[eslint](${linkTemplate(ruleName.replace(/^.*?\//, ''))})\n\n`;
+      const jumpContentTable = '**[⬆ 回到目录](#目录)**\n\n'
+      content += `${ruleTitle}${ruleContent}${eslintLink}${jumpContentTable}`
     },
   );
   return {
