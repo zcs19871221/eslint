@@ -25,14 +25,17 @@ const offRules = {
   'react/jsx-uses-vars': '有no-var规范就够了',
 };
 
-compareRules({
-  webDocUrl: 'https://github.com/yannickcr/eslint-plugin-react',
-  webRulesReg: /<li>[\s\S]*?<a.*?>(react\/.*?)<\/a>[\s\S]*?<\/li>/g,
-  offRules: Object.keys(offRules).concat(
-    Object.keys(prettierOffReactRules.rules),
-  ),
-  usedRules: Object.keys(myReactRules.rules)
-    .filter(name => name.startsWith('react/'))
-    .concat(Object.keys(prettierOffReactRules.rules)),
-  rulesPath: '/rules/react.js',
-});
+module.exports = () => {
+    compareRules({
+        webDocUrl: 'https://github.com/yannickcr/eslint-plugin-react',
+        webRulesReg: /<li>[\s\S]*?<a.*?>(react\/.*?)<\/a>[\s\S]*?<\/li>/g,
+        offRules: Object.keys(offRules).concat(
+          Object.keys(prettierOffReactRules.rules),
+        ),
+        usedRules: Object.keys(myReactRules.rules)
+          .filter(name => name.startsWith('react/'))
+          .concat(Object.keys(prettierOffReactRules.rules)),
+        rulesPath: '/rules/react.js',
+      });
+}
+

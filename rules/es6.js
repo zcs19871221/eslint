@@ -104,9 +104,6 @@ module.exports = {
     // 使用...运算符传递参数调用函数
     'prefer-spread': 'error',
 
-    // 使用模板字符串，不要用字符串连接
-    'prefer-template': 'error',
-
     // 构造器函数必须包含yield语法
     'require-yield': 'error',
 

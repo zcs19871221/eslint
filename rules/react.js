@@ -753,7 +753,7 @@ module.exports = {
      *       3. state的来源包括mount时候constructor中的props和willRecive中的判断设置,来源不单一，你可能要写两种情况的代码
      *     * 解决方法是：
      *       1. 尽量不设置state，所有组件只是用props，state统一管理(redux的做法)
-     *       2.使用key关联id，当一个组件的key换了，从新mount，避开willReceiveProps
+     *       2. 使用key关联id，当一个组件的key换了，从新mount，避开willReceiveProps
      * @wrong
      * @right
      * @reference

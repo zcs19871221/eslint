@@ -1,8 +1,9 @@
 {
   "name": "eslint-config-zcs1",
   "scripts": {
-    "checkReact": "node checkRules/checkReactRules.js",
-    "checkAccess": "node checkRules/checkReactAccessRules.js"
+    "checkRule": "node checkRules/checkRule.js",
+    "checkAccess": "node checkRules/checkReactAccessRules.js",
+    "createDoc": "node createDoc/creatDoc.js"
   },
   "version": "1.0.2",
   "description": "",
