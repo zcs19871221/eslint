@@ -52,7 +52,7 @@
 48. [react/jsx-handler-names](#react/jsx-handler-names)
 49. [react/jsx-fragments](#react/jsx-fragments)
 
-## react/forbid-prop-types
+## react/forbid-prop-types<a id='react/forbid-prop-types'></a>
 
 - 规则含义
 
@@ -62,7 +62,7 @@
 
   这三个关键词太笼统，起不到文档或约束作用，没有帮助
 
-## react/jsx-boolean-value
+## react/jsx-boolean-value<a id='react/jsx-boolean-value'></a>
 
 - 规则含义
 
@@ -80,7 +80,7 @@
 
       <Modal isShow />
 
-## react/jsx-key
+## react/jsx-key<a id='react/jsx-key'></a>
 
 - 规则含义
 
@@ -104,7 +104,7 @@
       data.map(x => <Hello key={x.id}>{x.value}</Hello>);  
       <Hello key={id} {...{ id, caption }} />
 
-## react/jsx-no-bind
+## react/jsx-no-bind<a id='react/jsx-no-bind'></a>
 
 - 规则含义
 
@@ -131,7 +131,7 @@
       onClick = () => {}  
       <Foo onClick={this.onClick}></Foo>
 
-## react/jsx-no-duplicate-props
+## react/jsx-no-duplicate-props<a id='react/jsx-no-duplicate-props'></a>
 
 - 规则含义
 
@@ -149,7 +149,7 @@
 
       <Hello name="John"  />;
 
-## react/jsx-no-undef
+## react/jsx-no-undef<a id='react/jsx-no-undef'></a>
 
 - 规则含义
 
@@ -166,7 +166,7 @@
       }  
       <Hello/>
 
-## react/jsx-pascal-case
+## react/jsx-pascal-case<a id='react/jsx-pascal-case'></a>
 
 - 规则含义
 
@@ -176,7 +176,7 @@
 
   jsx标签第一个字母大写表示这是一个react组件。
 
-## react/jsx-uses-react
+## react/jsx-uses-react<a id='react/jsx-uses-react'></a>
 
 - 规则含义
 
@@ -187,7 +187,7 @@
   jsx语法会编译成React.createElement，因此jsx代码范围内必须引用React防止  
   执行时候报错
 
-## react/no-danger
+## react/no-danger<a id='react/no-danger'></a>
 
 - 规则含义
 
@@ -201,7 +201,7 @@
   而dangerouslySetInnerHTML就相当于直接在dom上运行innerHTML，  
   react没有处理输入的字符串，这就有可能造成Xss攻击(字符串中注入JavaScript代码)
 
-## react/no-deprecated
+## react/no-deprecated<a id='react/no-deprecated'></a>
 
 - 规则含义
 
@@ -211,7 +211,7 @@
 
   弃用语法有的有安全性问题而且以后版本很可能会不支持
 
-## react/no-did-update-set-state
+## react/no-did-update-set-state<a id='react/no-did-update-set-state'></a>
 
 - 规则含义
 
@@ -221,7 +221,7 @@
 
   这样很可能会导致死循环重复刷新组件
 
-## react/no-will-update-set-state
+## react/no-will-update-set-state<a id='react/no-will-update-set-state'></a>
 
 - 规则含义
 
@@ -232,7 +232,7 @@
   willUpdate官方文档禁止使用setState，并且  
   改语法已经弃用了，并将于react17正式不支持
 
-## react/no-direct-mutation-state
+## react/no-direct-mutation-state<a id='react/no-direct-mutation-state'></a>
 
 - 规则含义
 
@@ -249,7 +249,7 @@
   而且state作为props传到组件的时候，还会再和上一个props进行浅比较决定组件是否刷新  
   如果只是改变属性的话，引用不变不会刷新
 
-## react/no-is-mounted
+## react/no-is-mounted<a id='react/no-is-mounted'></a>
 
 - 规则含义
 
@@ -269,7 +269,7 @@
   这个警告主要发生在异步回调的时候，你可以通过：在Umount中设置flag，在回调中判断flag来解决。  
   更好的方法是在umount的时候取消数据订阅，或者通过实现promise.cancel方法取消promise
 
-## react/no-multi-comp
+## react/no-multi-comp<a id='react/no-multi-comp'></a>
 
 - 规则含义
 
@@ -279,7 +279,7 @@
 
   单一职责原则，功能拆分，更好维护和修改
 
-## react/no-string-refs
+## react/no-string-refs<a id='react/no-string-refs'></a>
 
 - 规则含义
 
@@ -294,7 +294,7 @@
 
       <div ref={helloDom => { this.helloDom = helloDom; }}>Hello, world.</div>
 
-## react/no-unknown-property
+## react/no-unknown-property<a id='react/no-unknown-property'></a>
 
 - 规则含义
 
@@ -304,7 +304,7 @@
 
   具体哪些属性可用见索引
 
-## react/prefer-es6-class
+## react/prefer-es6-class<a id='react/prefer-es6-class'></a>
 
 - 规则含义
 
@@ -314,7 +314,7 @@
 
   用jsx语法，可读性好
 
-## react/prop-types
+## react/prop-types<a id='react/prop-types'></a>
 
 - 规则含义
 
@@ -325,7 +325,7 @@
   使用propTypes校验输入属性可以提高组件可用性，  
   也相当于一个绝佳的文档，方便维护
 
-## react/react-in-jsx-scope
+## react/react-in-jsx-scope<a id='react/react-in-jsx-scope'></a>
 
 - 规则含义
 
@@ -335,13 +335,13 @@
 
   jsx编译后就是React.createElement,作用域中必须引用React
 
-## react/require-render-return
+## react/require-render-return<a id='react/require-render-return'></a>
 
 - 规则含义
 
   render方法必须包含return语句
 
-## react/self-closing-comp
+## react/self-closing-comp<a id='react/self-closing-comp'></a>
 
 - 规则含义
 
@@ -359,7 +359,7 @@
 
       <Modal />
 
-## react/sort-comp
+## react/sort-comp<a id='react/sort-comp'></a>
 
 - 规则含义
 
@@ -380,7 +380,7 @@
            render() {}  
       }
 
-## react/jsx-no-target-blank
+## react/jsx-no-target-blank<a id='react/jsx-no-target-blank'></a>
 
 - 规则含义
 
@@ -392,7 +392,7 @@
   获得原页面的window对象,然后黑客可以通过执行window.opener.location  
   改变你原来的网址重定向到一个相似的钓鱼网站窃取你的信息。添加如上的rel属性可以让window.opener为空
 
-## react/jsx-filename-extension
+## react/jsx-filename-extension<a id='react/jsx-filename-extension'></a>
 
 - 规则含义
 
@@ -402,7 +402,7 @@
 
   可通过文件名快速了解内容
 
-## react/jsx-no-comment-textnodes
+## react/jsx-no-comment-textnodes<a id='react/jsx-no-comment-textnodes'></a>
 
 - 规则含义
 
@@ -412,7 +412,7 @@
 
   防止开发者以为注释了内容，实际没有导致输出错误信息的问题
 
-## react/no-render-return-value
+## react/no-render-return-value<a id='react/no-render-return-value'></a>
 
 - 规则含义
 
@@ -432,7 +432,7 @@
 
       ReactDOM.render(<App ref={doSomethingWithInst} />, document.body);
 
-## react/no-find-dom-node
+## react/no-find-dom-node<a id='react/no-find-dom-node'></a>
 
 - 规则含义
 
@@ -442,7 +442,7 @@
 
   react以后会废弃掉findDOMNode方法
 
-## react/no-danger-with-children
+## react/no-danger-with-children<a id='react/no-danger-with-children'></a>
 
 - 规则含义
 
@@ -452,7 +452,7 @@
 
   错误语法
 
-## react/no-unused-prop-types
+## react/no-unused-prop-types<a id='react/no-unused-prop-types'></a>
 
 - 规则含义
 
@@ -462,7 +462,7 @@
 
   代码越少越好,代码越多,问题越多
 
-## react/style-prop-object
+## react/style-prop-object<a id='react/style-prop-object'></a>
 
 - 规则含义
 
@@ -472,7 +472,7 @@
 
   错误语法
 
-## react/no-unescaped-entities
+## react/no-unescaped-entities<a id='react/no-unescaped-entities'></a>
 
 - 规则含义
 
@@ -501,7 +501,7 @@
       <div> &gt; </div>  
       <div> {'>'} </div>
 
-## react/no-children-prop
+## react/no-children-prop<a id='react/no-children-prop'></a>
 
 - 规则含义
 
@@ -519,7 +519,7 @@
 
       <Father><Child/></Father>
 
-## react/no-array-index-key
+## react/no-array-index-key<a id='react/no-array-index-key'></a>
 
 - 规则含义
 
@@ -539,7 +539,7 @@
 
       {list.map((item, index) => <div key={item}>{item}</div>)}
 
-## react/require-default-props
+## react/require-default-props<a id='react/require-default-props'></a>
 
 - 规则含义
 
@@ -552,7 +552,7 @@
   各种边界条件可以运行良好。  
   给所有props设置默认值，也能保证props缺失时组件能正常渲染。
 
-## react/forbid-foreign-prop-types
+## react/forbid-foreign-prop-types<a id='react/forbid-foreign-prop-types'></a>
 
 - 规则含义
 
@@ -574,7 +574,7 @@
 
       import SomeComponent, {propTypes as someComponentPropTypes} from './SomeComponent';
 
-## react/default-props-match-prop-types
+## react/default-props-match-prop-types<a id='react/default-props-match-prop-types'></a>
 
 - 规则含义
 
@@ -585,7 +585,7 @@
 
   减少冗余
 
-## react/no-redundant-should-component-update
+## react/no-redundant-should-component-update<a id='react/no-redundant-should-component-update'></a>
 
 - 规则含义
 
@@ -597,7 +597,7 @@
   再定义shouldComponentUpdate仍然会按照你定义的方法来决定是否渲染  
   但这样使用PureComponent就没有意义了
 
-## react/no-unused-state
+## react/no-unused-state<a id='react/no-unused-state'></a>
 
 - 规则含义
 
@@ -607,7 +607,7 @@
 
   减少冗余
 
-## react/boolean-prop-naming
+## react/boolean-prop-naming<a id='react/boolean-prop-naming'></a>
 
 - 规则含义
 
@@ -617,7 +617,7 @@
 
   统一规范,帮助理解变量含义
 
-## react/no-typos
+## react/no-typos<a id='react/no-typos'></a>
 
 - 规则含义
 
@@ -627,7 +627,7 @@
 
   js属性大小写敏感，写错就不执行了
 
-## react/jsx-curly-brace-presence
+## react/jsx-curly-brace-presence<a id='react/jsx-curly-brace-presence'></a>
 
 - 规则含义
 
@@ -645,7 +645,7 @@
 
       <Test name="zcs">zcs</Test>
 
-## react/destructuring-assignment
+## react/destructuring-assignment<a id='react/destructuring-assignment'></a>
 
 - 规则含义
 
@@ -669,7 +669,7 @@
        <Component name={name} gender={gender}/>  
       }
 
-## react/no-access-state-in-setstate
+## react/no-access-state-in-setstate<a id='react/no-access-state-in-setstate'></a>
 
 - 规则含义
 
@@ -705,7 +705,7 @@
          })  
       }
 
-## react/button-has-type
+## react/button-has-type<a id='react/button-has-type'></a>
 
 - 规则含义
 
@@ -715,7 +715,7 @@
 
   button的type属性默认值是submit，可能会导致意外现象
 
-## react/no-this-in-sfc
+## react/no-this-in-sfc<a id='react/no-this-in-sfc'></a>
 
 - 规则含义
 
@@ -726,7 +726,7 @@
   sfc==stateless function component===无状态组件===函数组件  
   这种组件的this和class组件的不同
 
-## react/no-unsafe
+## react/no-unsafe<a id='react/no-unsafe'></a>
 
 - 规则含义
 
@@ -745,7 +745,7 @@
         1. 尽量不设置state，所有组件只是用props，state统一管理(redux的做法)  
         2. 使用key关联id，当一个组件的key换了，从新mount，避开willReceiveProps
 
-## react/jsx-handler-names
+## react/jsx-handler-names<a id='react/jsx-handler-names'></a>
 
 - 规则含义
 
@@ -755,7 +755,7 @@
 
   统一规范，增强可读性
 
-## react/jsx-fragments
+## react/jsx-fragments<a id='react/jsx-fragments'></a>
 
 - 规则含义
 

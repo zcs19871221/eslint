@@ -32,7 +32,7 @@
 28. [jsx-a11y/no-noninteractive-element-to-interactive-role](#jsx-a11y/no-noninteractive-element-to-interactive-role)
 29. [jsx-a11y/no-noninteractive-tabindex](#jsx-a11y/no-noninteractive-tabindex)
 
-## jsx-a11y/anchor-has-content
+## jsx-a11y/anchor-has-content<a id='jsx-a11y/anchor-has-content'></a>
 
 - 规则含义
 
@@ -50,7 +50,7 @@
 
       <a>Anchor Content!</a>
 
-## jsx-a11y/aria-role
+## jsx-a11y/aria-role<a id='jsx-a11y/aria-role'></a>
 
 - 规则含义
 
@@ -80,7 +80,7 @@
       <div></div>                   <!-- Good: No ARIA role -->  
       <Foo role={role}></Foo>       <!-- Good: ignoreNonDOM is set to true -->
 
-## jsx-a11y/aria-props
+## jsx-a11y/aria-props<a id='jsx-a11y/aria-props'></a>
 
 - 规则含义
 
@@ -90,7 +90,7 @@
 
   理由同上个规则
 
-## jsx-a11y/aria-proptypes
+## jsx-a11y/aria-proptypes<a id='jsx-a11y/aria-proptypes'></a>
 
 - 规则含义
 
@@ -100,13 +100,13 @@
 
   理由同上个规则
 
-## jsx-a11y/aria-unsupported-elements
+## jsx-a11y/aria-unsupported-elements<a id='jsx-a11y/aria-unsupported-elements'></a>
 
 - 规则含义
 
   不支持aria的标签(比如meta)不允许有相关属性
 
-## jsx-a11y/alt-text
+## jsx-a11y/alt-text<a id='jsx-a11y/alt-text'></a>
 
 - 规则含义
 
@@ -149,7 +149,7 @@
       <input type="image" aria-label="foo" />  
       <img src="icon.png" alt="" /> 图标可以省略
 
-## jsx-a11y/mouse-events-have-key-events
+## jsx-a11y/mouse-events-have-key-events<a id='jsx-a11y/mouse-events-have-key-events'></a>
 
 - 规则含义
 
@@ -173,7 +173,7 @@
       <div onMouseOver={ () => void 0 } onFocus={ () => void 0 } {...otherProps} />  
       <div onMouseOut={ () => void 0 } onBlur={ () => void 0 } {...otherProps} />
 
-## jsx-a11y/no-access-key
+## jsx-a11y/no-access-key<a id='jsx-a11y/no-access-key'></a>
 
 - 规则含义
 
@@ -192,7 +192,7 @@
 
       <div />
 
-## jsx-a11y/interactive-supports-focus
+## jsx-a11y/interactive-supports-focus<a id='jsx-a11y/interactive-supports-focus'></a>
 
 - 规则含义
 
@@ -222,7 +222,7 @@
       <!-- Good: buttons are inherently focusable -->  
       <button onClick="doSomething();">Click the button :)</button>
 
-## jsx-a11y/role-has-required-aria-props
+## jsx-a11y/role-has-required-aria-props<a id='jsx-a11y/role-has-required-aria-props'></a>
 
 - 规则含义
 
@@ -238,7 +238,7 @@
       <!-- Good: the checkbox role requires the aria-checked state -->  
       <span role="checkbox" aria-checked="false" aria-labelledby="foo" tabindex="0"></span>
 
-## jsx-a11y/role-supports-aria-props
+## jsx-a11y/role-supports-aria-props<a id='jsx-a11y/role-supports-aria-props'></a>
 
 - 规则含义
 
@@ -262,7 +262,7 @@
           <li tabIndex="0" role="radio" aria-checked="true">Lake Trout</li>  
       </ul>
 
-## jsx-a11y/tabindex-no-positive
+## jsx-a11y/tabindex-no-positive<a id='jsx-a11y/tabindex-no-positive'></a>
 
 - 规则含义
 
@@ -272,7 +272,7 @@
 
   保持使用键盘的tab跳转顺序和html定义顺序一致
 
-## jsx-a11y/heading-has-content
+## jsx-a11y/heading-has-content<a id='jsx-a11y/heading-has-content'></a>
 
 - 规则含义
 
@@ -295,7 +295,7 @@
       <h1><TextWrapper /><h1>  
       <h1 dangerouslySetInnerHTML={{ __html: 'foo' }} />
 
-## jsx-a11y/html-has-lang
+## jsx-a11y/html-has-lang<a id='jsx-a11y/html-has-lang'></a>
 
 - 规则含义
 
@@ -317,7 +317,7 @@
       <html lang="en-US">  
       <html lang={language}>
 
-## jsx-a11y/lang
+## jsx-a11y/lang<a id='jsx-a11y/lang'></a>
 
 - 规则含义
 
@@ -339,7 +339,7 @@
       <html lang="en">  
       <html lang="en-US">
 
-## jsx-a11y/no-distracting-elements
+## jsx-a11y/no-distracting-elements<a id='jsx-a11y/no-distracting-elements'></a>
 
 - 规则含义
 
@@ -358,7 +358,7 @@
 
       <div />
 
-## jsx-a11y/scope
+## jsx-a11y/scope<a id='jsx-a11y/scope'></a>
 
 - 规则含义
 
@@ -382,7 +382,7 @@
       <th scope="col" />  
       <th scope={scope} />
 
-## jsx-a11y/click-events-have-key-events
+## jsx-a11y/click-events-have-key-events<a id='jsx-a11y/click-events-have-key-events'></a>
 
 - 规则含义
 
@@ -402,7 +402,7 @@
       <div onClick={() => {}} onKeyUp={this.handleKeyUp} />  
       <div onClick={() => {}} onKeyPress={this.handleKeyPress} />
 
-## jsx-a11y/no-static-element-interactions
+## jsx-a11y/no-static-element-interactions<a id='jsx-a11y/no-static-element-interactions'></a>
 
 - 规则含义
 
@@ -435,7 +435,7 @@
       <div className="foo" onClick={() => {}} role="button" />  
       <input type="text" onClick={() => {}} />
 
-## jsx-a11y/no-noninteractive-element-interactions
+## jsx-a11y/no-noninteractive-element-interactions<a id='jsx-a11y/no-noninteractive-element-interactions'></a>
 
 - 规则含义
 
@@ -457,7 +457,7 @@
       <h1>标题</h1>、  
       <h1><button onClick={() => {}}>标题</button></h1>、
 
-## jsx-a11y/accessible-emoji
+## jsx-a11y/accessible-emoji<a id='jsx-a11y/accessible-emoji'></a>
 
 - 规则含义
 
@@ -478,7 +478,7 @@
       <span role="img" aria-label="Panda">🐼</span>  
       <span role="img" aria-labelledby="panda1">🐼</span>
 
-## jsx-a11y/aria-activedescendant-has-tabindex
+## jsx-a11y/aria-activedescendant-has-tabindex<a id='jsx-a11y/aria-activedescendant-has-tabindex'></a>
 
 - 规则含义
 
@@ -498,7 +498,7 @@
 
       <div aria-activedescendant={someID} tabIndex={0} />
 
-## jsx-a11y/iframe-has-title
+## jsx-a11y/iframe-has-title<a id='jsx-a11y/iframe-has-title'></a>
 
 - 规则含义
 
@@ -519,7 +519,7 @@
       <iframe title="This is a unique title" />  
       <iframe title={uniqueTitle} />
 
-## jsx-a11y/no-autofocus
+## jsx-a11y/no-autofocus<a id='jsx-a11y/no-autofocus'></a>
 
 - 规则含义
 
@@ -542,7 +542,7 @@
 
       <div />
 
-## jsx-a11y/no-redundant-roles
+## jsx-a11y/no-redundant-roles<a id='jsx-a11y/no-redundant-roles'></a>
 
 - 规则含义
 
@@ -564,7 +564,7 @@
       <button role="presentation" />  
       <MyComponent role="main" />
 
-## jsx-a11y/media-has-caption
+## jsx-a11y/media-has-caption<a id='jsx-a11y/media-has-caption'></a>
 
 - 规则含义
 
@@ -585,7 +585,7 @@
       <audio><track kind="captions" {...props} /></audio>  
       <video><track kind="captions" {...props} /></video>
 
-## jsx-a11y/no-interactive-element-to-noninteractive-role
+## jsx-a11y/no-interactive-element-to-noninteractive-role<a id='jsx-a11y/no-interactive-element-to-noninteractive-role'></a>
 
 - 规则含义
 
@@ -604,7 +604,7 @@
 
       <button></button>
 
-## jsx-a11y/no-noninteractive-element-to-interactive-role
+## jsx-a11y/no-noninteractive-element-to-interactive-role<a id='jsx-a11y/no-noninteractive-element-to-interactive-role'></a>
 
 - 规则含义
 
@@ -622,7 +622,7 @@
 
       <article ></article>
 
-## jsx-a11y/no-noninteractive-tabindex
+## jsx-a11y/no-noninteractive-tabindex<a id='jsx-a11y/no-noninteractive-tabindex'></a>
 
 - 规则含义
 
