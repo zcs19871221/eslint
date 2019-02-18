@@ -8,29 +8,32 @@
 4. [jsx-a11y/aria-proptypes](#jsx-a11y/aria-proptypes)
 5. [jsx-a11y/aria-unsupported-elements](#jsx-a11y/aria-unsupported-elements)
 6. [jsx-a11y/alt-text](#jsx-a11y/alt-text)
-7. [jsx-a11y/mouse-events-have-key-events](#jsx-a11y/mouse-events-have-key-events)
-8. [jsx-a11y/no-access-key](#jsx-a11y/no-access-key)
-9. [jsx-a11y/interactive-supports-focus](#jsx-a11y/interactive-supports-focus)
-10. [jsx-a11y/role-has-required-aria-props](#jsx-a11y/role-has-required-aria-props)
-11. [jsx-a11y/role-supports-aria-props](#jsx-a11y/role-supports-aria-props)
-12. [jsx-a11y/tabindex-no-positive](#jsx-a11y/tabindex-no-positive)
-13. [jsx-a11y/heading-has-content](#jsx-a11y/heading-has-content)
-14. [jsx-a11y/html-has-lang](#jsx-a11y/html-has-lang)
-15. [jsx-a11y/lang](#jsx-a11y/lang)
-16. [jsx-a11y/no-distracting-elements](#jsx-a11y/no-distracting-elements)
-17. [jsx-a11y/scope](#jsx-a11y/scope)
-18. [jsx-a11y/click-events-have-key-events](#jsx-a11y/click-events-have-key-events)
-19. [jsx-a11y/no-static-element-interactions](#jsx-a11y/no-static-element-interactions)
-20. [jsx-a11y/no-noninteractive-element-interactions](#jsx-a11y/no-noninteractive-element-interactions)
-21. [jsx-a11y/accessible-emoji](#jsx-a11y/accessible-emoji)
-22. [jsx-a11y/aria-activedescendant-has-tabindex](#jsx-a11y/aria-activedescendant-has-tabindex)
-23. [jsx-a11y/iframe-has-title](#jsx-a11y/iframe-has-title)
-24. [jsx-a11y/no-autofocus](#jsx-a11y/no-autofocus)
-25. [jsx-a11y/no-redundant-roles](#jsx-a11y/no-redundant-roles)
-26. [jsx-a11y/media-has-caption](#jsx-a11y/media-has-caption)
-27. [jsx-a11y/no-interactive-element-to-noninteractive-role](#jsx-a11y/no-interactive-element-to-noninteractive-role)
-28. [jsx-a11y/no-noninteractive-element-to-interactive-role](#jsx-a11y/no-noninteractive-element-to-interactive-role)
-29. [jsx-a11y/no-noninteractive-tabindex](#jsx-a11y/no-noninteractive-tabindex)
+7. [jsx-a11y/img-redundant-alt](#jsx-a11y/img-redundant-alt)
+8. [jsx-a11y/label-has-associated-control](#jsx-a11y/label-has-associated-control)
+9. [jsx-a11y/mouse-events-have-key-events](#jsx-a11y/mouse-events-have-key-events)
+10. [jsx-a11y/no-access-key](#jsx-a11y/no-access-key)
+11. [jsx-a11y/interactive-supports-focus](#jsx-a11y/interactive-supports-focus)
+12. [jsx-a11y/role-has-required-aria-props](#jsx-a11y/role-has-required-aria-props)
+13. [jsx-a11y/role-supports-aria-props](#jsx-a11y/role-supports-aria-props)
+14. [jsx-a11y/tabindex-no-positive](#jsx-a11y/tabindex-no-positive)
+15. [jsx-a11y/heading-has-content](#jsx-a11y/heading-has-content)
+16. [jsx-a11y/html-has-lang](#jsx-a11y/html-has-lang)
+17. [jsx-a11y/lang](#jsx-a11y/lang)
+18. [jsx-a11y/no-distracting-elements](#jsx-a11y/no-distracting-elements)
+19. [jsx-a11y/scope](#jsx-a11y/scope)
+20. [jsx-a11y/click-events-have-key-events](#jsx-a11y/click-events-have-key-events)
+21. [jsx-a11y/no-static-element-interactions](#jsx-a11y/no-static-element-interactions)
+22. [jsx-a11y/no-noninteractive-element-interactions](#jsx-a11y/no-noninteractive-element-interactions)
+23. [jsx-a11y/accessible-emoji](#jsx-a11y/accessible-emoji)
+24. [jsx-a11y/aria-activedescendant-has-tabindex](#jsx-a11y/aria-activedescendant-has-tabindex)
+25. [jsx-a11y/iframe-has-title](#jsx-a11y/iframe-has-title)
+26. [jsx-a11y/no-autofocus](#jsx-a11y/no-autofocus)
+27. [jsx-a11y/no-redundant-roles](#jsx-a11y/no-redundant-roles)
+28. [jsx-a11y/media-has-caption](#jsx-a11y/media-has-caption)
+29. [jsx-a11y/no-interactive-element-to-noninteractive-role](#jsx-a11y/no-interactive-element-to-noninteractive-role)
+30. [jsx-a11y/no-noninteractive-element-to-interactive-role](#jsx-a11y/no-noninteractive-element-to-interactive-role)
+31. [jsx-a11y/no-noninteractive-tabindex](#jsx-a11y/no-noninteractive-tabindex)
+32. [jsx-a11y/anchor-is-valid](#jsx-a11y/anchor-is-valid)
 
 <a id='jsx-a11y/anchor-has-content'></a>
 ## jsx-a11y/anchor-has-content
@@ -154,6 +157,58 @@
       <input type="image" alt="This is descriptive!" />  
       <input type="image" aria-label="foo" />  
       <img src="icon.png" alt="" /> 图标可以省略
+
+<a id='jsx-a11y/img-redundant-alt'></a>
+## jsx-a11y/img-redundant-alt
+
+- 规则含义
+
+  img alt属性中禁止出现冗余的描述字符串，比如imgae photo picture
+
+- 规则原因
+
+  不要添加冗余的上下文名称：如果标签，类，对象已经描述了是什么东西，不要再重复它，  
+  比如  
+  class Car {  
+   carColor = 'red'  
+  }  
+  <img src='womenImage' />  
+  通过类名和img标签，已经知道是车，图片了，不要再在变量命名中额外添加Car和img等描述
+
+- 错误例子
+
+      <img src="foo" alt="Photo of foo being weird." />  
+      <img src="bar" alt="Image of me at a bar!" />  
+      <img src="baz" alt="Picture of baz fixing a bug." />
+
+- 正确例子
+
+
+
+<a id='jsx-a11y/label-has-associated-control'></a>
+## jsx-a11y/label-has-associated-control
+
+- 规则含义
+
+  强制要求label标签有文本表示，并且绑定点击跳转机制
+
+- 规则原因
+
+  html语义化,label标签就是用来对特定元素进行关联的，如果用label，就要绑定跳转关系，  
+  否则不要用。  
+  有两种方式实现label的跳转：  
+  1. label标签内直接嵌入需要绑定的tag，自动实现点击文本跳转  
+    `<label>姓名：<input type='text' /></label>`  
+  2. 使用jsx的htmlFor绑定id  
+    `<label htmlFor={domId}>Surname</label>`  
+    `<input type="text" id={domId} />`  
+  如何生成for的id？  
+  对于单页应用，页面上的id必须是唯一的：防止错误的label导向，并使组件可以复用  
+  通过js生成元素的id要注意的是：  
+      - 最好不要在浏览器端产生id，这样server 渲染和client渲染时候会出现不一致的id  
+      - 如果一定要浏览器生成id，保证生成唯一uuid，而不是渲染时候的不重复id。  
+  如果你的id生成器是数字自增这种形式，而且id保存在cookie中。那么有可能生成的id会和下次  
+  刷新页面产生的id重复产生错误。
 
 <a id='jsx-a11y/mouse-events-have-key-events'></a>
 ## jsx-a11y/mouse-events-have-key-events
@@ -668,4 +723,59 @@
 - 正确例子
 
       <h1>标题</h1>
+
+<a id='jsx-a11y/anchor-is-valid'></a>
+## jsx-a11y/anchor-is-valid
+
+- 规则含义
+
+  设置正确的a标签：a必须带着正确的href，用来作为导航功能
+
+- 规则原因
+
+  对于绝大多数人和视障辅助设备来说，a标签就只有导航的含义。  
+  因此不要用a标签作为其他的功能。  
+  和button的区别  
+  1. button可以通过space和enter触发  
+  2. a只能通过enter触发  
+  如何用a标签  
+  1. a标签必须带href，只用来导航，无交互操作  
+  2. 如果有交互，使用button或其他标签  
+  3. 如果要滚动条到顶部，使用<a href='#top'>top是浏览器都知道的默认锚点，自动定位到顶部  
+  保证语义一致。
+
+- 错误例子
+
+      下面的应该换成button  
+      <a onClick={foo} />  
+      <a href="#" onClick={foo} />  
+      <a href={"#"} onClick={foo} />  
+      <a href={`#`} onClick={foo} />  
+      <a href="javascript:void(0)" onClick={foo} />  
+      <a href={"javascript:void(0)"} onClick={foo} />  
+      <a href={`javascript:void(0)`} onClick={foo} />  
+      缺少href属性  
+      <a />  
+      <a href={undefined} />  
+      <a href={null} />  
+      无效href属性  
+      <a href="#" />  
+      <a href={"#"} />  
+      <a href={`#`} />  
+      <a href="javascript:void(0)" />  
+      <a href={"javascript:void(0)"} />  
+      <a href={`javascript:void(0)`} />
+
+- 正确例子
+
+      <a href="https://github.com" />  
+      <a href="#section" />  
+      <a href="foo" />  
+      <a href="/foo/bar" />  
+      <a href={someValidPath} />  
+      <a href="https://github.com" onClick={foo} />  
+      <a href="#section" onClick={foo} />  
+      <a href="foo" onClick={foo} />  
+      <a href="/foo/bar" onClick={foo} />  
+      <a href={someValidPath} onClick={foo} />
 

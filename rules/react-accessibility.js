@@ -1,15 +1,5 @@
 // 基于react-a11y插件，致力于提高系统可访问性
 // 帮助失明及聋哑人士
-// 如何查看规则详细：
-// 1. 获取rulesName: 'jsx-a11y/anchor-has-content'取斜线后边部分anchor-has-content
-// 2. 地址替换rulesName：
-// `https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/${rulesName}.md`
-// 可交互元素：语义表示控制、操作
-// 标签：<a href>, <button>, <input>, <select>, <textarea>
-// 非交互元素：语义表示容器、内容，
-// 标签：<main>, <area>, <h1> (,<h2>, etc), <img>, <li>, <ul> and <ol>.
-// 静态元素：没有含义
-// 标签: div,span
 module.exports = {
   plugins: ['jsx-a11y', 'react'],
 
@@ -20,7 +10,6 @@ module.exports = {
   },
 
   rules: {
-    // 要求a标签必须有href属性
     /**
      * @meaning
      * a标签必须有子元素 <a>something</a>
@@ -138,23 +127,50 @@ module.exports = {
       },
     ],
 
-    // img alt属性中禁止出现冗余的描述字符串，比如imgage photo picture
+    /**
+     * @meaning
+     * img alt属性中禁止出现冗余的描述字符串，比如imgae photo picture
+     * @why
+     * 不要添加冗余的上下文名称：如果标签，类，对象已经描述了是什么东西，不要再重复它，
+     * 比如
+     * class Car {
+     *  carColor = 'red'
+     * }
+     * <img src='womenImage' />
+     * 通过类名和img标签，已经知道是车，图片了，不要再在变量命名中额外添加Car和img等描述
+     * @wrong
+     * <img src="foo" alt="Photo of foo being weird." />
+     * <img src="bar" alt="Image of me at a bar!" />
+     * <img src="baz" alt="Picture of baz fixing a bug." />
+     * @right
+     *<img src="foo" alt="Foo eating a sandwich." />
+     *<img src="bar" aria-hidden alt="Picture of me taking a photo of an image" /> // Will pass because it is hidden.
+     *<img src="baz" alt={`Baz taking a ${photo}`} /> // This is valid since photo is a variable name.
+     */
     'jsx-a11y/img-redundant-alt': 'error',
 
-    // 强制要求label标签有文本表示，并且绑定点击跳转机制
-    // 如何实现：
-    // 1. label标签内直接嵌入需要绑定的tag，自动实现点击文本跳转
-    // <label>姓名：<input type='text' /></label>
-    // 2. 使用jsx的htmlFor绑定id
-    // <label htmlFor={domId}>Surname</label>
-    // <input type="text" id={domId} />
-    // 3. 如何确定Id
-    // 对于react来说，id必须是唯一的，防止错误的label导向，并使组件复用
-    // 浏览器端生成id要注意的是：
-    // 1. 最好不要在浏览器端产生id，这样server和client渲染时候会出现不一致。
-    // 2. 如果一定要生成，保证生成唯一uuid，而不是渲染时候的不重复id。
-    // 比如如果你的id生成器是数字自增这种形式，那么有可能你这次刷新页面生成的id会和下次
-    // 刷新页面产生的id重复，在使用redux保存列表数据到localstorage的时候，会产生错误。
+    /**
+     * @meaning
+     * 强制要求label标签有文本表示，并且绑定点击跳转机制
+     * @why
+     * html语义化,label标签就是用来对特定元素进行关联的，如果用label，就要绑定跳转关系，
+     * 否则不要用。
+     * 有两种方式实现label的跳转：
+     * 1. label标签内直接嵌入需要绑定的tag，自动实现点击文本跳转
+     *   `<label>姓名：<input type='text' /></label>`
+     * 2. 使用jsx的htmlFor绑定id
+     *   `<label htmlFor={domId}>Surname</label>`
+     *   `<input type="text" id={domId} />`
+     * 如何生成for的id？
+     * 对于单页应用，页面上的id必须是唯一的：防止错误的label导向，并使组件可以复用
+     * 通过js生成元素的id要注意的是：
+     *     - 最好不要在浏览器端产生id，这样server 渲染和client渲染时候会出现不一致的id
+     *     - 如果一定要浏览器生成id，保证生成唯一uuid，而不是渲染时候的不重复id。
+     * 如果你的id生成器是数字自增这种形式，而且id保存在cookie中。那么有可能生成的id会和下次
+     * 刷新页面产生的id重复产生错误。
+     * @wrong
+     * @right
+     */
     'jsx-a11y/label-has-associated-control': [
       'error',
       {
@@ -650,9 +666,8 @@ module.exports = {
      * <a href="foo" onClick={foo} />
      * <a href="/foo/bar" onClick={foo} />
      * <a href={someValidPath} onClick={foo} />
+     *
      */
-    // ensure <a> tags are valid
-    // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/0745af376cdc8686d85a361ce36952b1fb1ccf6e/docs/rules/anchor-is-valid.md
     'jsx-a11y/anchor-is-valid': [
       'error',
       {
