@@ -85,15 +85,15 @@ module.exports = {
      * 不允许使用...设置key，不利于代码可读性（不推荐使用静态key值）
      * @wrong
      * [<Hello />, <Hello />, <Hello />];
-     * 
+     *
      * data.map(x => <Hello>{x}</Hello>);
-     * 
+     *
      * <Hello {...{ key: id, id, caption }} />;
      * @right
      * [<Hello key="first" />, <Hello key="second" />, <Hello key="third" />];
-     * 
+     *
      * data.map(x => <Hello key={x.id}>{x.value}</Hello>);
-     * 
+     *
      * <Hello key={id} {...{ id, caption }} />;
      */
     'react/jsx-key': 'error',
@@ -106,14 +106,14 @@ module.exports = {
      * 会造成不必要的刷新(这个函数的引用每次都变)，出现性能问题
      * @wrong
      * <Foo onClick={this._handleClick.bind(this)}></Foo>
-     * 
+     *
      * <Foo onClick={() => console.log('Hello!')}></Foo>
      * @right
      * // 构造函数时候绑定原型方法到对象属性
      * constructor() {
      *  this.onClick= this.onClick.bind(this);
      * }
-     * 
+     *
      * // 或者使用箭头函数定义：利用箭头函数创建时候绑定this的特性绑定对象
      * onClick = () => {}
      * <Foo onClick={this.onClick}></Foo>
@@ -363,7 +363,7 @@ module.exports = {
      * function Hello({ name }) {
      *   return <div>Hello {name}</div>;
      * }
-     * 
+     *
      * Hello.propTypes = {
      *   name: PropTypes.string.isRequired,
      * };
@@ -515,7 +515,7 @@ module.exports = {
      * render() {
      *   return (
      *     <div>
-     *       // empty div 
+     *       // empty div
      *     </div>
      *     )
      *   }
@@ -580,7 +580,7 @@ module.exports = {
      *   static propTypes= {
      *     name: PropTypes.string
      *   }
-     * 
+     *
      *   render() {
      *     return <div>Hello Bob</div>;
      *   }
@@ -590,7 +590,7 @@ module.exports = {
      *   static propTypes= {
      *     name: PropTypes.string
      *   }
-     * 
+     *
      *   render() {
      *     return <div>Hello {this.props.name}</div>;
      *   }
@@ -720,7 +720,7 @@ module.exports = {
      *   foo: React.PropTypes.string.isRequired,
      *   bar: React.PropTypes.string
      * };
-     * 
+     *
      * MyStatelessComponent.defaultProps = {
      *   foo: "foo"，
      *   baz: "baz"
@@ -730,7 +730,7 @@ module.exports = {
      *   foo: React.PropTypes.string.isRequired,
      *   bar: React.PropTypes.string
      * };
-     * 
+     *
      * MyStatelessComponent.defaultProps = {
      *   bar: "bar"
      * };
@@ -947,7 +947,7 @@ module.exports = {
      * <React.Fragment><Foo /></React.Fragment>
      * @right
      * <><Foo /></>
-     * 
+     *
      * <React.Fragment key="key"><Foo /></React.Fragment>
      */
     'react/jsx-fragments': 'error',
