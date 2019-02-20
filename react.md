@@ -61,7 +61,26 @@
 
 - 规则原因
 
-  这三个关键词太笼统，起不到文档或约束作用，没有帮助
+  这三个关键词太笼统，起不到文档的约束作用，没有帮助
+
+- 错误例子
+
+      Component.propTypes = {  
+        a: PropTypes.any,  
+        r: PropTypes.array,  
+        o: PropTypes.object  
+      };
+
+- 正确例子
+
+      Component.propTypes = {  
+        a: PropTypes.string,  
+        r: PropTypes.arrayOf(PropTypes.number),  
+        o: PropTypes.shape({  
+          color: PropTypes.string,  
+          fontSize: PropTypes.number  
+        })  
+      };
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/forbid-prop-types.md)
 
@@ -101,19 +120,19 @@
 - 规则原因
 
   循环时使用key为了提高react性能：再次渲染如果key不变就不会重新渲染  
-  不允许使用...设置key，不利于代码可读性
+  不允许使用...设置key，不利于代码可读性（不推荐使用静态key值）
 
 - 错误例子
 
       [<Hello />, <Hello />, <Hello />];  
       data.map(x => <Hello>{x}</Hello>);  
-      <Hello {...{ key: id, id, caption }} />
+      <Hello {...{ key: id, id, caption }} />;
 
 - 正确例子
 
       [<Hello key="first" />, <Hello key="second" />, <Hello key="third" />];  
       data.map(x => <Hello key={x.id}>{x.value}</Hello>);  
-      <Hello key={id} {...{ id, caption }} />
+      <Hello key={id} {...{ id, caption }} />;
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-key.md)
 
@@ -138,12 +157,11 @@
 
 - 正确例子
 
-      构造函数时候绑定原型方法到对象属性  
-      或者使用箭头函数定义：利用箭头函数创建时候绑定this的特性绑定对象  
+      // 构造函数时候绑定原型方法到对象属性  
       constructor() {  
        this.onClick= this.onClick.bind(this);  
       }  
-      or  
+      // 或者使用箭头函数定义：利用箭头函数创建时候绑定this的特性绑定对象  
       onClick = () => {}  
       <Foo onClick={this.onClick}></Foo>
 
@@ -160,7 +178,7 @@
 
 - 规则原因
 
-  组件的props就是一个对象，同名的会覆盖，不同大小写的会认为是不同的
+  组件的props就是一个对象，同名的会覆盖，不同大小写的会认为是不同的，但不推荐使用
 
 - 错误例子
 
@@ -179,7 +197,7 @@
 
 - 规则含义
 
-  禁止未定义jsx组件就使用
+  禁止使用未定义jsx组件
 
 - 错误例子
 
@@ -206,6 +224,14 @@
 - 规则原因
 
   jsx标签第一个字母大写表示这是一个react组件。
+
+- 错误例子
+
+      <testcomponent />
+
+- 正确例子
+
+      <TestComponent />
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md)
 
@@ -281,12 +307,12 @@
 
 - 规则含义
 
-  禁止在willUpdate中使用setState
+  禁止在componentWillUpdate中使用setState
 
 - 规则原因
 
-  willUpdate官方文档禁止使用setState，并且  
-  改语法已经弃用了，并将于react17正式不支持
+  componentWillUpdate官方文档禁止使用setState，并且  
+  该方法已经弃用了，并将于react17正式不支持
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-will-update-set-state.md)
 
@@ -297,7 +323,7 @@
 
 - 规则含义
 
-  只允许使用setState改变state，不允许改变state属性或改变索引
+  只允许使用setState改变state，不允许改变state属性或改变索引（不允许直接改变this.state, 唯一可以直接给 this.state 赋值的地方是 constructor）
 
 - 规则原因
 
@@ -309,6 +335,14 @@
   和上一个状态state做一个浅比较，决定是否render。  
   而且state作为props传到组件的时候，还会再和上一个props进行浅比较决定组件是否刷新  
   如果只是改变属性的话，引用不变不会刷新
+
+- 错误例子
+
+      this.state.name = XXX
+
+- 正确例子
+
+      this.setState({name: XXX})
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-direct-mutation-state.md)
 
@@ -325,9 +359,11 @@
 
   react已经弃用这个属性了。  
   很多人这么用isMounted:  
+  ```  
   if (this.isMounted()) {  
    this.setState({...})  
   }  
+  ```  
   来消除警告：组件已经umount但仍然调用setState。  
   这个警告通常表示组件没有卸载干净：卸载后仍然保持对组件的引用，有可能导致内存泄漏。  
   使用isMounted可能会消除警告，但警告的目的是让你发现为什么umount了还会调用setState，从而  
@@ -344,11 +380,33 @@
 
 - 规则含义
 
-  一个文件中只允许出现一个react class组件（函数组件不计算）
+  一个文件中只允许定义一个react class组件（函数组件不计算）
 
 - 规则原因
 
-  单一职责原则，功能拆分，更好维护和修改
+  单一职责原则，功能拆分，利于组件复用，增加代码可读性，更好维护和修改
+
+- 错误例子
+
+      class Hello extends React.PureComponent{  
+        render() {  
+          return <div>Hello {this.props.name}</div>;  
+        }  
+      };  
+      class HelloJohn extends React.PureComponent{  
+        render: function() {  
+          return <Hello name="John" />;  
+        }  
+      };
+
+- 正确例子
+
+      const Hello = require('./components/Hello');  
+      class HelloJohn extends React.PureComponent{  
+        render: function() {  
+          return <Hello name="John" />;  
+        }  
+      };
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md)
 
@@ -359,12 +417,16 @@
 
 - 规则含义
 
-  禁止使用字符串ref
+  禁止使用字符串标识的ref属性
 
 - 规则原因
 
   react以前的ref形式，已经废弃  
   现在使用ref搭配一个函数来获取dom引用
+
+- 错误例子
+
+      <div ref="helloDom">Hello, world.</div>
 
 - 正确例子
 
@@ -385,6 +447,14 @@
 
   具体哪些属性可用见索引
 
+- 错误例子
+
+      <div class="hello">Hello World</div>
+
+- 正确例子
+
+      <div className="hello">Hello World</div>
+
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-unknown-property.md)
 
 **[⬆ 回到目录](#目录)**
@@ -400,6 +470,22 @@
 
   用jsx语法，可读性好
 
+- 错误例子
+
+      const Hello = createReactClass({  
+        render: function() {  
+          return <div>Hello {this.props.name}</div>;  
+        }  
+      });
+
+- 正确例子
+
+      class Hello extends React.Component {  
+        render() {  
+          return <div>Hello {this.props.name}</div>;  
+        }  
+      }
+
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md)
 
 **[⬆ 回到目录](#目录)**
@@ -409,12 +495,27 @@
 
 - 规则含义
 
-  强制使用propTypes检查属性
+  强制使用 PropTypes检查属性的数据类型
 
 - 规则原因
 
-  使用propTypes校验输入属性可以提高组件可用性，  
-  也相当于一个绝佳的文档，方便维护
+  使用 PropTypes校验输入属性可以提高组件可用性，其他开发人员可根据定义的类型检查正确使用该组件，  
+  相当于一个绝佳的文档，方便维护
+
+- 错误例子
+
+      function Hello({ name }) {  
+       return <div>Hello {name}</div>;  
+      }
+
+- 正确例子
+
+      function Hello({ name }) {  
+        return <div>Hello {name}</div>;  
+      }  
+      Hello.propTypes = {  
+        name: PropTypes.string.isRequired,  
+      };
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md)
 
@@ -442,6 +543,22 @@
 
   render方法必须包含return语句
 
+- 错误例子
+
+      class Hello extends React.Component {  
+        render() {  
+          <div>Hello</div>;  
+        }  
+      }
+
+- 正确例子
+
+      class Hello extends React.Component {  
+        render() {  
+          return <div>Hello</div>;  
+        }  
+      }
+
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-render-return.md)
 
 **[⬆ 回到目录](#目录)**
@@ -451,11 +568,11 @@
 
 - 规则含义
 
-  没有子元素的组件强制自闭合标签
+  没有子元素的组件强制使用自闭合标签
 
 - 规则原因
 
-  简洁，统一
+  没必要使用闭合标签，简洁，统一
 
 - 错误例子
 
@@ -474,12 +591,11 @@
 
 - 规则含义
 
-  类组件的方法按照  
-  1. 静态方法  
-  2. 事件循环方法  
+  类组件的方法按照以下顺序组织排列  
+  1. 静态方法和属性  
+  2. 生命周期方法  
   3. 其他方法  
-  4. render方法  
-  的顺序排列
+  4. render方法
 
 - 正确例子
 
@@ -500,13 +616,23 @@
 
 - 规则含义
 
-  使用有target='_blank'属性的a标签时候，必须加上rel='noreferrer noopener'属性
+  使用有`target='_blank'`属性的a标签时候，必须加上rel='noreferrer noopener'属性
 
 - 规则原因
 
-  安全隐患：钓鱼网站。当使用<a target='_blank'>打开新页面时候，新页面可以通过window.opener  
+  服务器安全隐患：钓鱼网站。当使用`<a target='_blank'/>`打开新页面时候，新页面可以通过window.opener  
   获得原页面的window对象,然后黑客可以通过执行window.opener.location  
   改变你原来的网址重定向到一个相似的钓鱼网站窃取你的信息。添加如上的rel属性可以让window.opener为空
+
+- 错误例子
+
+      <a target='_blank' href="http://example.com/">
+
+- 正确例子
+
+      <p target="_blank"></p>  
+      <a target="_blank" rel="noopener noreferrer" href="http://example.com"></a>  
+      <a target="_blank" href="path/in/the/host"></a>
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-target-blank.md)
 
@@ -523,6 +649,20 @@
 
   可通过文件名快速了解内容
 
+- 错误例子
+
+      // filename: MyComponent.js  
+      function MyComponent() {  
+        return <div />;  
+      }
+
+- 正确例子
+
+      // filename: MyComponent.jsx  
+      function MyComponent() {  
+        return <div />;  
+      }
+
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md)
 
 **[⬆ 回到目录](#目录)**
@@ -536,7 +676,27 @@
 
 - 规则原因
 
-  防止开发者以为注释了内容，实际没有导致输出错误信息的问题
+  防止开发者以为注释了内容，实际没有，导致输出错误信息的问题
+
+- 错误例子
+
+      class Hello extends React.PureComponent{  
+      render() {  
+        return (  
+          <div>  
+            // empty div  
+          </div>  
+          )  
+        }  
+      }
+
+- 正确例子
+
+      class Hello extends React.PureComponent{  
+        render() {  
+          return <div>{// empty div }</div>;  
+        }  
+      }
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-comment-textnodes.md)
 
@@ -547,7 +707,7 @@
 
 - 规则含义
 
-  禁止使用React.render/ReactDOM.render的返回值
+  禁止使用 `React.render/ReactDOM.render`的返回值
 
 - 规则原因
 
@@ -572,11 +732,11 @@
 
 - 规则含义
 
-  禁止使用findDOMNode方法
+  禁止使用findDOMNode方法, 用 ref
 
 - 规则原因
 
-  react以后会废弃掉findDOMNode方法
+  react以后会废弃掉 findDOMNode方法
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-find-dom-node.md)
 
@@ -593,6 +753,19 @@
 
   错误语法
 
+- 错误例子
+
+      <div dangerouslySetInnerHTML={{ __html: "HTML" }}>  
+        Children  
+      </div>
+
+- 正确例子
+
+      <div dangerouslySetInnerHTML={{ __html: "HTML" }} />  
+      <div>  
+        Children  
+      </div>
+
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-danger-with-children.md)
 
 **[⬆ 回到目录](#目录)**
@@ -602,11 +775,33 @@
 
 - 规则含义
 
-  不要定义使用不到的propTypes
+  不要定义使用不到的 prop types
 
 - 规则原因
 
   代码越少越好,代码越多,问题越多
+
+- 错误例子
+
+      class Hello extends React.PureComponent{  
+        static propTypes= {  
+          name: PropTypes.string  
+        }  
+        render() {  
+          return <div>Hello Bob</div>;  
+        }  
+      };
+
+- 正确例子
+
+      class Hello extends React.PureComponent{  
+        static propTypes= {  
+          name: PropTypes.string  
+        }  
+        render() {  
+          return <div>Hello {this.props.name}</div>;  
+        }  
+      };
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-unused-prop-types.md)
 
@@ -621,7 +816,15 @@
 
 - 规则原因
 
-  错误语法
+  错误语法 (This is consistent with the DOM style JavaScript property, is more efficient, and prevents XSS security holes.)
+
+- 错误例子
+
+      <div style="color: 'red'" />
+
+- 正确例子
+
+      <div style={{ color: "red" }} />
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/style-prop-object.md)
 
@@ -637,16 +840,20 @@
 - 规则原因
 
   这几个字符出现了也没事，react会自动转义。但是大概率这几种字符的出现是由于敲错了，比如：  
+  ```  
   <Component  
     a="b">  
     c="d">  
   >bodytext</Component>  
+  ```  
   因为多敲了一个>，输出错误。这个规则就是让你及早发现错误  
   如果你需要用到这几个字符，使用转义符号或者通过{}输出：  
+  ```  
   > -> &gt;  
   " -> &quot;  
   ' -> &apos;  
-  } -> &#125;
+  } -> &#125;  
+  ```
 
 - 错误例子
 
@@ -693,7 +900,7 @@
 
 - 规则原因
 
-  key能告诉react，哪些元素是不变的，哪些元素是变了的从而从新渲染  
+  key能告诉react，哪些元素是不变的，哪些元素是变了的从而重新渲染  
   如果使用索引作为key，不能唯一标识元素，有可能的后果就是，内容变了，但是没有重新刷新  
   使用元素内容唯一标识
 
@@ -736,14 +943,14 @@
 
 - 规则原因
 
-  防止生产环境下使用babel插件babel-plugin-transform-react-remove-prop-types  
+  防止生产环境下使用babel插件 babel-plugin-transform-react-remove-prop-types  
   去除propTypes时出现问题
 
 - 错误例子
 
       import SomeComponent from './SomeComponent';  
       SomeComponent.propTypes;  
-      var { propTypes } = SomeComponent;  
+      const { propTypes } = SomeComponent;  
       SomeComponent['propTypes'];
 
 - 正确例子
@@ -765,6 +972,27 @@
 - 规则原因
 
   减少冗余
+
+- 错误例子
+
+      MyStatelessComponent.propTypes = {  
+        foo: React.PropTypes.string.isRequired,  
+        bar: React.PropTypes.string  
+      };  
+      MyStatelessComponent.defaultProps = {  
+        foo: "foo"，  
+        baz: "baz"  
+      };
+
+- 正确例子
+
+      MyStatelessComponent.propTypes = {  
+        foo: React.PropTypes.string.isRequired,  
+        bar: React.PropTypes.string  
+      };  
+      MyStatelessComponent.defaultProps = {  
+        bar: "bar"  
+      };
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/default-props-match-prop-types.md)
 
@@ -822,7 +1050,7 @@
 
 - 规则含义
 
-  保证react预留的静态和事件循环方法大小写拼写正确
+  保证react预留的静态类属性和生命周期方法大小写拼写正确
 
 - 规则原因
 
@@ -860,7 +1088,7 @@
 
 - 规则含义
 
-  强制要求使用解构获取所有props属性，再通过变量在render中使用
+  强制要求使用解构获取所有props,state,context属性，再通过变量在render中使用
 
 - 规则原因
 
@@ -918,6 +1146,7 @@
       }  
       onClick() {  
          this.setState(xx, () => {  
+             ...  
          })  
       }
 
@@ -930,11 +1159,21 @@
 
 - 规则含义
 
-  button标签必须设置type属性
+  button标签必须设置type属性(button, submit, reset)
 
 - 规则原因
 
   button的type属性默认值是submit，可能会导致意外现象
+
+- 错误例子
+
+      <button>Hello</button>
+
+- 正确例子
+
+      <button type="button">Hello</button>  
+      <button type="submit">Hello</button>  
+      <button type="reset">Hello</button>
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/button-has-type.md)
 
@@ -952,6 +1191,22 @@
   sfc==stateless function component===无状态组件===函数组件  
   这种组件的this和class组件的不同
 
+- 错误例子
+
+      function Foo(props) {  
+        return (  
+          <div>{this.props.bar}</div>  
+        );  
+      }
+
+- 正确例子
+
+      function Foo(props) {  
+        return (  
+          <div>{props.bar}</div>  
+        );  
+      }
+
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-this-in-sfc.md)
 
 **[⬆ 回到目录](#目录)**
@@ -961,20 +1216,21 @@
 
 - 规则含义
 
-  禁止使用Unsafe方法(componentWillMount,componentWillUpdate,componentWillReceiveProps)
+  禁止使用不安全的生命周期方法(componentWillMount,componentWillUpdate,componentWillReceiveProps)
 
 - 规则原因
 
   1. 这些方法将在react17正式不支持。  
   2. 这些方法本身就有潜在的问题。  
-      * willMount和willUpdate都是render前要调用的方法，不能调用setState容易出错  
+      * componentWillMount和 componentWillUpdate都是render前要调用的方法，不能调用setState容易出错  
       * componentWillReceiveProps有以下问题：  
         1. 你不能直接把props的值一股脑的设置给state，因为这样会把用户原生操作的状态冲掉  
         2. 当接收新props时，你需要对内容进行判断，决定更新哪个状态。这是很复杂的，随着props的增多很难维护。而且难以把状态复原  
-        3. state的来源包括mount时候constructor中的props和willRecive中的判断设置,来源不单一，你可能要写两种情况的代码  
+        3. state的来源包括mount时候constructor中的props和 componentWillReceiveProps中的判断设置,来源不单一，你可能要写两种情况的代码  
       * 解决方法是：  
         1. 尽量不设置state，所有组件只是用props，state统一管理(redux的做法)  
-        2. 使用key关联id，当一个组件的key换了，从新mount，避开willReceiveProps
+        2. 使用key关联id，当一个组件的key换了，从新mount，避开 componentWillReceiveProps 方法  
+  （这些方法在组价的异步渲染和严格模式下会有问题）
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-unsafe.md)
 
@@ -985,11 +1241,19 @@
 
 - 规则含义
 
-  强制要求jsx中onXXX的对应类的方法前缀必须是handleXXX
+  强制要求jsx中onXXX（事件处理函数）的对应类的方法前缀必须是handle
 
 - 规则原因
 
   统一规范，增强可读性
+
+- 错误例子
+
+      <MyComponent handleChange={this.componentChanged} />
+
+- 正确例子
+
+      <MyComponent onChange={this.handleChange} />
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-handler-names.md)
 
@@ -1005,6 +1269,15 @@
 - 规则原因
 
   统一规范，减少冗余
+
+- 错误例子
+
+      <React.Fragment><Foo /></React.Fragment>
+
+- 正确例子
+
+      <><Foo /></>  
+      <React.Fragment key="key"><Foo /></React.Fragment>
 
 [eslint](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-fragments.md)
 
