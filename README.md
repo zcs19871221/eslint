@@ -1,9 +1,10 @@
-#  javaScript和React规范
+# javaScript 和 React 规范
 
-基于eslint,react插件,import插件,a11y插件,参考了airbnb配置
+基于 eslint,react 插件,import 插件,a11y 插件,参考了 airbnb 配置
 
-  - [React规范](./react.md)
-  - [React可访问性规范](./reactAccessbility.md)
+- [React 规范](./react.md)
+- [React 可访问性规范](./reactAccessbility.md)
+- [模块化规范](./imports.md)
 
 # 如何使用
 
@@ -11,14 +12,14 @@
 
 # 如何更新插件
 
-执行`npm run checkRule`,会把当前规则和eslint最新版本插件比较，按照提示更新rule文件夹
+执行`npm run checkRule`,会把当前规则和 eslint 最新版本插件比较，按照提示更新 rule 文件夹
 
-**添加或修改规范后，必须严格按照下面样式更新jsDoc的注释，并重新生成文档**
+**添加或修改规范后，必须严格按照下面样式更新 jsDoc 的注释，并重新生成文档**
 
 # 如何创建文档
 
-执行`npm run createDoc` 
-根据rule文件夹下的jsDoc注释
+执行`npm run createDoc`
+根据 rule 文件夹下的 jsDoc 注释
 
 # 关于规范中的注释
 

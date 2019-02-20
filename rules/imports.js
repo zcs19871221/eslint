@@ -177,8 +177,6 @@ module.exports = {
      */
     'import/no-duplicates': 'error',
 
-    // js,jsx,mjs后缀的文件import时候不允许使用后缀
-    // 其他后缀文件import时候必须使用后缀
     /**
      * @meaning
      * import`js,jsx,mjs`后缀的文件时路径不允许使用后缀
@@ -274,42 +272,56 @@ module.exports = {
      */
     'import/no-absolute-path': 'error',
 
-    // nodeJs的require禁止使用表达式动态生成地址
-    // 难以分析问题以及找到代码位置
     /**
      * @meaning
+     * require语法的地址必须使用静态地址
      * @why
+     * 1. 会阻止打包工具和语法检查工具的正常使用
+     * 2. 不利于代码可读性
      * @wrong
+     * require(name);
+     * require(`../${name}`);
      * @right
+     * require('../name');
+     * @group
+     * module
      */
     'import/no-dynamic-require': 'error',
 
-    // 禁止使用webpack loader参数语法在模块里
     /**
      * @meaning
+     * 禁止在模块引入时使用webpack loader语法
      * @why
      * @wrong
      * @right
+     * @group
+     * hide
      */
     'import/no-webpack-loader-syntax': 'error',
 
-    // Prevent importing the default as if it were named
-    // 禁止把default导入重命名为其他名称
-    // 错误：import {default as foo} from 'modules'
     /**
      * @meaning
+     * 禁止把default import重命名
      * @why
      * @wrong
+     * import { default as foo } from './foo.js';
      * @right
+     * import foo from './foo.js';
+     * @group
+     * hide
      */
     'import/no-named-default': 'error',
 
-    // 禁止在模块中引用自己
     /**
      * @meaning
+     * 禁止在模块中引用自己
      * @why
      * @wrong
+     * // foo.js
+     * import foo from './foo';
      * @right
+     * @group
+     * hide
      */
     'import/no-self-import': 'error',
 
@@ -320,27 +332,39 @@ module.exports = {
     // 不要有循环引用
     /**
      * @meaning
+     * 禁止循环依赖
      * @why
+     * 1. 造成紧耦合，不利于维护
+     * 2. commonJs下，循环依赖会导致模块不正确加载
      * @wrong
+     * // a.js
+     * import b from './b.js'
+     * // b.js
+     * import a from './a.js'
      * @right
      */
     'import/no-cycle': ['error', { maxDepth: Infinity }],
 
-    // 禁止路径中出现无效符号
-    // 比如: './../' './/abc'
     /**
      * @meaning
+     * 禁止在模块路径中出现无效的符号
      * @why
+     * 增强代码可读性
      * @wrong
+     * import "./../pages/about.js";
+     * import "./pages//about"
      * @right
+     * import "../pages/about.js";
+     * import "./pages/about"
      */
     'import/no-useless-path-segments': 'error',
 
-    // 动态加载模块强制要求通过webpack magic comment来配置
-    // 动态模块名称，增加可读性
     /**
      * @meaning
+     * 动态加载模块必须使用webpack magic comment的`webpackChunkName`来配置打包模块名称
      * @why
+     * 1. 报错时候可以迅速定位错误文件
+     * 2. 统一规范
      * @wrong
      * @right
      */
@@ -351,15 +375,5 @@ module.exports = {
         webpackChunknameFormat: '[0-9a-zA-Z-_/.]+',
       },
     ],
-
-    // Use this rule to prevent imports to folders in relative parent paths.
-    // https://github.com/benmosher/eslint-plugin-import/blob/c34f14f67f077acd5a61b3da9c0b0de298d20059/docs/rules/no-relative-parent-imports.md
-    /**
-     * @meaning
-     * @why
-     * @wrong
-     * @right
-     */
-    'import/no-relative-parent-imports': 'off',
   },
 };

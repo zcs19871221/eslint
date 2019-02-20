@@ -2,7 +2,7 @@
   "name": "eslint-config-zcs1",
   "scripts": {
     "checkRule": "node checkRules/checkRule.js",
-    "createDoc": "node createDoc/createDoc.js"
+    "createDoc": "node createDoc/createAllDoc.js"
   },
   "version": "1.0.2",
   "description": "",
