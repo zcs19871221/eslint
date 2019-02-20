@@ -38,9 +38,22 @@ module.exports = {
      * @meaning
      * propTypes校验禁止使用类型any,array(arrayOf替换),object(shape替换)
      * @why
-     * 这三个关键词太笼统，起不到文档或约束作用，没有帮助
+     * 这三个关键词太笼统，起不到文档的约束作用，没有帮助
      * @wrong
+     * Component.propTypes = {
+     *   a: PropTypes.any,
+     *   r: PropTypes.array,
+     *   o: PropTypes.object
+     * };
      * @right
+     * Component.propTypes = {
+     *   a: PropTypes.string,
+     *   r: PropTypes.arrayOf(PropTypes.number),
+     *   o: PropTypes.shape({
+     *     color: PropTypes.string,
+     *     fontSize: PropTypes.number
+     *   })
+     * };
      */
     'react/forbid-prop-types': [
       'error',
@@ -69,15 +82,19 @@ module.exports = {
      * 不允许使用...运算符设置key属性
      * @why
      * 循环时使用key为了提高react性能：再次渲染如果key不变就不会重新渲染
-     * 不允许使用...设置key，不利于代码可读性
+     * 不允许使用...设置key，不利于代码可读性（不推荐使用静态key值）
      * @wrong
      * [<Hello />, <Hello />, <Hello />];
+     * 
      * data.map(x => <Hello>{x}</Hello>);
-     * <Hello {...{ key: id, id, caption }} />
+     * 
+     * <Hello {...{ key: id, id, caption }} />;
      * @right
      * [<Hello key="first" />, <Hello key="second" />, <Hello key="third" />];
+     * 
      * data.map(x => <Hello key={x.id}>{x.value}</Hello>);
-     * <Hello key={id} {...{ id, caption }} />
+     * 
+     * <Hello key={id} {...{ id, caption }} />;
      */
     'react/jsx-key': 'error',
 
@@ -89,14 +106,15 @@ module.exports = {
      * 会造成不必要的刷新(这个函数的引用每次都变)，出现性能问题
      * @wrong
      * <Foo onClick={this._handleClick.bind(this)}></Foo>
+     * 
      * <Foo onClick={() => console.log('Hello!')}></Foo>
      * @right
-     * 构造函数时候绑定原型方法到对象属性
-     * 或者使用箭头函数定义：利用箭头函数创建时候绑定this的特性绑定对象
+     * // 构造函数时候绑定原型方法到对象属性
      * constructor() {
      *  this.onClick= this.onClick.bind(this);
      * }
-     * or
+     * 
+     * // 或者使用箭头函数定义：利用箭头函数创建时候绑定this的特性绑定对象
      * onClick = () => {}
      * <Foo onClick={this.onClick}></Foo>
      */
@@ -115,7 +133,7 @@ module.exports = {
      * @meaning
      * 禁止在jsx的属性中出现重名，大小写不一样的重名也不行
      * @why
-     * 组件的props就是一个对象，同名的会覆盖，不同大小写的会认为是不同的
+     * 组件的props就是一个对象，同名的会覆盖，不同大小写的会认为是不同的，但不推荐使用
      * @wrong
      * <Hello name="John" Name="John" />;
      * @right
@@ -125,7 +143,7 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止未定义jsx组件就使用
+     * 禁止使用未定义jsx组件
      * @why
      * @wrong
      * <Hello name="John" />;
@@ -143,7 +161,9 @@ module.exports = {
      * @why
      * jsx标签第一个字母大写表示这是一个react组件。
      * @wrong
+     * <testcomponent />
      * @right
+     * <TestComponent />
      */
     'react/jsx-pascal-case': [
       'error',
@@ -200,10 +220,10 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止在willUpdate中使用setState
+     * 禁止在componentWillUpdate中使用setState
      * @why
-     * willUpdate官方文档禁止使用setState，并且
-     * 改语法已经弃用了，并将于react17正式不支持
+     * componentWillUpdate官方文档禁止使用setState，并且
+     * 该方法已经弃用了，并将于react17正式不支持
      * @wrong
      * @right
      */
@@ -211,7 +231,7 @@ module.exports = {
 
     /**
      * @meaning
-     * 只允许使用setState改变state，不允许改变state属性或改变索引
+     * 只允许使用setState改变state，不允许改变state属性或改变索引（不允许直接改变this.state, 唯一可以直接给 this.state 赋值的地方是 constructor）
      * @why
      * react的核心思路就是保持一切都是纯的，然后利用持久化数据结构的原理优化性能：
      * 当有改变发生需要比较状态的时候，找出树状结构上不变和变化的部分，
@@ -223,7 +243,9 @@ module.exports = {
      * 而且state作为props传到组件的时候，还会再和上一个props进行浅比较决定组件是否刷新
      * 如果只是改变属性的话，引用不变不会刷新
      * @wrong
+     * this.state.name = XXX
      * @right
+     * this.setState({name: XXX})
      */
     'react/no-direct-mutation-state': 'error',
 
@@ -233,9 +255,11 @@ module.exports = {
      * @why
      * react已经弃用这个属性了。
      * 很多人这么用isMounted:
+     * ```
      * if (this.isMounted()) {
      *  this.setState({...})
      * }
+     * ```
      * 来消除警告：组件已经umount但仍然调用setState。
      * 这个警告通常表示组件没有卸载干净：卸载后仍然保持对组件的引用，有可能导致内存泄漏。
      * 使用isMounted可能会消除警告，但警告的目的是让你发现为什么umount了还会调用setState，从而
@@ -246,27 +270,46 @@ module.exports = {
      * @wrong
      * @right
      * @reference
-     * https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html
+     * <a href="https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html" target="_blank" rel="noopener noreferrer">isMounted is an Antipattern</a>
      */
     'react/no-is-mounted': 'error',
 
     /**
      * @meaning
-     * 一个文件中只允许出现一个react class组件（函数组件不计算）
+     * 一个文件中只允许定义一个react class组件（函数组件不计算）
      * @why
-     * 单一职责原则，功能拆分，更好维护和修改
+     * 单一职责原则，功能拆分，利于组件复用，增加代码可读性，更好维护和修改
      * @wrong
+     * class Hello extends React.PureComponent{
+     *   render() {
+     *     return <div>Hello {this.props.name}</div>;
+     *   }
+     * };
+     *
+     * class HelloJohn extends React.PureComponent{
+     *   render: function() {
+     *     return <Hello name="John" />;
+     *   }
+     * };
      * @right
+     * const Hello = require('./components/Hello');
+
+     * class HelloJohn extends React.PureComponent{
+     *   render: function() {
+     *     return <Hello name="John" />;
+     *   }
+     * };
      */
     'react/no-multi-comp': ['error', { ignoreStateless: true }],
 
     /**
      * @meaning
-     * 禁止使用字符串ref
+     * 禁止使用字符串标识的ref属性
      * @why
      * react以前的ref形式，已经废弃
      * 现在使用ref搭配一个函数来获取dom引用
      * @wrong
+     * <div ref="helloDom">Hello, world.</div>
      * @right
      * <div ref={helloDom => { this.helloDom = helloDom; }}>Hello, world.</div>
      */
@@ -278,9 +321,11 @@ module.exports = {
      * @why
      * 具体哪些属性可用见索引
      * @wrong
+     * <div class="hello">Hello World</div>
      * @right
+     * <div className="hello">Hello World</div>
      * @reference
-     * https://reactjs.org/docs/dom-elements.html
+     * <a href="https://reactjs.org/docs/dom-elements.html" target="_blank" rel="noopener noreferrer">DOM Elements</a>
      */
     'react/no-unknown-property': 'error',
 
@@ -290,18 +335,38 @@ module.exports = {
      * @why
      * 用jsx语法，可读性好
      * @wrong
+     * const Hello = createReactClass({
+     *   render: function() {
+     *     return <div>Hello {this.props.name}</div>;
+     *   }
+     * });
      * @right
+     * class Hello extends React.Component {
+     *   render() {
+     *     return <div>Hello {this.props.name}</div>;
+     *   }
+     * }
      */
     'react/prefer-es6-class': ['error', 'always'],
 
     /**
      * @meaning
-     * 强制使用propTypes检查属性
+     * 强制使用 PropTypes检查属性的数据类型
      * @why
-     * 使用propTypes校验输入属性可以提高组件可用性，
-     * 也相当于一个绝佳的文档，方便维护
+     * 使用 PropTypes校验输入属性可以提高组件可用性，其他开发人员可根据定义的类型检查正确使用该组件，
+     * 相当于一个绝佳的文档，方便维护
      * @wrong
+     * function Hello({ name }) {
+     *  return <div>Hello {name}</div>;
+     * }
      * @right
+     * function Hello({ name }) {
+     *   return <div>Hello {name}</div>;
+     * }
+     * 
+     * Hello.propTypes = {
+     *   name: PropTypes.string.isRequired,
+     * };
      */
     'react/prop-types': [
       'error',
@@ -327,15 +392,25 @@ module.exports = {
      * render方法必须包含return语句
      * @why
      * @wrong
+     * class Hello extends React.Component {
+     *   render() {
+     *     <div>Hello</div>;
+     *   }
+     * }
      * @right
+     * class Hello extends React.Component {
+     *   render() {
+     *     return <div>Hello</div>;
+     *   }
+     * }
      */
     'react/require-render-return': 'error',
 
     /**
      * @meaning
-     * 没有子元素的组件强制自闭合标签
+     * 没有子元素的组件强制使用自闭合标签
      * @why
-     * 简洁，统一
+     * 没必要使用闭合标签，简洁，统一
      * @wrong
      * <Modal></Modal>
      * @right
@@ -345,12 +420,11 @@ module.exports = {
 
     /**
      * @meaning
-     * 类组件的方法按照
-     * 1. 静态方法
-     * 2. 事件循环方法
+     * 类组件的方法按照以下顺序组织排列
+     * 1. 静态方法和属性
+     * 2. 生命周期方法
      * 3. 其他方法
      * 4. render方法
-     * 的顺序排列
      * @why
      * @wrong
      * @right
@@ -394,18 +468,22 @@ module.exports = {
     ],
 
     // 当使用a标签的target='_blank'属性时候，有安全隐患，新开的页面可以通过
-    // window.opener获取原始页面的windows对象，想象你打开了一个连接到一个恶意网站，
+    // window.opener获取原始页面的windows对象，想象你打开了一个链接到一个恶意网站，
     // 该网站通过window.opener.location='一个高仿钓鱼网站'窃取你的信息
     // 因此当href是域名开头或者变量的时候，要求必须添加属性rel='noreferrer noopener'
     /**
      * @meaning
-     * 使用有target='_blank'属性的a标签时候，必须加上rel='noreferrer noopener'属性
+     * 使用有`target='_blank'`属性的a标签时候，必须加上rel='noreferrer noopener'属性
      * @why
-     * 安全隐患：钓鱼网站。当使用<a target='_blank'>打开新页面时候，新页面可以通过window.opener
+     * 服务器安全隐患：钓鱼网站。当使用`<a target='_blank'/>`打开新页面时候，新页面可以通过window.opener
      * 获得原页面的window对象,然后黑客可以通过执行window.opener.location
      * 改变你原来的网址重定向到一个相似的钓鱼网站窃取你的信息。添加如上的rel属性可以让window.opener为空
      * @wrong
+     * <a target='_blank' href="http://example.com/">
      * @right
+     * <p target="_blank"></p>
+     * <a target="_blank" rel="noopener noreferrer" href="http://example.com"></a>
+     * <a target="_blank" href="path/in/the/host"></a>
      */
     'react/jsx-no-target-blank': ['error', { enforceDynamicLinks: 'always' }],
 
@@ -415,7 +493,15 @@ module.exports = {
      * @why
      * 可通过文件名快速了解内容
      * @wrong
+     * // filename: MyComponent.js
+     * function MyComponent() {
+     *   return <div />;
+     * }
      * @right
+     * // filename: MyComponent.jsx
+     * function MyComponent() {
+     *   return <div />;
+     * }
      */
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx'] }],
 
@@ -423,15 +509,29 @@ module.exports = {
      * @meaning
      * 禁止在jsx文本节点中出现注释(行和块注释)
      * @why
-     * 防止开发者以为注释了内容，实际没有导致输出错误信息的问题
+     * 防止开发者以为注释了内容，实际没有，导致输出错误信息的问题
      * @wrong
+     * class Hello extends React.PureComponent{
+     * render() {
+     *   return (
+     *     <div>
+     *       // empty div 
+     *     </div>
+     *     )
+     *   }
+     * }
      * @right
+     * class Hello extends React.PureComponent{
+     *   render() {
+     *     return <div>{// empty div }</div>;
+     *   }
+     * }
      */
     'react/jsx-no-comment-textnodes': 'error',
 
     /**
      * @meaning
-     * 禁止使用React.render/ReactDOM.render的返回值
+     * 禁止使用 `React.render/ReactDOM.render`的返回值
      * @why
      * 这个返回值是对根元素的引用，但是以后有可能会使用异步渲染
      * 为了防止以后升级版本可能出现的问题，不要用，如果要获取dom，使用ref
@@ -445,9 +545,9 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止使用findDOMNode方法
+     * 禁止使用findDOMNode方法, 用 ref
      * @why
-     * react以后会废弃掉findDOMNode方法
+     * react以后会废弃掉 findDOMNode方法
      * @wrong
      * @right
      */
@@ -459,17 +559,42 @@ module.exports = {
      * @why
      * 错误语法
      * @wrong
+     * <div dangerouslySetInnerHTML={{ __html: "HTML" }}>
+     *   Children
+     * </div>
      * @right
+     * <div dangerouslySetInnerHTML={{ __html: "HTML" }} />
+     * <div>
+     *   Children
+     * </div>
      */
     'react/no-danger-with-children': 'error',
 
     /**
      * @meaning
-     * 不要定义使用不到的propTypes
+     * 不要定义使用不到的 prop types
      * @why
      * 代码越少越好,代码越多,问题越多
      * @wrong
+     * class Hello extends React.PureComponent{
+     *   static propTypes= {
+     *     name: PropTypes.string
+     *   }
+     * 
+     *   render() {
+     *     return <div>Hello Bob</div>;
+     *   }
+     * };
      * @right
+     * class Hello extends React.PureComponent{
+     *   static propTypes= {
+     *     name: PropTypes.string
+     *   }
+     * 
+     *   render() {
+     *     return <div>Hello {this.props.name}</div>;
+     *   }
+     * };
      */
     'react/no-unused-prop-types': [
       'error',
@@ -485,9 +610,11 @@ module.exports = {
      * @meaning
      * 强制要求style属性的值必须是对象
      * @why
-     * 错误语法
+     * 错误语法 (This is consistent with the DOM style JavaScript property, is more efficient, and prevents XSS security holes.)
      * @wrong
+     * <div style="color: 'red'" />
      * @right
+     * <div style={{ color: "red" }} />
      */
     'react/style-prop-object': 'error',
 
@@ -496,16 +623,20 @@ module.exports = {
      * 禁止在jsx文本节点中出现没有转义字符： > " ' }
      * @why
      * 这几个字符出现了也没事，react会自动转义。但是大概率这几种字符的出现是由于敲错了，比如：
+     * ```
      * <Component
      *   a="b">
      *   c="d">
      * >bodytext</Component>
+     * ```
      * 因为多敲了一个>，输出错误。这个规则就是让你及早发现错误
      * 如果你需要用到这几个字符，使用转义符号或者通过{}输出：
+     * ```
      * > -> &gt;
      * " -> &quot;
      * ' -> &apos;
      * } -> &#125;
+     * ```
      * @wrong
      * <div> > </div>
      * @right
@@ -530,7 +661,7 @@ module.exports = {
      * @meaning
      * 禁止使用索引作为属性key的值
      * @why
-     * key能告诉react，哪些元素是不变的，哪些元素是变了的从而从新渲染
+     * key能告诉react，哪些元素是不变的，哪些元素是变了的从而重新渲染
      * 如果使用索引作为key，不能唯一标识元素，有可能的后果就是，内容变了，但是没有重新刷新
      * 使用元素内容唯一标识
      * @wrong
@@ -564,12 +695,12 @@ module.exports = {
      * @meaning
      * 禁止直接引用别的组件的proptypes（可以通过import解构重命名使用）
      * @why
-     * 防止生产环境下使用babel插件babel-plugin-transform-react-remove-prop-types
+     * 防止生产环境下使用babel插件 babel-plugin-transform-react-remove-prop-types
      * 去除propTypes时出现问题
      * @wrong
      * import SomeComponent from './SomeComponent';
      * SomeComponent.propTypes;
-     * var { propTypes } = SomeComponent;
+     * const { propTypes } = SomeComponent;
      * SomeComponent['propTypes'];
      * @right
      * import SomeComponent, {propTypes as someComponentPropTypes} from './SomeComponent';
@@ -585,7 +716,24 @@ module.exports = {
      * @why
      * 减少冗余
      * @wrong
+     * MyStatelessComponent.propTypes = {
+     *   foo: React.PropTypes.string.isRequired,
+     *   bar: React.PropTypes.string
+     * };
+     * 
+     * MyStatelessComponent.defaultProps = {
+     *   foo: "foo"，
+     *   baz: "baz"
+     * };
      * @right
+     * MyStatelessComponent.propTypes = {
+     *   foo: React.PropTypes.string.isRequired,
+     *   bar: React.PropTypes.string
+     * };
+     * 
+     * MyStatelessComponent.defaultProps = {
+     *   bar: "bar"
+     * };
      */
     'react/default-props-match-prop-types': [
       'error',
@@ -634,7 +782,7 @@ module.exports = {
 
     /**
      * @meaning
-     * 保证react预留的静态和事件循环方法大小写拼写正确
+     * 保证react预留的静态类属性和生命周期方法大小写拼写正确
      * @why
      * js属性大小写敏感，写错就不执行了
      * @wrong
@@ -666,7 +814,7 @@ module.exports = {
     // 这样可读性更好，一下就可看到用了哪些属性，统一位置
     /**
      * @meaning
-     * 强制要求使用解构获取所有props属性，再通过变量在render中使用
+     * 强制要求使用解构获取所有props,state,context属性，再通过变量在render中使用
      * @why
      * 1. 减少this.props字符串的书写
      * 2. 减少对this.props的索引搜索
@@ -709,7 +857,7 @@ module.exports = {
      * }
      * onClick() {
      *    this.setState(xx, () => {
-     *
+     *        ...
      *    })
      * }
      */
@@ -717,11 +865,15 @@ module.exports = {
 
     /**
      * @meaning
-     * button标签必须设置type属性
+     * button标签必须设置type属性(button, submit, reset)
      * @why
      * button的type属性默认值是submit，可能会导致意外现象
      * @wrong
+     * <button>Hello</button>
      * @right
+     * <button type="button">Hello</button>
+     * <button type="submit">Hello</button>
+     * <button type="reset">Hello</button>
      */
     'react/button-has-type': 'error',
 
@@ -732,38 +884,51 @@ module.exports = {
      * sfc==stateless function component===无状态组件===函数组件
      * 这种组件的this和class组件的不同
      * @wrong
+     * function Foo(props) {
+     *   return (
+     *     <div>{this.props.bar}</div>
+     *   );
+     * }
      * @right
+     * function Foo(props) {
+     *   return (
+     *     <div>{props.bar}</div>
+     *   );
+     * }
      */
     'react/no-this-in-sfc': 'error',
 
     /**
      * @meaning
-     * 禁止使用Unsafe方法(componentWillMount,componentWillUpdate,componentWillReceiveProps)
+     * 禁止使用不安全的生命周期方法(componentWillMount,componentWillUpdate,componentWillReceiveProps)
      * @why
      * 1. 这些方法将在react17正式不支持。
      * 2. 这些方法本身就有潜在的问题。
-     *     * willMount和willUpdate都是render前要调用的方法，不能调用setState容易出错
+     *     * componentWillMount和 componentWillUpdate都是render前要调用的方法，不能调用setState容易出错
      *     * componentWillReceiveProps有以下问题：
      *       1. 你不能直接把props的值一股脑的设置给state，因为这样会把用户原生操作的状态冲掉
      *       2. 当接收新props时，你需要对内容进行判断，决定更新哪个状态。这是很复杂的，随着props的增多很难维护。而且难以把状态复原
-     *       3. state的来源包括mount时候constructor中的props和willRecive中的判断设置,来源不单一，你可能要写两种情况的代码
+     *       3. state的来源包括mount时候constructor中的props和 componentWillReceiveProps中的判断设置,来源不单一，你可能要写两种情况的代码
      *     * 解决方法是：
      *       1. 尽量不设置state，所有组件只是用props，state统一管理(redux的做法)
-     *       2. 使用key关联id，当一个组件的key换了，从新mount，避开willReceiveProps
+     *       2. 使用key关联id，当一个组件的key换了，从新mount，避开 componentWillReceiveProps 方法
+     * （这些方法在组价的异步渲染和严格模式下会有问题）
      * @wrong
      * @right
      * @reference
-     * https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
+     * <a href="https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html" target="_blank" rel="noopener noreferrer">You Probably Don't Need Derived State</a>
      */
     'react/no-unsafe': 'error',
 
     /**
      * @meaning
-     * 强制要求jsx中onXXX的对应类的方法前缀必须是handleXXX
+     * 强制要求jsx中onXXX（事件处理函数）的对应类的方法前缀必须是handle
      * @why
      * 统一规范，增强可读性
      * @wrong
+     * <MyComponent handleChange={this.componentChanged} />
      * @right
+     * <MyComponent onChange={this.handleChange} />
      */
     'react/jsx-handler-names': [
       'error',
@@ -779,7 +944,11 @@ module.exports = {
      * @why
      * 统一规范，减少冗余
      * @wrong
+     * <React.Fragment><Foo /></React.Fragment>
      * @right
+     * <><Foo /></>
+     * 
+     * <React.Fragment key="key"><Foo /></React.Fragment>
      */
     'react/jsx-fragments': 'error',
   },
