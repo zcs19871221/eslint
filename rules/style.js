@@ -2,9 +2,23 @@ module.exports = {
   rules: {
     // 变量命名要求驼峰式
     // 检查变量是否中间有_，有的话报错
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     camelcase: 'error',
 
     // 禁止出现匿名函数，即使是函数表达式，为了更好的debug
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'func-names': 'warn',
 
     // 强制使用函数表达式，不要用函数声明
@@ -13,15 +27,36 @@ module.exports = {
     // 在读代码的时候，会先读到定义函数的代码，
     // 如果他很大很复杂，你会倾向于重构或把他提取出
     // 一个模块，但如果你先使用，后面再声明，很可能你就不管他了
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'func-style': 'error',
 
     // 变量黑名单，禁止使用data，e，cb，callback
     // 的变量或函数名，因为这些名字不表达开发者的意图
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'id-blacklist': ['error', 'data', 'err', 'e', 'cb', 'callback'],
 
     // 要求变量名在2到20之间
     // 非常短的变量名和非常长的变量名会让程序
     // 难以阅读和维护
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'id-length': [
       'error',
       {
@@ -31,26 +66,68 @@ module.exports = {
     ],
 
     // 变量必须是骆驼式，类必须是首字母大写
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'id-match': ['error', '^(([a-z]+([A-Z][a-z]+))|([A-z][a-z]+))*$'],
 
     // 强制要求单行注释必须在代码上方
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'line-comment-position': 'error',
 
     // 强制要求换行必须是unix的\n
     // 为了统一unix和windows下风格
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'linebreak-style': ['error', 'unix'],
 
     // 要求类方法之间必须有空格分割，提高可读性
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'lines-between-class-members': 'error',
 
     // 要求代码逻辑最大嵌套4层，
     // 过深的嵌套不利于理解代码
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'max-depth': ['error', 3],
 
     // 要求一个文件的去除空行和注释的行数
     // 不能超过300行
     // 过大的文件说明功能不止一个，不利于维护
     // 重构成多个小文件 单一职责原则
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'max-lines': [
       'error',
       {
@@ -61,6 +138,13 @@ module.exports = {
     ],
 
     // 强制要求一个函数行数不超过30行，行数不包含空行和注释
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'max-lines-per-function': [
       'error',
       {
@@ -72,18 +156,46 @@ module.exports = {
     ],
 
     // 最大回调嵌套数量
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'max-nested-callbacks': ['error', 3],
 
     // 函数参数最多为3
     // 函数参数多，读代码就困难，
     // 也说明函数做了不止一件事。
     // 函数参数少，可以根据函数名和参数很快就理解函数的意图
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'max-params': ['error', 3],
 
     // 一行允许最多一个声明语句
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'max-statements-per-line': ['error', { max: 1 }],
 
     // 要求所有用new创建的函数，类，首字母大写
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'new-cap': [
       'error',
       {
@@ -99,37 +211,114 @@ module.exports = {
     ],
 
     // 不允许直接调用Array创建数组，使用new Array
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-array-constructor': 'error',
 
     // 禁止使用按位运算符|，一般这个出现多半是输入||输错了
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-bitwise': 'error',
 
     // 禁止使用continue语句，不易debug，维护
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-continue': 'error',
 
     // disallow comments inline after code
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-inline-comments': 'error',
 
     // 禁止在else语句中出现唯一if语句，
     // 这种情况应该使用else if
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-lonely-if': 'error',
 
     // 禁止使用链式分配，容易造成意外的全局变量
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-multi-assign': ['error'],
 
     // 不允许在if else条件判断的if中出现否定判断条件
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-negated-condition': 'error',
 
     // 禁止嵌套三目运算符
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-nested-ternary': 'error',
 
     // 使用字面量创建新对象，不要用new Object
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-new-object': 'error',
 
     // 不允许使用自增减一元运算符
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-plusplus': 'error',
 
     // 禁止使用for in，with，label语法
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-restricted-syntax': [
       'error',
       {
@@ -150,6 +339,13 @@ module.exports = {
     ],
 
     // 禁止在变量中使用_下划线
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-underscore-dangle': [
       'error',
       {
@@ -161,15 +357,43 @@ module.exports = {
     ],
 
     // 禁止使用无用的三目运算符
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'no-unneeded-ternary': ['error', { defaultAssignment: false }],
 
     // 一个声明符只声明一个变量
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'one-var': ['error', 'never'],
 
     // 尽可能使用赋值运算符
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'operator-assignment': ['error', 'always'],
 
     // 要求注释开头空一格
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
     'spaced-comment': [
       'error',
       'always',
@@ -177,11 +401,25 @@ module.exports = {
         line: {
           exceptions: ['-', '+'],
           // space here to support sprockets directives
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
           markers: ['=', '!'],
         },
         block: {
           exceptions: ['-', '+'],
           // space here to support sprockets directives
+    /**
+    * @meaning
+    * @why
+    * @wrong
+    * @right
+    * @group
+    */
           markers: ['=', '!'],
           balanced: true,
         },

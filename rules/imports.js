@@ -342,6 +342,8 @@ module.exports = {
      * // b.js
      * import a from './a.js'
      * @right
+     * @group
+     * module
      */
     'import/no-cycle': ['error', { maxDepth: Infinity }],
 
@@ -367,6 +369,8 @@ module.exports = {
      * 2. 统一规范
      * @wrong
      * @right
+     * @group
+     * module
      */
     'import/dynamic-import-chunkname': [
       'error',
