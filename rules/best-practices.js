@@ -2,11 +2,11 @@ module.exports = {
   rules: {
     /**
      * @meaning
-     * 数组内置方法中回调函数需要返回值的函数体中必须包含return
-     * 允许单return语法（allowImplicit: true）
+     * 数组内置方法中需要返回值的回调函数必须包含return
+     * 允许return后不跟随值语法(allowImplicit: true)
      * @why
-     * 统一规范,防止map等函数忘了写return而导致的问题，
-     * 如果只是想遍历不需要返回值的话，使用`forEach`方法。
+     * 统一规范,防止map等函数忘了写return而导致的问题,
+     * 如果只是想遍历不需要返回值的话,使用`forEach`方法.
      * @wrong
      * list.map(e => console.log(e));
      * @right
@@ -21,9 +21,9 @@ module.exports = {
      * 类中的方法必须使用this
      * 或者把它变成static函数或提取出模块
      * @why
-     * 让你精简类，把和实例不关联的方法移出类（提取出模块等）
-     * 另一种相反的观点是：我需要在类中提供一些公共帮助方法，供
-     * 多个类方法使用。而且继承的时候可以更好的重用。
+     * 让你精简类,把和实例不关联的方法移出类(提取出模块等)
+     * 另一种相反的观点是：我需要在类中提供一些公共帮助方法,供
+     * 多个类方法使用.而且继承的时候可以更好的重用.
      * @wrong
      * class A {
      *   method() { console.log('method')}
@@ -46,11 +46,11 @@ module.exports = {
 
     /**
      * @meaning
-     * 函数的return语句统一形式：如果有`return`语句，那么要求每一个分支出口都有`return`语句
+     * 函数的return语句统一形式：如果有`return`语句,那么要求每一个分支出口都有`return`语句
      * 且每个return语句的形式统一成两者之一：`return value`或者`return`
      * 忽略首字母大写的函数(这种函数认为是类)
      * @why
-     * 1. 统一规范return形式，看到return就知道是函数出口，增强可读性
+     * 1. 统一规范return形式,看到return就知道是函数出口,增强可读性
      * 2. 防止在写某个条件时候因为忘了写return而导致意外错误
      * @wrong
      * // 有出口没有return
@@ -73,9 +73,9 @@ module.exports = {
      *  }
      *  return false;
      * }
-     * // 首字母大写，是类，忽略
+     * // 首字母大写,是类,忽略
      * function Foo() {
-     *   // 安全构造函数，防止不使用new直接调用Foo时候this指向错误
+     *   // 安全构造函数,防止不使用new直接调用Foo时候this指向错误
      *   if (!(this instanceof Foo)) {
      *     return new Foo();
      *   }
@@ -89,10 +89,10 @@ module.exports = {
     /**
      * @meaning
      * switch语句强制要求default块
-     * 如果没有default行为，加上注释`//no default`跳过规则
+     * 如果没有default行为,加上注释`//no default`跳过规则
      * @why
-     * 通过明确要求写default语句，让开发人员意识到，
-     * 功能是否有默认行为而自己忘了写
+     * 通过明确要求写default语句,让开发人员意识到,
+     * 是不是应该有默认行为而自己忘了写
      * @wrong
      * switch (a) {
      *  case 1:
@@ -121,7 +121,7 @@ module.exports = {
      * @meaning
      * 直接访问对象属性(属性名无需动态表示)时必须使用`.`来访问
      * @why
-     * 更易阅读，更简洁
+     * 更易阅读,更简洁
      * @wrong
      * obj['name']
      * @right
@@ -135,8 +135,8 @@ module.exports = {
      * @meaning
      * 强制使用 === 和 !== 比较值是否相等
      * @why
-     * == 和 !==会对不同类型进行转换后比较，
-     * 防止意外的隐式转换造成的错误。
+     * == 和 !==会对不同类型进行转换后比较,
+     * 防止意外转换造成的错误.
      * 转换规则https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness#Loose_equality_using
      * ==的比较规则：
      * * 同类型
@@ -159,7 +159,7 @@ module.exports = {
      * @meaning
      * 不允许使用`alert`,`confirm`和`prompt`
      * @why
-     * 这几个ui不好看，而且会阻塞js进程
+     * 这几个ui不好看,而且会阻塞js进程
      * @wrong
      * alert('abcd')
      * @right
@@ -185,9 +185,9 @@ module.exports = {
     /**
      * @meaning
      * 不允许在switch语句中使用变量声明语句(const,let,function,class)
-     * 如果使用的话，用{}包含case中的代码块
+     * 如果使用的话,用{}包含case中的代码块
      * @why
-     * const,let,class和function公用一个作用域。可能导致意外的错误
+     * const,let,class,function公用一个作用域.可能导致意外的错误
      * @wrong
      *  switch (1) {
      *    case 0:
@@ -226,7 +226,7 @@ module.exports = {
      * 禁止定义没有执行语句的空函数
      * 允许箭头函数是空函数
      * @why
-     * 空函数增加读代码的成本：需要猜测写的人是有什么特殊含义还是仅仅是写错了
+     * 空函数增加读代码的成本：需要猜测写的人是有什么特殊含义还是写错了
      * @wrong
      * function foo() {}
      * @right
@@ -246,7 +246,7 @@ module.exports = {
 
     /**
      * @meaning
-     * 不允出现空解构
+     * 不允许出现空解构
      * @why
      * @wrong
      * const {a: {}} = foo;
@@ -259,7 +259,7 @@ module.exports = {
      * @meaning
      * 不允许使用eval
      * @why
-     * 1. eval的字符串有js注入的风险：比如让用户输入四则运算eval('3 + 4')，但是黑客输入js代码:eval('window.location = /hackServer/?cookie=document.cookie')
+     * 1. eval的字符串有js注入的风险：比如让用户输入四则运算eval('3 + 4'),但是黑客输入js代码:eval('window.location = /hackServer?cookie=document.cookie')
      * 2. 无法debug eval中的代码
      * @wrong
      * @right
@@ -272,7 +272,7 @@ module.exports = {
      * @meaning
      * 禁止拓展原生对象
      * @why
-     * 防止有人改变原生的方法，而其他人不知道，导致错误的使用方法
+     * 防止有人改变原生的方法,而其他人不知道,导致错误使用
      * @wrong
      * Object.prototype.a = "a";
      * Array.prototype.a = "a";
@@ -284,8 +284,7 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止无效bind（无this,箭头函数,函数体是自执行语句)
-     * 插件只能检测出函数定义后紧跟bind的语法（`const y = (function() {}).bind()` `变量.bind()`的语法无法检测到，请自己注意)
+     * 禁止无效bind(无this,箭头函数,函数体是自执行语句)
      * @why
      * 箭头函数this无法改变
      * 无this函数不要用bind
@@ -301,7 +300,7 @@ module.exports = {
      * @meaning
      * switch中每个case必须有对应break
      * @why
-     * 防止因为忘记写break导致额外执行了不满足条件的case代码段
+     * 防止因为忘记写break导致额外执行了其他case代码段
      * @wrong
      * case 1:
      *  dosomething();
@@ -321,7 +320,7 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止重新分配只读全局对象的引用
+     * 禁止重新分配全局对象
      * @why
      * @wrong
      * @right
@@ -332,7 +331,7 @@ module.exports = {
 
     /**
      * @meaning
-     * 不允许隐式使用eval（settimeout参数传字符串）
+     * 不允settimeout传递字符串
      * @why
      * 理由同no-eval
      * @wrong
@@ -358,7 +357,7 @@ module.exports = {
 
     /**
      * @meaning
-     * 不允许在switch和循环中使用标签
+     * 不允许在switch和循环中使用label语法
      * @why
      * label是弃用语法
      * @wrong
@@ -369,7 +368,7 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止出现重复的`{}`
+     * 禁止出现冗余的`{}`
      * @why
      * 消除混淆
      * @wrong
@@ -378,15 +377,13 @@ module.exports = {
      */
     'no-lone-blocks': 'error',
 
-    // 不允许在循环中创建函数
     /**
      * @meaning
      * 不允许在循环中创建函数
      * @why
-     * 创建函数就是创建闭包，防止错误引用变量或造成内存溢出
-     *
+     * 创建函数就是创建闭包,防止错误引用变量或造成内存溢出
      * @wrong
-     * // 共享上下文环境，都输出10
+     * // 共享上下文环境,都输出10
      * for (var i = 0; i < 10; i++) {
      *    funcs[i] = function() {
      *        return i;
@@ -402,12 +399,12 @@ module.exports = {
      *     var a = function() {};
      *     a();
      * }
-     * // 可以，引用的是块作用域变量
+     * // 可以,引用的是块作用域变量
      * for (let i=10; i; i--) {
      *     var a = function() { return i; };
      *     a();
      * }
-     * // 可以，函数保存的引用是外层不变的变量
+     * // 可以,函数保存的引用是外层不变的变量
      * var foo = 100;
      * for (let i=10; i; i--) {
      *     var a = function() { return foo; };
@@ -417,9 +414,9 @@ module.exports = {
      */
     'no-loop-func': 'error',
 
-    // 禁止使用多行字符串，字符串中使用转义换行符：\\n
     /**
      * @meaning
+     * 禁止在字符串变量中使用`\回车`的方法来书写多行字符串
      * @why
      * @wrong
      * @right
@@ -427,73 +424,125 @@ module.exports = {
      */
     'no-multi-str': 'error',
 
-    // 禁止直接在语法中出现非赋值的new运算符：(const a = new Person()可以，不能直接new Person())
-    // 一般new的对象都要返回，如果只new不返回使用，有可能是写错了，造成意外错误
     /**
      * @meaning
+     * 禁止使用new创建对象后不给对象设置对应变量
      * @why
+     * new 操作符做了很多操作：
+     * 1. 创建一个新对象
+     * 2. 让构造函数的this指向新对象
+     * 3. 执行函数
+     * 4. 返回对象
+     * 如果你仅仅是为了执行构造函数,不要使用new操作符
      * @wrong
+     * new Func()
      * @right
+     * const obj = new Func()
      * @group
+     * 对象
      */
     'no-new': 'error',
 
-    // 不允许使用new操作符创建函数(通过解析字符串创建函数，一般也就模板引擎这么干)
     /**
      * @meaning
+     * 禁止使用new创建函数
      * @why
+     * 理由同no-eval
      * @wrong
+     * var x = new Function("a", "b", "return a + b");
      * @right
+     * var x = function (a, b) {
+     *     return a + b;
+     * };
      * @group
+     * 函数
      */
     'no-new-func': 'error',
 
-    // 禁止使用包装器对象创建string，number，boolean类型
-    // 首先明确，stirng，number，boolean是原始类型，不是对象，但是他们为什么有
-    // 类似'str'.toUppserCase()的方法呢，因为在读取值的时候，幕后使用包装器对象String('str')
-    // 把它转换成对象以使用String类的全部方法，使用完成后，将丢弃包装器对象。
-    // 那么用包装器对象有什么问题呢
-    // 1. 使用包装器对象返回的是对象，不是原始类型
-    // 1. const str = new String('str'); typeof str //'object'
-    // 2. 使用包装器对象创建bool值，永远是true
-    // 2. if (new Boolean(fasle)) { //执行}
     /**
      * @meaning
+     * 禁止`new 包装器对象`
      * @why
+     * - 什么是包装器对象
+     *   'abc' 134 true 都是原始类型,但是我们可以调用它们的方法：
+     *   'abc'.toString() 134.toString() true.toString()是为什么？每次使用方法时,
+     *   通过new String,Boolean,Number临时创建一个对象,继承类方法.使用完方法后,再回复成原始
+     *   类型.
+     * - 使用有什么问题
+     *     1. 使用包装器对象返回的是对象,不是原始类型
+     *         const str = new String('str'); typeof str //'object'
+     *     2. 使用包装器对象创建bool值,永远是true
+     *         if (new Boolean(fasle)) { //执行}
+     * - 把包装器对象作为函数
+     *     类型转换,返回原始类型
      * @wrong
+     * const str = new String('abc')
      * @right
+     * const str = 'abcd';
+     * const str = String(1234)
      * @group
+     * 对象
      */
     'no-new-wrappers': 'error',
 
-    // 禁止八进制形式的数字
     /**
      * @meaning
+     * 禁止数字写成以0开头形式
      * @why
+     * 会被转换成8进制
      * @wrong
+     * // 57
+     * var num = 071;
+     * // 61
+     * var result = 5 + 070;
      * @right
+     * var num = '071'
      * @group
+     * 数字
      */
     'no-octal': 'error',
 
-    // 禁止八进制字符串中的转义字符
-    // var foo = 'Copyright \251';
     /**
      * @meaning
+     * 禁止使用字符串中的八进制转义
      * @why
+     * js中预设这种转义码/[0-7][0-7][0-7]对应了字符串
+     * 统一使用/u形式的unicode码
      * @wrong
+     * var foo = 'Copyright \251';
      * @right
+     * // unicode
+     * var foo = "Copyright \u00A9";
      * @group
+     * 字符串
      */
     'no-octal-escape': 'error',
 
-    // 禁止重新分配，操作函数参数
     /**
      * @meaning
+     * 禁止改变函数参数引用或改变参数内部属性
      * @why
+     * 1. 有可能突变外部对象
+     * const obj = {a:1}
+     * function b (args) {
+     *  args.a += 1;
+     * }
+     * // obj值改变
+     * b(obj)
+     * 2. 突变arguments对象
+     * function b(args) {
+     *  console.log(arguments[0]);
+     *  // 意外修改了args
+     *  args = 'dsff';
+     *  console.log(arguments[0]);
+     * }
      * @wrong
+     * function foo(bar) {bar = 13}
+     * function foo(bar) {bar.value = 13}
      * @right
+     * function foo(bar) {const baz = bar}
      * @group
+     * 函数
      */
     'no-param-reassign': [
       'error',
@@ -501,109 +550,56 @@ module.exports = {
         props: true,
         ignorePropertyModificationsFor: [
           // for reduce accumulators
-          /**
-           * @meaning
-           * @why
-           * @wrong
-           * @right
-           * @group
-           */
           'acc',
           // for reduce accumulators
-          /**
-           * @meaning
-           * @why
-           * @wrong
-           * @right
-           * @group
-           */
           'accumulator',
           // for e.returnvalue
-          /**
-           * @meaning
-           * @why
-           * @wrong
-           * @right
-           * @group
-           */
           'e',
           // for Koa routing
-          /**
-           * @meaning
-           * @why
-           * @wrong
-           * @right
-           * @group
-           */
           'ctx',
           // for Express requests
-          /**
-           * @meaning
-           * @why
-           * @wrong
-           * @right
-           * @group
-           */
           'req',
           // for Express requests
-          /**
-           * @meaning
-           * @why
-           * @wrong
-           * @right
-           * @group
-           */
           'request',
           // for Express responses
-          /**
-           * @meaning
-           * @why
-           * @wrong
-           * @right
-           * @group
-           */
           'res',
           // for Express responses
-          /**
-           * @meaning
-           * @why
-           * @wrong
-           * @right
-           * @group
-           */
           'response',
         ],
       },
     ],
 
-    // 禁止使用__proto__属性，这个属性指向一个对象的原型对象
     /**
      * @meaning
+     * 禁止使用__proto__属性
      * @why
+     * js保留属性,表示指向对象的原型对象
      * @wrong
      * @right
      * @group
+     * 对象
      */
     'no-proto': 'error',
 
-    // 不允许重复声明一个变量
     /**
      * @meaning
+     * 禁止重复声明变量
      * @why
      * @wrong
      * @right
      * @group
+     * 变量
      */
     'no-redeclare': 'error',
 
-    // 禁止使用特定对象的特定属性
-    // 1. 禁止使用arguments.callee
-    // 2. 禁止使用全局对象（global，self，window）的isFinite，(使用Number.isFinite，因为全局的isFinite会转换成数字后判断)
-    // 3. 禁止使用全局对象（同上）的isNaN，(请使用Number.isNaN，因为全局的isFinite会转换成数字后判断)
-    // 4. 禁止使用对象的__defineGetter__和__defineSetter__方法，使用Object.definePropery代替
-    // 5. 禁止使用Math.pow。幂运算，使用**代替
     /**
      * @meaning
+     * 禁止使用特定对象的特定属性
+     * 1. 禁止使用arguments.callee
+     * 2. 禁止使用全局对象(global,self,window)的isFinite,(使用Number.isFinite,因为全局的isFinite会把非数字转换成后判断)
+     * 3. 禁止使用全局对象(同上)的isNaN,(请使用Number.isNaN,因为全局的isFinite会转换成数字后判断)
+     * 4. 禁止使用对象的__defineGetter__和__defineSetter__方法,使用Object.definePropery代替
+     * 5. 禁止使用Math.pow.幂运算,使用**代替
      * @why
      * @wrong
      * @right
@@ -661,42 +657,59 @@ module.exports = {
       },
     ],
 
-    // 在return语句中禁止执行赋值语法
     /**
      * @meaning
+     * 禁止在return 语句中进行赋值
      * @why
+     * 这种语法容易造成混淆：
+     * function doSome() {
+     *  return foo = bar + 2;
+     * }
+     * 是不是想写return foo === bar + 2,少写=造成的意外呢？
      * @wrong
+     * function doSome() {
+     *  return foo = bar + 2;
+     * }
      * @right
+     * function doSome() {
+     *  return foo === bar + 2;
+     * }
      * @group
      */
     'no-return-assign': ['error', 'always'],
 
-    // 禁止在return中使用await语法
     /**
      * @meaning
+     * 禁止在return中使用await语法
      * @why
+     * 冗余的写法
+     * 处理async返回值和await处理参数的方式都是一样的.
      * @wrong
      * @right
      * @group
      */
     'no-return-await': 'error',
 
-    // 禁止在url中使用JavaScript脚本。ex：location.href = "javascript:void(0)";
-    // 安全性问题
     /**
      * @meaning
+     * 禁止在url中使用JavaScript脚本
      * @why
+     * 同no-eval
      * @wrong
+     * location.href = "javascript:void(0)";
      * @right
      * @group
+     * 安全
      */
     'no-script-url': 'error',
 
-    // 禁止自我分配
     /**
      * @meaning
+     * 禁止自我分配
      * @why
+     * 无效,一般是拼写错误
      * @wrong
+     * foo = foo;
      * @right
      * @group
      */
@@ -707,29 +720,32 @@ module.exports = {
       },
     ],
 
-    // 禁止自己和自己比较
     /**
      * @meaning
+     * 禁止自己比较
      * @why
+     * 无效,一般是拼写错误
      * @wrong
+     * self !== self
      * @right
      * @group
      */
     'no-self-compare': 'error',
 
-    // 禁止使用逗号运算符
     /**
      * @meaning
+     * 禁止使用逗号运算符
      * @why
+     * 造成意外错误
      * @wrong
      * @right
      * @group
      */
     'no-sequences': 'error',
 
-    // throw只允许throw error对象
     /**
      * @meaning
+     * throw只允许throw error对象
      * @why
      * @wrong
      * @right
@@ -737,9 +753,9 @@ module.exports = {
      */
     'no-throw-literal': 'error',
 
-    // 禁止出现独立的表达式，包含短路、三目、模板字符（表达式结果没有赋值，有可能会修改变量，造成副作用）
     /**
      * @meaning
+     * 禁止未使用的表达式
      * @why
      * @wrong
      * @right
@@ -754,9 +770,9 @@ module.exports = {
       },
     ],
 
-    // 禁止无效的字符串连接('a' + 'b' => 'ab')
     /**
      * @meaning
+     * 禁止无效的字符串连接('a' + 'b' => 'ab')
      * @why
      * @wrong
      * @right
@@ -764,9 +780,9 @@ module.exports = {
      */
     'no-useless-concat': 'error',
 
-    // 禁止出现无效的转义符号（'a\b'）
     /**
      * @meaning
+     * 禁止出现无效的转义符号('a\b')
      * @why
      * @wrong
      * @right
@@ -774,39 +790,52 @@ module.exports = {
      */
     'no-useless-escape': 'error',
 
-    // 禁止出现return后面什么都不带（要不return具体值，要不别写return）
     /**
      * @meaning
+     * 禁止出现冗余return(在出口处return并且没有跟随值)
      * @why
      * @wrong
+     * function t() {
+     *  doSome()
+     *  return
+     * }
      * @right
+     * function t() {
+     *  return doSome()
+     * }
      * @group
      */
     'no-useless-return': 'error',
 
-    // 禁止使用void运算符
     /**
      * @meaning
+     * 禁止使用void运算符
      * @why
+     * void语法：执行void后面表达式,返回return
+     * 执行void后面表达式有可能会产生副作用.
+     * let a = 1;
+     * console.log(void (a = 2));
+     * console.log(a);
      * @wrong
      * @right
      * @group
      */
     'no-void': 'error',
 
-    // 禁止使用with语法
     /**
      * @meaning
+     * 禁止使用with语法
      * @why
+     * 将对象的成员添加到当前作用域,可能出现问题
      * @wrong
      * @right
      * @group
      */
     'no-with': 'error',
 
-    // promise reject的必须使用error对象或自定义对象
     /**
      * @meaning
+     * promise reject的参数必须使用error对象或自定义对象
      * @why
      * @wrong
      * @right
@@ -814,30 +843,31 @@ module.exports = {
      */
     'prefer-promise-reject-errors': ['error', { allowEmptyReject: true }],
 
-    // parseInt函数必须提供第二个参数-进制基数。
-    // 因为parseInt会根据输入自动检测是属于哪个进制，这可能会造成
-    // 和意图不符合的意外错误，比如：
-    // var num = parseInt("071");      // 57
-    // var num = parseInt("071", 10);  // 71
     /**
      * @meaning
+     * parseInt函数必须提供第二个参数-进制基数
      * @why
+     * 因为parseInt会根据输入自动检测是属于哪个进制,这可能会造成
+     * 和意图不符合的意外错误,比如：
+     * var num = parseInt("071");      // 57
+     * var num = parseInt("071", 10);  // 71
      * @wrong
+     * var num = parseInt("071");      // 57
      * @right
+     * var num = parseInt("071", 10);  // 71
      * @group
      */
     radix: 'error',
 
-    // 要求条件判断语句中先出现变量，后出现常量
-    // good：if (color === 'red')
-    // bad：if ('red' === 'color')
-    // 名字来源于星球大战中的尤达大师，说话
-    // 喜欢这样反着来
     /**
      * @meaning
+     * 要求条件判断语句中先出现变量,后出现常量
      * @why
+     * 增强可读性,比如if (color === 'red')可理解为如果颜色是红色的
      * @wrong
+     * if ('red' === color)
      * @right
+     * if ( color === 'red')
      * @group
      */
     yoda: 'error',

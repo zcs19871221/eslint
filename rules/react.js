@@ -38,7 +38,7 @@ module.exports = {
      * @meaning
      * propTypes校验禁止使用类型any,array(arrayOf替换),object(shape替换)
      * @why
-     * 这三个关键词太笼统，起不到文档的约束作用，没有帮助
+     * 这三个关键词太笼统,起不到文档的约束作用,没有帮助
      * @wrong
      * Component.propTypes = {
      *   a: PropTypes.any,
@@ -68,7 +68,7 @@ module.exports = {
      * @meaning
      * jsx中使用省略写法设置属性为true的值
      * @why
-     * 统一规范，更简洁
+     * 统一规范,更简洁
      * @wrong
      * <Modal isShow={true} />
      * @right
@@ -82,7 +82,7 @@ module.exports = {
      * 不允许使用...运算符设置key属性
      * @why
      * 循环时使用key为了提高react性能：再次渲染如果key不变就不会重新渲染
-     * 不允许使用...设置key，不利于代码可读性（不推荐使用静态key值）
+     * 不允许使用...设置key,不利于代码可读性(不推荐使用静态key值)
      * @wrong
      * [<Hello />, <Hello />, <Hello />];
      *
@@ -102,8 +102,8 @@ module.exports = {
      * @meaning
      * 禁止在jsx的属性值中包含bind语法函数或创建箭头函数字面量
      * @why
-     * 每次渲染时候，在{}中执行bind或箭头函数时候都会创建一个全新的函数
-     * 会造成不必要的刷新(这个函数的引用每次都变)，出现性能问题
+     * 每次渲染时候,在{}中执行bind或箭头函数时候都会创建一个全新的函数
+     * 会造成不必要的刷新(这个函数的引用每次都变),出现性能问题
      * @wrong
      * <Foo onClick={this._handleClick.bind(this)}></Foo>
      *
@@ -131,9 +131,9 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止在jsx的属性中出现重名，大小写不一样的重名也不行
+     * 禁止在jsx的属性中出现重名,大小写不一样的重名也不行
      * @why
-     * 组件的props就是一个对象，同名的会覆盖，不同大小写的会认为是不同的，但不推荐使用
+     * 组件的props就是一个对象,同名的会覆盖,不同大小写的会认为是不同的,但不推荐使用
      * @wrong
      * <Hello name="John" Name="John" />;
      * @right
@@ -159,7 +159,7 @@ module.exports = {
      * @meaning
      * 强制要求组件以大骆驼形式命名
      * @why
-     * jsx标签第一个字母大写表示这是一个react组件。
+     * jsx标签第一个字母大写表示这是一个react组件.
      * @wrong
      * <testcomponent />
      * @right
@@ -177,7 +177,7 @@ module.exports = {
      * @meaning
      * 不使用jsx语法时候不要引用React模块
      * @why
-     * jsx语法会编译成React.createElement，因此jsx代码范围内必须引用React防止
+     * jsx语法会编译成React.createElement,因此jsx代码范围内必须引用React防止
      * 执行时候报错
      * @wrong
      * @right
@@ -188,11 +188,11 @@ module.exports = {
      * @meaning
      * 使用dangerouslySetInnerHTML时发出警告
      * @why
-     * react的一大优势就是免去了用户的dom操作，这不仅仅是方便了开发。
-     * 而且因为react自己实现的dom系统可以提升性能和浏览器兼容性，
-     * 并且规避了一些特定浏览器或特定情况下的问题(边界条件，安全性问题等)。
-     * 而dangerouslySetInnerHTML就相当于直接在dom上运行innerHTML，
-     * react没有处理输入的字符串，这就有可能造成Xss攻击(字符串中注入JavaScript代码)
+     * react的一大优势就是免去了用户的dom操作,这不仅仅是方便了开发.
+     * 而且因为react自己实现的dom系统可以提升性能和浏览器兼容性,
+     * 并且规避了一些特定浏览器或特定情况下的问题(边界条件,安全性问题等).
+     * 而dangerouslySetInnerHTML就相当于直接在dom上运行innerHTML,
+     * react没有处理输入的字符串,这就有可能造成Xss攻击(字符串中注入JavaScript代码)
      * @wrong
      * @right
      */
@@ -222,8 +222,8 @@ module.exports = {
      * @meaning
      * 禁止在componentWillUpdate中使用setState
      * @why
-     * componentWillUpdate官方文档禁止使用setState，并且
-     * 该方法已经弃用了，并将于react17正式不支持
+     * componentWillUpdate官方文档禁止使用setState,并且
+     * 该方法已经弃用了,并将于react17正式不支持
      * @wrong
      * @right
      */
@@ -231,17 +231,17 @@ module.exports = {
 
     /**
      * @meaning
-     * 只允许使用setState改变state，不允许改变state属性或改变索引（不允许直接改变this.state, 唯一可以直接给 this.state 赋值的地方是 constructor）
+     * 只允许使用setState改变state,不允许改变state属性或改变索引(不允许直接改变this.state, 唯一可以直接给 this.state 赋值的地方是 constructor)
      * @why
-     * react的核心思路就是保持一切都是纯的，然后利用持久化数据结构的原理优化性能：
-     * 当有改变发生需要比较状态的时候，找出树状结构上不变和变化的部分，
-     * 然后只替换变化的节点和受影响的所有父节点。
-     * 这个思路体现在每次render后的元素树的比较上，同样体现在state树上。
+     * react的核心思路就是保持一切都是纯的,然后利用持久化数据结构的原理优化性能：
+     * 当有改变发生需要比较状态的时候,找出树状结构上不变和变化的部分,
+     * 然后只替换变化的节点和受影响的所有父节点.
+     * 这个思路体现在每次render后的元素树的比较上,同样体现在state树上.
      *
-     * react的state必须保持纯的，因为react会把当前state
-     * 和上一个状态state做一个浅比较，决定是否render。
-     * 而且state作为props传到组件的时候，还会再和上一个props进行浅比较决定组件是否刷新
-     * 如果只是改变属性的话，引用不变不会刷新
+     * react的state必须保持纯的,因为react会把当前state
+     * 和上一个状态state做一个浅比较,决定是否render.
+     * 而且state作为props传到组件的时候,还会再和上一个props进行浅比较决定组件是否刷新
+     * 如果只是改变属性的话,引用不变不会刷新
      * @wrong
      * this.state.name = XXX
      * @right
@@ -253,20 +253,20 @@ module.exports = {
      * @meaning
      * 禁止使用isMounted
      * @why
-     * react已经弃用这个属性了。
+     * react已经弃用这个属性了.
      * 很多人这么用isMounted:
      * ```
      * if (this.isMounted()) {
      *  this.setState({...})
      * }
      * ```
-     * 来消除警告：组件已经umount但仍然调用setState。
-     * 这个警告通常表示组件没有卸载干净：卸载后仍然保持对组件的引用，有可能导致内存泄漏。
-     * 使用isMounted可能会消除警告，但警告的目的是让你发现为什么umount了还会调用setState，从而
-     * 发现代码潜在的问题。使用isMounted没有了警告，但你也发现不了问题
+     * 来消除警告：组件已经umount但仍然调用setState.
+     * 这个警告通常表示组件没有卸载干净：卸载后仍然保持对组件的引用,有可能导致内存泄漏.
+     * 使用isMounted可能会消除警告,但警告的目的是让你发现为什么umount了还会调用setState,从而
+     * 发现代码潜在的问题.使用isMounted没有了警告,但你也发现不了问题
      *
-     * 这个警告主要发生在异步回调的时候，你可以通过：在Umount中设置flag，在回调中判断flag来解决。
-     * 更好的方法是在umount的时候取消数据订阅，或者通过实现promise.cancel方法取消promise
+     * 这个警告主要发生在异步回调的时候,你可以通过：在Umount中设置flag,在回调中判断flag来解决.
+     * 更好的方法是在umount的时候取消数据订阅,或者通过实现promise.cancel方法取消promise
      * @wrong
      * @right
      * @reference
@@ -276,9 +276,9 @@ module.exports = {
 
     /**
      * @meaning
-     * 一个文件中只允许定义一个react class组件（函数组件不计算）
+     * 一个文件中只允许定义一个react class组件(函数组件不计算)
      * @why
-     * 单一职责原则，功能拆分，利于组件复用，增加代码可读性，更好维护和修改
+     * 单一职责原则,功能拆分,利于组件复用,增加代码可读性,更好维护和修改
      * @wrong
      * class Hello extends React.PureComponent{
      *   render() {
@@ -306,7 +306,7 @@ module.exports = {
      * @meaning
      * 禁止使用字符串标识的ref属性
      * @why
-     * react以前的ref形式，已经废弃
+     * react以前的ref形式,已经废弃
      * 现在使用ref搭配一个函数来获取dom引用
      * @wrong
      * <div ref="helloDom">Hello, world.</div>
@@ -317,7 +317,7 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止在原生dom组件中出现非标准（不符合react属性名）的属性
+     * 禁止在原生dom组件中出现非标准(不符合react属性名)的属性
      * @why
      * 具体哪些属性可用见索引
      * @wrong
@@ -331,9 +331,9 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止使用createReactClass创建组件，使用class
+     * 禁止使用createReactClass创建组件,使用class
      * @why
-     * 用jsx语法，可读性好
+     * 用jsx语法,可读性好
      * @wrong
      * const Hello = createReactClass({
      *   render: function() {
@@ -353,8 +353,8 @@ module.exports = {
      * @meaning
      * 强制使用 PropTypes检查属性的数据类型
      * @why
-     * 使用 PropTypes校验输入属性可以提高组件可用性，其他开发人员可根据定义的类型检查正确使用该组件，
-     * 相当于一个绝佳的文档，方便维护
+     * 使用 PropTypes校验输入属性可以提高组件可用性,其他开发人员可根据定义的类型检查正确使用该组件,
+     * 相当于一个绝佳的文档,方便维护
      * @wrong
      * function Hello({ name }) {
      *  return <div>Hello {name}</div>;
@@ -410,7 +410,7 @@ module.exports = {
      * @meaning
      * 没有子元素的组件强制使用自闭合标签
      * @why
-     * 没必要使用闭合标签，简洁，统一
+     * 没必要使用闭合标签,简洁,统一
      * @wrong
      * <Modal></Modal>
      * @right
@@ -467,17 +467,17 @@ module.exports = {
       },
     ],
 
-    // 当使用a标签的target='_blank'属性时候，有安全隐患，新开的页面可以通过
-    // window.opener获取原始页面的windows对象，想象你打开了一个链接到一个恶意网站，
+    // 当使用a标签的target='_blank'属性时候,有安全隐患,新开的页面可以通过
+    // window.opener获取原始页面的windows对象,想象你打开了一个链接到一个恶意网站,
     // 该网站通过window.opener.location='一个高仿钓鱼网站'窃取你的信息
-    // 因此当href是域名开头或者变量的时候，要求必须添加属性rel='noreferrer noopener'
+    // 因此当href是域名开头或者变量的时候,要求必须添加属性rel='noreferrer noopener'
     /**
      * @meaning
-     * 使用有`target='_blank'`属性的a标签时候，必须加上rel='noreferrer noopener'属性
+     * 使用有`target='_blank'`属性的a标签时候,必须加上rel='noreferrer noopener'属性
      * @why
-     * 服务器安全隐患：钓鱼网站。当使用`<a target='_blank'/>`打开新页面时候，新页面可以通过window.opener
+     * 服务器安全隐患：钓鱼网站.当使用`<a target='_blank'/>`打开新页面时候,新页面可以通过window.opener
      * 获得原页面的window对象,然后黑客可以通过执行window.opener.location
-     * 改变你原来的网址重定向到一个相似的钓鱼网站窃取你的信息。添加如上的rel属性可以让window.opener为空
+     * 改变你原来的网址重定向到一个相似的钓鱼网站窃取你的信息.添加如上的rel属性可以让window.opener为空
      * @wrong
      * <a target='_blank' href="http://example.com/">
      * @right
@@ -509,7 +509,7 @@ module.exports = {
      * @meaning
      * 禁止在jsx文本节点中出现注释(行和块注释)
      * @why
-     * 防止开发者以为注释了内容，实际没有，导致输出错误信息的问题
+     * 防止开发者以为注释了内容,实际没有,导致输出错误信息的问题
      * @wrong
      * class Hello extends React.PureComponent{
      * render() {
@@ -533,8 +533,8 @@ module.exports = {
      * @meaning
      * 禁止使用 `React.render/ReactDOM.render`的返回值
      * @why
-     * 这个返回值是对根元素的引用，但是以后有可能会使用异步渲染
-     * 为了防止以后升级版本可能出现的问题，不要用，如果要获取dom，使用ref
+     * 这个返回值是对根元素的引用,但是以后有可能会使用异步渲染
+     * 为了防止以后升级版本可能出现的问题,不要用,如果要获取dom,使用ref
      * @wrong
      * const inst = ReactDOM.render(<App />, document.body);
      * doSomethingWithInst(inst);
@@ -622,15 +622,15 @@ module.exports = {
      * @meaning
      * 禁止在jsx文本节点中出现没有转义字符： > " ' }
      * @why
-     * 这几个字符出现了也没事，react会自动转义。但是大概率这几种字符的出现是由于敲错了，比如：
+     * 这几个字符出现了也没事,react会自动转义.但是大概率这几种字符的出现是由于敲错了,比如：
      * ```
      * <Component
      *   a="b">
      *   c="d">
      * >bodytext</Component>
      * ```
-     * 因为多敲了一个>，输出错误。这个规则就是让你及早发现错误
-     * 如果你需要用到这几个字符，使用转义符号或者通过{}输出：
+     * 因为多敲了一个>,输出错误.这个规则就是让你及早发现错误
+     * 如果你需要用到这几个字符,使用转义符号或者通过{}输出：
      * ```
      * > -> &gt;
      * " -> &quot;
@@ -661,8 +661,8 @@ module.exports = {
      * @meaning
      * 禁止使用索引作为属性key的值
      * @why
-     * key能告诉react，哪些元素是不变的，哪些元素是变了的从而重新渲染
-     * 如果使用索引作为key，不能唯一标识元素，有可能的后果就是，内容变了，但是没有重新刷新
+     * key能告诉react,哪些元素是不变的,哪些元素是变了的从而重新渲染
+     * 如果使用索引作为key,不能唯一标识元素,有可能的后果就是,内容变了,但是没有重新刷新
      * 使用元素内容唯一标识
      * @wrong
      * {list.map((item, index) => <div key={index}>{item}</div>)}
@@ -675,10 +675,10 @@ module.exports = {
      * @meaning
      * 强制要求每个非必需props都有一个对应的defaultProps
      * @why
-     * 组件可以看成和js的函数一样的东西，输入就是props，输出就是elements
-     * 一个好的函数应该对每个输入值进行类型检查并设置默认值，运行时候保证
-     * 各种边界条件可以运行良好。
-     * 给所有props设置默认值，也能保证props缺失时组件能正常渲染。
+     * 组件可以看成和js的函数一样的东西,输入就是props,输出就是elements
+     * 一个好的函数应该对每个输入值进行类型检查并设置默认值,运行时候保证
+     * 各种边界条件可以运行良好.
+     * 给所有props设置默认值,也能保证props缺失时组件能正常渲染.
      * @wrong
      * @right
      */
@@ -689,11 +689,11 @@ module.exports = {
       },
     ],
 
-    // 禁止引用别的组件，后直接使用组件的propTypes作为自己的propTypes
+    // 禁止引用别的组件,后直接使用组件的propTypes作为自己的propTypes
     // 防止使用babel插件babel-plugin-transform-react-remove-prop-types时候出现问题
     /**
      * @meaning
-     * 禁止直接引用别的组件的proptypes（可以通过import解构重命名使用）
+     * 禁止直接引用别的组件的proptypes(可以通过import解构重命名使用)
      * @why
      * 防止生产环境下使用babel插件 babel-plugin-transform-react-remove-prop-types
      * 去除propTypes时出现问题
@@ -722,7 +722,7 @@ module.exports = {
      * };
      *
      * MyStatelessComponent.defaultProps = {
-     *   foo: "foo"，
+     *   foo: "foo",
      *   baz: "baz"
      * };
      * @right
@@ -745,7 +745,7 @@ module.exports = {
      * @meaning
      * PureComponent类型的组件禁止使用shouldComponentUpdate方法
      * @why
-     * PureComponent默认实现了一个shouldComponentUpdate方法(通过对state和props浅比较决定是否渲染)。
+     * PureComponent默认实现了一个shouldComponentUpdate方法(通过对state和props浅比较决定是否渲染).
      * 再定义shouldComponentUpdate仍然会按照你定义的方法来决定是否渲染
      * 但这样使用PureComponent就没有意义了
      * @wrong
@@ -784,13 +784,13 @@ module.exports = {
      * @meaning
      * 保证react预留的静态类属性和生命周期方法大小写拼写正确
      * @why
-     * js属性大小写敏感，写错就不执行了
+     * js属性大小写敏感,写错就不执行了
      * @wrong
      * @right
      */
     'react/no-typos': 'error',
 
-    // 强制要求不要出现不必要的花括号，比如
+    // 强制要求不要出现不必要的花括号,比如
     // <Test p={'1234}>
     // <Test p='1234'>
     /**
@@ -808,13 +808,13 @@ module.exports = {
       { props: 'never', children: 'never' },
     ],
 
-    // 强制要求使用解构获取所有props属性，再通过变量在render中使用
+    // 强制要求使用解构获取所有props属性,再通过变量在render中使用
     // wrong: render() { return <div>{this.props.name}</div>}
     // wright: render() { const {name} = this.props; return <div>{name}</div>}
-    // 这样可读性更好，一下就可看到用了哪些属性，统一位置
+    // 这样可读性更好,一下就可看到用了哪些属性,统一位置
     /**
      * @meaning
-     * 强制要求使用解构获取所有props,state,context属性，再通过变量在render中使用
+     * 强制要求使用解构获取所有props,state,context属性,再通过变量在render中使用
      * @why
      * 1. 减少this.props字符串的书写
      * 2. 减少对this.props的索引搜索
@@ -830,14 +830,14 @@ module.exports = {
      */
     'react/destructuring-assignment': ['error', 'always'],
 
-    // 在setState方法中禁止使用this.state,因为setState是异步、批量处理的，
-    // 使用this.state获取的状态不一定是上一次状态，使用第一个参数获取上一次状态
+    // 在setState方法中禁止使用this.state,因为setState是异步、批量处理的,
+    // 使用this.state获取的状态不一定是上一次状态,使用第一个参数获取上一次状态
     /**
      * @meaning
      * setState方法中禁止使用this.state
      * @why
-     * setState中使用this.state都是为了获取上一次的状态，进行下一次的操作。
-     * 但setState有可能是异步的，批量的，因此使用this.state不能准确获取上一次的状态数据
+     * setState中使用this.state都是为了获取上一次的状态,进行下一次的操作.
+     * 但setState有可能是异步的,批量的,因此使用this.state不能准确获取上一次的状态数据
      * 你可以：
      * 1. 要不使用回调函数获取修改后的state
      * 2. 要不通过第一个函数参数获取上一次state
@@ -867,7 +867,7 @@ module.exports = {
      * @meaning
      * button标签必须设置type属性(button, submit, reset)
      * @why
-     * button的type属性默认值是submit，可能会导致意外现象
+     * button的type属性默认值是submit,可能会导致意外现象
      * @wrong
      * <button>Hello</button>
      * @right
@@ -902,17 +902,17 @@ module.exports = {
      * @meaning
      * 禁止使用不安全的生命周期方法(componentWillMount,componentWillUpdate,componentWillReceiveProps)
      * @why
-     * 1. 这些方法将在react17正式不支持。
-     * 2. 这些方法本身就有潜在的问题。
-     *     * componentWillMount和 componentWillUpdate都是render前要调用的方法，不能调用setState容易出错
+     * 1. 这些方法将在react17正式不支持.
+     * 2. 这些方法本身就有潜在的问题.
+     *     * componentWillMount和 componentWillUpdate都是render前要调用的方法,不能调用setState容易出错
      *     * componentWillReceiveProps有以下问题：
-     *       1. 你不能直接把props的值一股脑的设置给state，因为这样会把用户原生操作的状态冲掉
-     *       2. 当接收新props时，你需要对内容进行判断，决定更新哪个状态。这是很复杂的，随着props的增多很难维护。而且难以把状态复原
-     *       3. state的来源包括mount时候constructor中的props和 componentWillReceiveProps中的判断设置,来源不单一，你可能要写两种情况的代码
+     *       1. 你不能直接把props的值一股脑的设置给state,因为这样会把用户原生操作的状态冲掉
+     *       2. 当接收新props时,你需要对内容进行判断,决定更新哪个状态.这是很复杂的,随着props的增多很难维护.而且难以把状态复原
+     *       3. state的来源包括mount时候constructor中的props和 componentWillReceiveProps中的判断设置,来源不单一,你可能要写两种情况的代码
      *     * 解决方法是：
-     *       1. 尽量不设置state，所有组件只是用props，state统一管理(redux的做法)
-     *       2. 使用key关联id，当一个组件的key换了，从新mount，避开 componentWillReceiveProps 方法
-     * （这些方法在组价的异步渲染和严格模式下会有问题）
+     *       1. 尽量不设置state,所有组件只是用props,state统一管理(redux的做法)
+     *       2. 使用key关联id,当一个组件的key换了,从新mount,避开 componentWillReceiveProps 方法
+     * (这些方法在组价的异步渲染和严格模式下会有问题)
      * @wrong
      * @right
      * @reference
@@ -922,9 +922,9 @@ module.exports = {
 
     /**
      * @meaning
-     * 强制要求jsx中onXXX（事件处理函数）的对应类的方法前缀必须是handle
+     * 强制要求jsx中onXXX(事件处理函数)的对应类的方法前缀必须是handle
      * @why
-     * 统一规范，增强可读性
+     * 统一规范,增强可读性
      * @wrong
      * <MyComponent handleChange={this.componentChanged} />
      * @right
@@ -942,7 +942,7 @@ module.exports = {
      * @meaning
      * 强制fragment语法使用简写<></>
      * @why
-     * 统一规范，减少冗余
+     * 统一规范,减少冗余
      * @wrong
      * <React.Fragment><Foo /></React.Fragment>
      * @right
@@ -963,7 +963,7 @@ module.exports = {
       pragma: 'React',
       version: '16.8',
     },
-    // propTypes的包装函数，暂时不需要
+    // propTypes的包装函数,暂时不需要
     propWrapperFunctions: [],
   },
 };
