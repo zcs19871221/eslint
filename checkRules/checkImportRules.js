@@ -1,5 +1,6 @@
 const myRules = require('../rules/imports');
 const compareRules = require('./compareRules');
+const queryWebDocRules = require('./queryWebDocRules');
 
 const offRules = {
   'import/no-extraneous-dependencies':
@@ -27,10 +28,13 @@ const offRules = {
     '不能出现多个export，使用export {}聚合成一组 - export const更方便',
 };
 
-module.exports = () => {
+module.exports = async () => {
+  const webRules = await queryWebDocRules(
+    'https://github.com/benmosher/eslint-plugin-import',
+    /<a.*?href=.*?\/rules\/([^.]*?).*?><code>\1<\/code>[\s\S]?<\/a>/g,
+  );
   compareRules({
-    webDocUrl: 'https://github.com/benmosher/eslint-plugin-import',
-    webRulesReg: /<a.*?href=.*?\/rules\/([^.]*?).*?><code>\1<\/code>[\s\S]?<\/a>/g,
+    webRules,
     usedRules: Object.keys(myRules.rules).map(name =>
       name.replace('import/', ''),
     ),

@@ -1,8 +1,8 @@
 module.exports = {
   rules: {
-    // 强制要求循环方向正确
     /**
      * @meaning
+     * 禁止for循环设置错误的循环方向
      * @why
      * @wrong
      * @right
@@ -10,9 +10,9 @@ module.exports = {
      */
     'for-direction': 'error',
 
-    // 强制在getter函数中使用return
     /**
      * @meaning
+     * 强制在getter函数中使用return
      * @why
      * @wrong
      * @right
@@ -20,113 +20,154 @@ module.exports = {
      */
     'getter-return': ['error', { allowImplicit: true }],
 
-    // Disallow await inside of loops
-    // https://eslint.org/docs/rules/no-await-in-loop
-    // 'no-await-in-loop': 'error',
-
-    // 禁止与-0比较
     /**
      * @meaning
+     * 禁止与-0比较
      * @why
+     * 0 === -0 0 === +0 于-0比较没意义
      * @wrong
      * @right
      * @group
      */
     'no-compare-neg-zero': 'error',
 
-    // 禁止在条件语句中赋值
     /**
      * @meaning
+     * 禁止在条件语句中赋值
      * @why
+     * if (user.jobTitle = 'manage')这段代码容易让人混淆
+     * 到底是一个赋值还是仅仅是少写了一个===号，虽然执行结果一致，
+     * 但是赋值会重新设置user的属性
      * @wrong
+     * if (user.jobTitle = 'manage')
      * @right
+     * if (user.jobTitle === 'manage')
      * @group
+     * 条件判断
      */
     'no-cond-assign': ['error', 'always'],
 
-    // 条件判断中禁止使用常量
     /**
      * @meaning
+     * 条件判断中禁止使用常量
      * @why
+     * 如果条件判断是常量，一般都是写错的情况
      * @wrong
+     * if (true)
+     * while (true)
      * @right
+     * if (x === 0)
+     * while (x)
      * @group
      */
     'no-constant-condition': 'warn',
 
-    // 禁止正则中的控制字符
     /**
      * @meaning
+     * 禁止正则中的控制字符
      * @why
+     * 控制字符是ASCII范围0-31中的特殊不可见字符。这些字符在JavaScript字符串中很少使用，因此包含这些字符的正则表达式很可能是错误的。
      * @wrong
+     * var pattern1 = /\x1f/;
      * @right
+     * var pattern1 = /\x20/;
      * @group
      */
     'no-control-regex': 'error',
 
-    // 禁止使用debugger
     /**
      * @meaning
+     * 禁止使用debugger
      * @why
+     * 在生产环境遗留debugger代码会导致浏览器定制代码
+     * 如果debug使用浏览器断点
      * @wrong
+     * debugger;
      * @right
      * @group
+     * 最佳实践
      */
     'no-debugger': 'error',
 
-    // 函数参数中禁止出现重复名称
     /**
      * @meaning
+     * 函数参数中禁止出现重复名称
      * @why
+     * 1. 最后出现的重名参数会覆盖之前的
+     * 2. 这很可能是一个拼写错误
      * @wrong
+     * function foo(a, b, a)
      * @right
+     * function foo(a, b, c)
      * @group
+     * 函数
      */
     'no-dupe-args': 'error',
 
-    // 对象中禁止出现重复属性
     /**
      * @meaning
+     * 对象中禁止出现重复属性
      * @why
+     * 1. 最后出现的重名参数会覆盖之前的
+     * 2. 这很可能是一个拼写错误
      * @wrong
+     * var foo = {a:'1234', b:'2344'}
      * @right
      * @group
+     * 对象
      */
     'no-dupe-keys': 'error',
 
-    // switch语句中禁止出现同样条件的case块
     /**
      * @meaning
+     * witch语句中禁止出现同样条件的case块
      * @why
+     * 这很可能是复制case代码段后忘了改变条件造成的错误
      * @wrong
      * @right
      * @group
+     * 条件判断
      */
     'no-duplicate-case': 'error',
 
-    // 禁止出现空块语句
     /**
      * @meaning
+     * 禁止出现空块语句
      * @why
+     * 空语句块有可能是遗漏或忘了处理造成的错误
+     * 如果有空语句块，请通过加入注释证明确实不是开发人员的失误造成的
      * @wrong
+     * if (foo) {}
+     * while (foo) {}
+     * switch(foo) {}
      * @right
+     * if (foo) {
+     *  // empty
+     * }
+     * while (foo) {
+     *  // empty
+     * }
+     * switch(foo) {
+     *  // empty
+     * }
      * @group
      */
     'no-empty': 'error',
 
-    // 禁止在正则的[]中出现空
     /**
      * @meaning
+     * 禁止正则的[]是空的
      * @why
+     * 防止意外输错
      * @wrong
      * @right
      * @group
      */
     'no-empty-character-class': 'error',
 
-    // 禁止在catch语句中赋值
     /**
      * @meaning
+     * 禁止在catch语句中为错误参数重新赋值
      * @why
      * @wrong
      * @right
@@ -134,49 +175,70 @@ module.exports = {
      */
     'no-ex-assign': 'error',
 
-    // 禁止不必要的强制布尔转换
     /**
      * @meaning
+     * 禁止不必要的强制布尔转换
      * @why
      * @wrong
+     * var foo = !!!bar;
      * @right
      * @group
      */
     'no-extra-boolean-cast': 'error',
 
-    // 禁止出现不必要的分号
     /**
      * @meaning
+     * 禁止出现不必要的分号
      * @why
      * @wrong
+     * var x = 5;;
      * @right
      * @group
      */
     'no-extra-semi': 'error',
 
-    // 声明function禁止重新赋值
     /**
      * @meaning
+     * 声明函数禁止重新赋值
      * @why
+     * 函数声明会悬置，作用域很大，如果改变了赋值（一般都是意外输入），会造成错误
      * @wrong
      * @right
      * @group
+     * 函数
      */
     'no-func-assign': 'error',
 
-    // 禁止在嵌套块中定义函数
     /**
      * @meaning
+     * 禁止在嵌套块中定义函数
      * @why
+     * 在es6中增加了块作用域，在严格模式下，禁止在块作用域中定义函数声明
+     * 在非严格模式下，在块作用域中的函数声明会悬置到块作用域，表现和普通的函数声明悬置一样
+     * 也会悬置到函数作用域，表现和var悬置一样，因此，在嵌套块中定义会出现意外错误
+     * function test() {
+     *   // undefined
+     *   console.log(aa);
+     *   {
+     *    // [Function: aa]
+     *     console.log(aa);
+     *     function aa() {}
+     *   }
+     * }
+     * test();
      * @wrong
+     * if (1) {
+     *  function aa() {}
+     * }
      * @right
      * @group
+     * 函数
      */
     'no-inner-declarations': 'error',
 
-    // 禁止在正则中出现非法字符
     /**
      * @meaning
+     * 禁止在正则中出现非法字符
      * @why
      * @wrong
      * @right
@@ -184,9 +246,9 @@ module.exports = {
      */
     'no-invalid-regexp': 'error',
 
-    // 禁止非规范空格字符串
     /**
      * @meaning
+     * 禁止在代码中出现非规范空格字符串
      * @why
      * @wrong
      * @right
@@ -194,111 +256,146 @@ module.exports = {
      */
     'no-irregular-whitespace': 'error',
 
-    // 禁止将全局对象属性调用为函数
     /**
      * @meaning
+     * 禁止将全局对象属性调用为函数
      * @why
+     * Math,JSON,Reflect对象不能作为函数调用（没有[[Call]]属性）
      * @wrong
+     * var math = Math();
+     * var json = JSON();
+     * var reflect = Reflect();
      * @right
      * @group
      */
     'no-obj-calls': 'error',
 
-    // 不允许直接使用对象的内置原型对象方法
-    // 在某个模块中统一引出
     /**
      * @meaning
+     * 禁止通过自定义对象调用Object的原生方法
      * @why
+     * 1. 自定义对象的prototype属性可能为空导致访问错误：const obj = Object.create(null)
+     * 2. 自定义对象的prototype属性可能被覆盖：const obj = Object.create({hasOwnProperty: 1})导致调用错误
      * @wrong
+     * foo.hasOwnProperty(1)
      * @right
+     * Object.prototype.hasOwnProperty.call(foo, 'bar')
+     * {}.hasOwnProperty.call(foo, 'bar')
+     * const hasOwnProperty = Object.prototype.hasOwnProperty
      * @group
+     * 对象
      */
     'no-prototype-builtins': 'error',
 
-    // 禁止在字符串中出现多个空格
-    // bad: /a    /
-    // good: /a {3}/
     /**
      * @meaning
+     * 禁止在正则中出现多个空格
      * @why
+     * 保持正则简单，可读
      * @wrong
+     * /a   /
      * @right
+     * /a {3}
      * @group
+     * 正则
      */
     'no-regex-spaces': 'error',
 
-    // 禁止稀疏数组([1,,2])
     /**
      * @meaning
+     * 禁止稀疏数组
      * @why
+     * 不利于代码可读性
+     * 多半是意外多写一个逗号造成
      * @wrong
+     * [1,,3]
      * @right
+     * [1,2,3]
      * @group
      */
     'no-sparse-arrays': 'error',
 
-    // 禁止在普通字符串中出现模板字符串中的占位符语法${}
     /**
      * @meaning
+     * 禁止在普通字符串中出现模板字符串中的占位符语法
      * @why
+     * 防止写模板字符串时候使用了字符串的引号导致错误
      * @wrong
+     * '${abc}'
      * @right
+     * `${abc}`
      * @group
      */
     'no-template-curly-in-string': 'error',
 
-    // Avoid code that looks like two expressions but is actually one
-    // https://eslint.org/docs/rules/no-unexpected-multiline
     /**
      * @meaning
+     * 禁止出现到达不了的语句
      * @why
+     * 1. 有可能是书写错误
+     * 2. 确实是没用的语句，删除减少冗余，增加可读性
      * @wrong
-     * @right
-     * @group
-     */
-    'no-unexpected-multiline': 'error',
-
-    // 禁止出现到达不了的语句
-    /**
-     * @meaning
-     * @why
-     * @wrong
+     * function fn() {
+     *  x = 1;
+     *  return x;
+     *  x = 3
+     * }
      * @right
      * @group
      */
     'no-unreachable': 'error',
 
-    // disallow return/throw/break/continue inside finally blocks
-    // 禁止在finally语句中出现return/throw/break/continue语句,
-    // 因为finally中的控制语句会覆盖catch中的语句
     /**
      * @meaning
+     * 禁止在finally语句中出现return/throw/break/continue语句
      * @why
+     * try-catch-finally语法中，try和catch中的代码执行完后，即使执行的是
+     * return/throw/break/continue这种控制语句，仍然回去执行finally
+     * 这时候finally的控制语句会覆盖try-catch中的
      * @wrong
+     * try {
+     *   return 1
+     * } catch (e) {
+     *   return 2
+     * } finally () {
+     *   return 3
+     * }
      * @right
      * @group
+     * 最佳实践
      */
     'no-unsafe-finally': 'error',
 
-    // 不允许!操作符出现在in,instanceof的左边,容易敲错造成意外的逻辑
-    // bad:!key in object
-    // good:!(key in object)
     /**
      * @meaning
+     * 不允许!操作符出现在in,instanceof的左边
      * @why
+     * 防止书写错误，一般都是这样表达：if (!(key instanceof obj))
+     * 有可能写着写着就忘了变成 if (!key instanceof obj)
      * @wrong
+     * if (!key instanceof obj)
      * @right
+     * if (!(key instanceof obj))
      * @group
+     * 最佳实践
      */
     'no-unsafe-negation': 'error',
 
-    // 禁止对NaN进行比较,使用Number.isNaN
+    // ,使用Number.isNaN
     /**
      * @meaning
+     * 禁止对NaN进行直接比较
      * @why
+     * 因为NaN是一个特殊的数字，他的特性是
+     * (NaN !=== NaN) // true
+     * (NaN === NaN) // false
+     * 不能直接比较，使用Number.isNaN来判断
      * @wrong
+     * foo == NaN
      * @right
+     * Number.isNaN(foo)
      * @group
+     * 数字
      */
     'use-isnan': 'error',
 
@@ -308,8 +405,11 @@ module.exports = {
     // 之一
     /**
      * @meaning
+     * 保证和typeof结果比较的是有效字符
      * @why
+     * typeof 结果只能是 string,object,undefined,symbol,number,boolean,function之一
      * @wrong
+     * typeof foo === 'null'
      * @right
      * @group
      */

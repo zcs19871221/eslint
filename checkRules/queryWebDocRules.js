@@ -1,6 +1,6 @@
 const request = require('request');
 
-const queryCurrentReactRules = (docUrl, ruleReg) => {
+const queryWebRules = (docUrl, ruleReg) => {
   return new Promise((resolve, reject) => {
     request(docUrl, (error, res, body) => {
       if (error) {
@@ -16,4 +16,4 @@ const queryCurrentReactRules = (docUrl, ruleReg) => {
     });
   });
 };
-module.exports = queryCurrentReactRules;
+module.exports = queryWebRules;

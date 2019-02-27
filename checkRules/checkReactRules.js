@@ -1,6 +1,7 @@
 const prettierOffReactRules = require('eslint-config-prettier/react');
 const myReactRules = require('../rules/react');
 const compareRules = require('./compareRules');
+const queryWebDocRules = require('./queryWebDocRules');
 
 const offRules = {
   'react/display-name': '必须设置display属性-不需要',
@@ -25,17 +26,21 @@ const offRules = {
   'react/jsx-uses-vars': '有no-var规范就够了',
 };
 
-module.exports = () => {
-    compareRules({
-        webDocUrl: 'https://github.com/yannickcr/eslint-plugin-react',
-        webRulesReg: /<li>[\s\S]*?<a.*?>(react\/.*?)<\/a>[\s\S]*?<\/li>/g,
-        offRules: Object.keys(offRules).concat(
-          Object.keys(prettierOffReactRules.rules),
-        ),
-        usedRules: Object.keys(myReactRules.rules)
-          .filter(name => name.startsWith('react/'))
-          .concat(Object.keys(prettierOffReactRules.rules)),
-        rulesPath: '/rules/react.js',
-      });
-}
+const main = async () => {
+  const webRules = await queryWebDocRules(
+    'https://github.com/yannickcr/eslint-plugin-react',
+    /<li>[\s\S]*?<a.*?>(react\/.*?)<\/a>[\s\S]*?<\/li>/g,
+  );
+  compareRules({
+    webRules,
+    offRules: Object.keys(offRules).concat(
+      Object.keys(prettierOffReactRules.rules),
+    ),
+    usedRules: Object.keys(myReactRules.rules).filter(name =>
+      name.startsWith('react/'),
+    ),
+    rulesPath: '/rules/react.js',
+  });
+};
 
+module.exports = main;

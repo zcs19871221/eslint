@@ -65,16 +65,6 @@ module.exports = {
       },
     ],
 
-    // 变量必须是骆驼式,类必须是首字母大写
-    /**
-     * @meaning
-     * @why
-     * @wrong
-     * @right
-     * @group
-     */
-    'id-match': ['error', '^(([a-z]+([A-Z][a-z]+))|([A-z][a-z]+))*$'],
-
     // 强制要求单行注释必须在代码上方
     /**
      * @meaning
