@@ -12,14 +12,14 @@
 
 # 如何更新插件
 
-执行`npm run checkRule`,会把当前规则和 eslint 最新版本插件比较，按照提示更新 rule 文件夹
+执行`npm run checkRule`,会把当前规则和 eslint 官网以及使用插件官网上的规则进行比较，按照提示更新 rule 文件夹
 
 **添加或修改规范后，必须严格按照下面样式更新 jsDoc 的注释，并重新生成文档**
 
 # 如何创建文档
 
 执行`npm run createDoc`
-根据 rule 文件夹下的 jsDoc 注释
+根据 rule 文件夹下的 jsDoc 注释生成文档
 
 # 关于规范中的注释
 

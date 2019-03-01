@@ -9,6 +9,16 @@ module.exports = {
      * @group
      */
     'for-direction': 'error',
+    /**
+     * @meaning
+     * 禁止promise中的函数使用async函数
+     * @why
+     * 不需要用,async就是返回promise
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-async-promise-executor': 'error',
 
     /**
      * @meaning
@@ -185,6 +195,36 @@ module.exports = {
      * @group
      */
     'no-extra-boolean-cast': 'error',
+
+    /**
+     * @meaning
+     * 禁止在代码某些位置换行而不添加;
+     * @why
+     * 由于ansi规则，有些会被程序认为是错误的
+     * ansi:
+     * 1. 默认\n插入;
+     * 2. 特殊情况不插入分号
+     *     - 本行
+     *       1. 有未结束括号[](){}
+     *       2. 以操作符结尾(+ - * / )
+     *       3. 以,结尾
+     *       4. 以.结尾
+     *       5. 只有++或--
+     *     - 下一行
+     *       1. 以括号[]()开始
+     *       2. 以操作符开始 + - * /
+     *       3. 以正则开始 //
+     *       4. 以模板符号开始 ``
+     *       5. 以.开始
+     * @wrong
+     * var foo = '1234'
+     * /1234/.test(foo)
+     * @right
+     * var foo = '1234';
+     * /1234/.test(foo);
+     * @group
+     */
+    'no-unexpected-multiline': 'error',
 
     /**
      * @meaning
