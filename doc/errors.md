@@ -41,7 +41,7 @@
 
   禁止for循环设置错误的循环方向
 
-[eslint](https://eslint.org/docs/rules/for-direction.md)
+[eslint](https://eslint.org/docs/rules/for-direction)
 
 **[⬆ 回到目录](#目录)**
 
@@ -56,7 +56,7 @@
 
   不需要用,async就是返回promise
 
-[eslint](https://eslint.org/docs/rules/no-async-promise-executor.md)
+[eslint](https://eslint.org/docs/rules/no-async-promise-executor)
 
 **[⬆ 回到目录](#目录)**
 
@@ -67,7 +67,7 @@
 
   强制在getter函数中使用return
 
-[eslint](https://eslint.org/docs/rules/getter-return.md)
+[eslint](https://eslint.org/docs/rules/getter-return)
 
 **[⬆ 回到目录](#目录)**
 
@@ -82,7 +82,7 @@
 
   0 === -0 0 === +0 于-0比较没意义
 
-[eslint](https://eslint.org/docs/rules/no-compare-neg-zero.md)
+[eslint](https://eslint.org/docs/rules/no-compare-neg-zero)
 
 **[⬆ 回到目录](#目录)**
 
@@ -107,7 +107,7 @@
 
       if (user.jobTitle === 'manage')
 
-[eslint](https://eslint.org/docs/rules/no-cond-assign.md)
+[eslint](https://eslint.org/docs/rules/no-cond-assign)
 
 **[⬆ 回到目录](#目录)**
 
@@ -132,7 +132,7 @@
       if (x === 0)  
       while (x)
 
-[eslint](https://eslint.org/docs/rules/no-constant-condition.md)
+[eslint](https://eslint.org/docs/rules/no-constant-condition)
 
 **[⬆ 回到目录](#目录)**
 
@@ -155,7 +155,7 @@
 
       var pattern1 = /\x20/;
 
-[eslint](https://eslint.org/docs/rules/no-control-regex.md)
+[eslint](https://eslint.org/docs/rules/no-control-regex)
 
 **[⬆ 回到目录](#目录)**
 
@@ -175,7 +175,7 @@
 
       debugger;
 
-[eslint](https://eslint.org/docs/rules/no-debugger.md)
+[eslint](https://eslint.org/docs/rules/no-debugger)
 
 **[⬆ 回到目录](#目录)**
 
@@ -199,7 +199,7 @@
 
       function foo(a, b, c)
 
-[eslint](https://eslint.org/docs/rules/no-dupe-args.md)
+[eslint](https://eslint.org/docs/rules/no-dupe-args)
 
 **[⬆ 回到目录](#目录)**
 
@@ -219,7 +219,7 @@
 
       var foo = {a:'1234', b:'2344'}
 
-[eslint](https://eslint.org/docs/rules/no-dupe-keys.md)
+[eslint](https://eslint.org/docs/rules/no-dupe-keys)
 
 **[⬆ 回到目录](#目录)**
 
@@ -234,7 +234,7 @@
 
   这很可能是复制case代码段后忘了改变条件造成的错误
 
-[eslint](https://eslint.org/docs/rules/no-duplicate-case.md)
+[eslint](https://eslint.org/docs/rules/no-duplicate-case)
 
 **[⬆ 回到目录](#目录)**
 
@@ -268,7 +268,7 @@
        // empty  
       }
 
-[eslint](https://eslint.org/docs/rules/no-empty.md)
+[eslint](https://eslint.org/docs/rules/no-empty)
 
 **[⬆ 回到目录](#目录)**
 
@@ -283,7 +283,7 @@
 
   防止意外输错
 
-[eslint](https://eslint.org/docs/rules/no-empty-character-class.md)
+[eslint](https://eslint.org/docs/rules/no-empty-character-class)
 
 **[⬆ 回到目录](#目录)**
 
@@ -294,7 +294,7 @@
 
   禁止在catch语句中为错误参数重新赋值
 
-[eslint](https://eslint.org/docs/rules/no-ex-assign.md)
+[eslint](https://eslint.org/docs/rules/no-ex-assign)
 
 **[⬆ 回到目录](#目录)**
 
@@ -309,7 +309,7 @@
 
       var foo = !!!bar;
 
-[eslint](https://eslint.org/docs/rules/no-extra-boolean-cast.md)
+[eslint](https://eslint.org/docs/rules/no-extra-boolean-cast)
 
 **[⬆ 回到目录](#目录)**
 
@@ -349,7 +349,7 @@
       var foo = '1234';  
       /1234/.test(foo);
 
-[eslint](https://eslint.org/docs/rules/no-unexpected-multiline.md)
+[eslint](https://eslint.org/docs/rules/no-unexpected-multiline)
 
 **[⬆ 回到目录](#目录)**
 
@@ -364,7 +364,7 @@
 
       var x = 5;;
 
-[eslint](https://eslint.org/docs/rules/no-extra-semi.md)
+[eslint](https://eslint.org/docs/rules/no-extra-semi)
 
 **[⬆ 回到目录](#目录)**
 
@@ -379,7 +379,7 @@
 
   函数声明会悬置，作用域很大，如果改变了赋值（一般都是意外输入），会造成错误
 
-[eslint](https://eslint.org/docs/rules/no-func-assign.md)
+[eslint](https://eslint.org/docs/rules/no-func-assign)
 
 **[⬆ 回到目录](#目录)**
 
@@ -412,7 +412,7 @@
        function aa() {}  
       }
 
-[eslint](https://eslint.org/docs/rules/no-inner-declarations.md)
+[eslint](https://eslint.org/docs/rules/no-inner-declarations)
 
 **[⬆ 回到目录](#目录)**
 
@@ -423,7 +423,7 @@
 
   禁止在正则中出现非法字符
 
-[eslint](https://eslint.org/docs/rules/no-invalid-regexp.md)
+[eslint](https://eslint.org/docs/rules/no-invalid-regexp)
 
 **[⬆ 回到目录](#目录)**
 
@@ -434,7 +434,7 @@
 
   禁止在代码中出现非规范空格字符串
 
-[eslint](https://eslint.org/docs/rules/no-irregular-whitespace.md)
+[eslint](https://eslint.org/docs/rules/no-irregular-whitespace)
 
 **[⬆ 回到目录](#目录)**
 
@@ -455,7 +455,7 @@
       var json = JSON();  
       var reflect = Reflect();
 
-[eslint](https://eslint.org/docs/rules/no-obj-calls.md)
+[eslint](https://eslint.org/docs/rules/no-obj-calls)
 
 **[⬆ 回到目录](#目录)**
 
@@ -481,7 +481,7 @@
       {}.hasOwnProperty.call(foo, 'bar')  
       const hasOwnProperty = Object.prototype.hasOwnProperty
 
-[eslint](https://eslint.org/docs/rules/no-prototype-builtins.md)
+[eslint](https://eslint.org/docs/rules/no-prototype-builtins)
 
 **[⬆ 回到目录](#目录)**
 
@@ -504,7 +504,7 @@
 
       /a {3}
 
-[eslint](https://eslint.org/docs/rules/no-regex-spaces.md)
+[eslint](https://eslint.org/docs/rules/no-regex-spaces)
 
 **[⬆ 回到目录](#目录)**
 
@@ -528,7 +528,7 @@
 
       [1,2,3]
 
-[eslint](https://eslint.org/docs/rules/no-sparse-arrays.md)
+[eslint](https://eslint.org/docs/rules/no-sparse-arrays)
 
 **[⬆ 回到目录](#目录)**
 
@@ -551,7 +551,7 @@
 
       `${abc}`
 
-[eslint](https://eslint.org/docs/rules/no-template-curly-in-string.md)
+[eslint](https://eslint.org/docs/rules/no-template-curly-in-string)
 
 **[⬆ 回到目录](#目录)**
 
@@ -575,7 +575,7 @@
        x = 3  
       }
 
-[eslint](https://eslint.org/docs/rules/no-unreachable.md)
+[eslint](https://eslint.org/docs/rules/no-unreachable)
 
 **[⬆ 回到目录](#目录)**
 
@@ -602,7 +602,7 @@
         return 3  
       }
 
-[eslint](https://eslint.org/docs/rules/no-unsafe-finally.md)
+[eslint](https://eslint.org/docs/rules/no-unsafe-finally)
 
 **[⬆ 回到目录](#目录)**
 
@@ -626,7 +626,7 @@
 
       if (!(key instanceof obj))
 
-[eslint](https://eslint.org/docs/rules/no-unsafe-negation.md)
+[eslint](https://eslint.org/docs/rules/no-unsafe-negation)
 
 **[⬆ 回到目录](#目录)**
 
@@ -652,7 +652,7 @@
 
       Number.isNaN(foo)
 
-[eslint](https://eslint.org/docs/rules/use-isnan.md)
+[eslint](https://eslint.org/docs/rules/use-isnan)
 
 **[⬆ 回到目录](#目录)**
 
@@ -671,7 +671,7 @@
 
       typeof foo === 'null'
 
-[eslint](https://eslint.org/docs/rules/valid-typeof.md)
+[eslint](https://eslint.org/docs/rules/valid-typeof)
 
 **[⬆ 回到目录](#目录)**
 

@@ -36,7 +36,7 @@
   1. super()直接执行父类构造函数  
   2. super.xx执行父类xx方法
 
-[eslint](https://eslint.org/docs/rules/constructor-super.md)
+[eslint](https://eslint.org/docs/rules/constructor-super)
 
 **[⬆ 回到目录](#目录)**
 
@@ -47,7 +47,7 @@
 
   禁止修改类声明
 
-[eslint](https://eslint.org/docs/rules/no-class-assign.md)
+[eslint](https://eslint.org/docs/rules/no-class-assign)
 
 **[⬆ 回到目录](#目录)**
 
@@ -58,7 +58,7 @@
 
   禁止修改const声明变量
 
-[eslint](https://eslint.org/docs/rules/no-const-assign.md)
+[eslint](https://eslint.org/docs/rules/no-const-assign)
 
 **[⬆ 回到目录](#目录)**
 
@@ -69,7 +69,7 @@
 
   类属性禁止重名
 
-[eslint](https://eslint.org/docs/rules/no-dupe-class-members.md)
+[eslint](https://eslint.org/docs/rules/no-dupe-class-members)
 
 **[⬆ 回到目录](#目录)**
 
@@ -93,7 +93,7 @@
 
       import {a, b} from 'module'
 
-[eslint](https://eslint.org/docs/rules/no-duplicate-imports.md)
+[eslint](https://eslint.org/docs/rules/no-duplicate-imports)
 
 **[⬆ 回到目录](#目录)**
 
@@ -104,7 +104,7 @@
 
   Symbo直接调用,不要用new Symbol
 
-[eslint](https://eslint.org/docs/rules/no-new-symbol.md)
+[eslint](https://eslint.org/docs/rules/no-new-symbol)
 
 **[⬆ 回到目录](#目录)**
 
@@ -115,7 +115,7 @@
 
   继承类的构造函数中,在super调用之前禁止使用this赋值
 
-[eslint](https://eslint.org/docs/rules/no-this-before-super.md)
+[eslint](https://eslint.org/docs/rules/no-this-before-super)
 
 **[⬆ 回到目录](#目录)**
 
@@ -138,7 +138,7 @@
         abc: 'abc'  
       }
 
-[eslint](https://eslint.org/docs/rules/no-useless-computed-key.md)
+[eslint](https://eslint.org/docs/rules/no-useless-computed-key)
 
 **[⬆ 回到目录](#目录)**
 
@@ -149,7 +149,7 @@
 
   不允许出现空构造函数
 
-[eslint](https://eslint.org/docs/rules/no-useless-constructor.md)
+[eslint](https://eslint.org/docs/rules/no-useless-constructor)
 
 **[⬆ 回到目录](#目录)**
 
@@ -160,7 +160,7 @@
 
   禁止解构重命名为原来变量名
 
-[eslint](https://eslint.org/docs/rules/no-useless-rename.md)
+[eslint](https://eslint.org/docs/rules/no-useless-rename)
 
 **[⬆ 回到目录](#目录)**
 
@@ -171,7 +171,7 @@
 
   禁止使用var定义变量
 
-[eslint](https://eslint.org/docs/rules/no-var.md)
+[eslint](https://eslint.org/docs/rules/no-var)
 
 **[⬆ 回到目录](#目录)**
 
@@ -190,7 +190,7 @@
         x,  
       }
 
-[eslint](https://eslint.org/docs/rules/object-shorthand.md)
+[eslint](https://eslint.org/docs/rules/object-shorthand)
 
 **[⬆ 回到目录](#目录)**
 
@@ -201,7 +201,7 @@
 
   使用箭头函数作为回调
 
-[eslint](https://eslint.org/docs/rules/prefer-arrow-callback.md)
+[eslint](https://eslint.org/docs/rules/prefer-arrow-callback)
 
 **[⬆ 回到目录](#目录)**
 
@@ -212,7 +212,7 @@
 
   不会改变引用的变量都是用const定义
 
-[eslint](https://eslint.org/docs/rules/prefer-const.md)
+[eslint](https://eslint.org/docs/rules/prefer-const)
 
 **[⬆ 回到目录](#目录)**
 
@@ -223,7 +223,7 @@
 
   使用解构来从数组和对象中获取值
 
-[eslint](https://eslint.org/docs/rules/prefer-destructuring.md)
+[eslint](https://eslint.org/docs/rules/prefer-destructuring)
 
 **[⬆ 回到目录](#目录)**
 
@@ -234,7 +234,7 @@
 
   使用rest运算符获取参数,不要用arguments
 
-[eslint](https://eslint.org/docs/rules/prefer-rest-params.md)
+[eslint](https://eslint.org/docs/rules/prefer-rest-params)
 
 **[⬆ 回到目录](#目录)**
 
@@ -245,7 +245,7 @@
 
   使用...运算符传递参数调用函数
 
-[eslint](https://eslint.org/docs/rules/prefer-spread.md)
+[eslint](https://eslint.org/docs/rules/prefer-spread)
 
 **[⬆ 回到目录](#目录)**
 
@@ -256,7 +256,7 @@
 
   构造器必须包含yield语法
 
-[eslint](https://eslint.org/docs/rules/require-yield.md)
+[eslint](https://eslint.org/docs/rules/require-yield)
 
 **[⬆ 回到目录](#目录)**
 
@@ -267,7 +267,7 @@
 
   使用Symbol创建唯一值的时候,需要描述字符串
 
-[eslint](https://eslint.org/docs/rules/symbol-description.md)
+[eslint](https://eslint.org/docs/rules/symbol-description)
 
 **[⬆ 回到目录](#目录)**
 

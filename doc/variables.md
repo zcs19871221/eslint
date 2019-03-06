@@ -18,7 +18,7 @@
 
   禁止delete声明变量
 
-[eslint](https://eslint.org/docs/rules/no-delete-var.md)
+[eslint](https://eslint.org/docs/rules/no-delete-var)
 
 **[⬆ 回到目录](#目录)**
 
@@ -29,7 +29,7 @@
 
   禁止使用容易混淆的全局变量
 
-[eslint](https://eslint.org/docs/rules/no-restricted-globals.md)
+[eslint](https://eslint.org/docs/rules/no-restricted-globals)
 
 **[⬆ 回到目录](#目录)**
 
@@ -40,7 +40,7 @@
 
   不允许声明一个已经在外部作用域声明的同名变量
 
-[eslint](https://eslint.org/docs/rules/no-shadow.md)
+[eslint](https://eslint.org/docs/rules/no-shadow)
 
 **[⬆ 回到目录](#目录)**
 
@@ -51,7 +51,7 @@
 
   不允许定义和全局变量同名的变量
 
-[eslint](https://eslint.org/docs/rules/no-shadow-restricted-names.md)
+[eslint](https://eslint.org/docs/rules/no-shadow-restricted-names)
 
 **[⬆ 回到目录](#目录)**
 
@@ -62,7 +62,7 @@
 
   禁止使用未声明的变量
 
-[eslint](https://eslint.org/docs/rules/no-undef.md)
+[eslint](https://eslint.org/docs/rules/no-undef)
 
 **[⬆ 回到目录](#目录)**
 
@@ -73,7 +73,7 @@
 
   禁止初始化为未定义
 
-[eslint](https://eslint.org/docs/rules/no-undef-init.md)
+[eslint](https://eslint.org/docs/rules/no-undef-init)
 
 **[⬆ 回到目录](#目录)**
 
@@ -84,7 +84,7 @@
 
   禁止出现未使用的变量
 
-[eslint](https://eslint.org/docs/rules/no-unused-vars.md)
+[eslint](https://eslint.org/docs/rules/no-unused-vars)
 
 **[⬆ 回到目录](#目录)**
 
@@ -95,7 +95,7 @@
 
   不允许在定义变量之前使用变量
 
-[eslint](https://eslint.org/docs/rules/no-use-before-define.md)
+[eslint](https://eslint.org/docs/rules/no-use-before-define)
 
 **[⬆ 回到目录](#目录)**
 

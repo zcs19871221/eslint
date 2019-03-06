@@ -42,7 +42,7 @@
   变量命名要求驼峰式  
   检查变量是否中间有_, 有的话报错
 
-[eslint](https://eslint.org/docs/rules/camelcase.md)
+[eslint](https://eslint.org/docs/rules/camelcase)
 
 **[⬆ 回到目录](#目录)**
 
@@ -57,7 +57,7 @@
 
   为了更好的debug和定位错误
 
-[eslint](https://eslint.org/docs/rules/func-names.md)
+[eslint](https://eslint.org/docs/rules/func-names)
 
 **[⬆ 回到目录](#目录)**
 
@@ -76,7 +76,7 @@
    如果他很大很复杂,你会有欲望把它重构或把他提取出  
    一个模块,因为太碍事了
 
-[eslint](https://eslint.org/docs/rules/func-style.md)
+[eslint](https://eslint.org/docs/rules/func-style)
 
 **[⬆ 回到目录](#目录)**
 
@@ -91,7 +91,7 @@
 
   这些变量名降低可读性
 
-[eslint](https://eslint.org/docs/rules/id-blacklist.md)
+[eslint](https://eslint.org/docs/rules/id-blacklist)
 
 **[⬆ 回到目录](#目录)**
 
@@ -106,7 +106,7 @@
 
   非常短的变量名和非常长的变量名会让程序难以阅读和维护
 
-[eslint](https://eslint.org/docs/rules/id-length.md)
+[eslint](https://eslint.org/docs/rules/id-length)
 
 **[⬆ 回到目录](#目录)**
 
@@ -117,7 +117,7 @@
 
   强制要求单行注释必须在代码上方
 
-[eslint](https://eslint.org/docs/rules/line-comment-position.md)
+[eslint](https://eslint.org/docs/rules/line-comment-position)
 
 **[⬆ 回到目录](#目录)**
 
@@ -136,7 +136,7 @@
   在windows下这段代码可能就不正确了，因为换行是\r\n  
   保持一致，减少出错几率
 
-[eslint](https://eslint.org/docs/rules/linebreak-style.md)
+[eslint](https://eslint.org/docs/rules/linebreak-style)
 
 **[⬆ 回到目录](#目录)**
 
@@ -151,7 +151,7 @@
 
   提高可读性
 
-[eslint](https://eslint.org/docs/rules/lines-between-class-members.md)
+[eslint](https://eslint.org/docs/rules/lines-between-class-members)
 
 **[⬆ 回到目录](#目录)**
 
@@ -166,7 +166,7 @@
 
   过深的嵌套降低可读性
 
-[eslint](https://eslint.org/docs/rules/max-depth.md)
+[eslint](https://eslint.org/docs/rules/max-depth)
 
 **[⬆ 回到目录](#目录)**
 
@@ -182,7 +182,7 @@
   过大的文件说明功能不止一个,不利于维护  
   鼓励重构成多个小文件 单一职责原则
 
-[eslint](https://eslint.org/docs/rules/max-lines.md)
+[eslint](https://eslint.org/docs/rules/max-lines)
 
 **[⬆ 回到目录](#目录)**
 
@@ -197,7 +197,7 @@
 
   理由同max-lines
 
-[eslint](https://eslint.org/docs/rules/max-lines-per-function.md)
+[eslint](https://eslint.org/docs/rules/max-lines-per-function)
 
 **[⬆ 回到目录](#目录)**
 
@@ -212,7 +212,7 @@
 
   降低可读性，使用promise或async
 
-[eslint](https://eslint.org/docs/rules/max-nested-callbacks.md)
+[eslint](https://eslint.org/docs/rules/max-nested-callbacks)
 
 **[⬆ 回到目录](#目录)**
 
@@ -228,7 +228,7 @@
   1. 函数参数越多，这个函数就越难读懂，测试就越复杂  
   2. 参数多，也说明函数做了不止一件事，鼓励让函数只做一件事，对函数进行重构
 
-[eslint](https://eslint.org/docs/rules/max-params.md)
+[eslint](https://eslint.org/docs/rules/max-params)
 
 **[⬆ 回到目录](#目录)**
 
@@ -248,7 +248,7 @@
       var bar; var baz;  
       if (condition) { bar = 1; }
 
-[eslint](https://eslint.org/docs/rules/max-statements-per-line.md)
+[eslint](https://eslint.org/docs/rules/max-statements-per-line)
 
 **[⬆ 回到目录](#目录)**
 
@@ -263,7 +263,7 @@
 
   类首字母大写
 
-[eslint](https://eslint.org/docs/rules/new-cap.md)
+[eslint](https://eslint.org/docs/rules/new-cap)
 
 **[⬆ 回到目录](#目录)**
 
@@ -278,7 +278,7 @@
 
   Array全局可能被更改引用
 
-[eslint](https://eslint.org/docs/rules/no-array-constructor.md)
+[eslint](https://eslint.org/docs/rules/no-array-constructor)
 
 **[⬆ 回到目录](#目录)**
 
@@ -294,7 +294,7 @@
   前端很少使用bit运算符（除了面试可能）  
   用的时候一般都是||忘了敲一个|
 
-[eslint](https://eslint.org/docs/rules/no-bitwise.md)
+[eslint](https://eslint.org/docs/rules/no-bitwise)
 
 **[⬆ 回到目录](#目录)**
 
@@ -309,7 +309,7 @@
 
   降低代码可读性，不易debug
 
-[eslint](https://eslint.org/docs/rules/no-continue.md)
+[eslint](https://eslint.org/docs/rules/no-continue)
 
 **[⬆ 回到目录](#目录)**
 
@@ -320,7 +320,7 @@
 
   禁止注释和代码放到同一行
 
-[eslint](https://eslint.org/docs/rules/no-inline-comments.md)
+[eslint](https://eslint.org/docs/rules/no-inline-comments)
 
 **[⬆ 回到目录](#目录)**
 
@@ -331,7 +331,7 @@
 
   禁止if语句是else语句中的唯一语句
 
-[eslint](https://eslint.org/docs/rules/no-lonely-if.md)
+[eslint](https://eslint.org/docs/rules/no-lonely-if)
 
 **[⬆ 回到目录](#目录)**
 
@@ -361,7 +361,7 @@
       const b = 5;  
       const c = 5;
 
-[eslint](https://eslint.org/docs/rules/no-multi-assign.md)
+[eslint](https://eslint.org/docs/rules/no-multi-assign)
 
 **[⬆ 回到目录](#目录)**
 
@@ -393,7 +393,7 @@
       }  
       !a ? c : b
 
-[eslint](https://eslint.org/docs/rules/no-negated-condition.md)
+[eslint](https://eslint.org/docs/rules/no-negated-condition)
 
 **[⬆ 回到目录](#目录)**
 
@@ -413,7 +413,7 @@
       var thing = foo ? bar : baz === qux ? quxx : foobar;  
       foo ? baz === qux ? quxx() : foobar() : bar();
 
-[eslint](https://eslint.org/docs/rules/no-nested-ternary.md)
+[eslint](https://eslint.org/docs/rules/no-nested-ternary)
 
 **[⬆ 回到目录](#目录)**
 
@@ -436,7 +436,7 @@
 
       var myObject = {};
 
-[eslint](https://eslint.org/docs/rules/no-new-object.md)
+[eslint](https://eslint.org/docs/rules/no-new-object)
 
 **[⬆ 回到目录](#目录)**
 
@@ -468,7 +468,7 @@
       i += 1;  
       i -= 1
 
-[eslint](https://eslint.org/docs/rules/no-plusplus.md)
+[eslint](https://eslint.org/docs/rules/no-plusplus)
 
 **[⬆ 回到目录](#目录)**
 
@@ -484,7 +484,7 @@
   for..in遍历原型链，容易出错  
   label和with容易混淆
 
-[eslint](https://eslint.org/docs/rules/no-restricted-syntax.md)
+[eslint](https://eslint.org/docs/rules/no-restricted-syntax)
 
 **[⬆ 回到目录](#目录)**
 
@@ -500,7 +500,7 @@
   悬挂下划线一般表示私有成员  
   但是变量的含义应该通过名称来表示而不是约定符号，这样降低可读性
 
-[eslint](https://eslint.org/docs/rules/no-underscore-dangle.md)
+[eslint](https://eslint.org/docs/rules/no-underscore-dangle)
 
 **[⬆ 回到目录](#目录)**
 
@@ -519,7 +519,7 @@
 
       var isYes = answer === 1;
 
-[eslint](https://eslint.org/docs/rules/no-unneeded-ternary.md)
+[eslint](https://eslint.org/docs/rules/no-unneeded-ternary)
 
 **[⬆ 回到目录](#目录)**
 
@@ -546,7 +546,7 @@
       let b;  
       let c;
 
-[eslint](https://eslint.org/docs/rules/one-var.md)
+[eslint](https://eslint.org/docs/rules/one-var)
 
 **[⬆ 回到目录](#目录)**
 
@@ -569,7 +569,7 @@
 
       x += y;
 
-[eslint](https://eslint.org/docs/rules/operator-assignment.md)
+[eslint](https://eslint.org/docs/rules/operator-assignment)
 
 **[⬆ 回到目录](#目录)**
 
@@ -580,7 +580,7 @@
 
   要求注释开头空一格
 
-[eslint](https://eslint.org/docs/rules/spaced-comment.md)
+[eslint](https://eslint.org/docs/rules/spaced-comment)
 
 **[⬆ 回到目录](#目录)**
 

@@ -40,7 +40,7 @@ const createEslintDoc = () => {
       rulePath: realPath,
       title,
       outPutPath,
-      linkTemplate: ruleName => `https://eslint.org/docs/rules/${ruleName}.md`,
+      linkTemplate: ruleName => `https://eslint.org/docs/rules/${ruleName}`,
     });
   });
 };

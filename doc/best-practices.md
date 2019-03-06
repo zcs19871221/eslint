@@ -71,7 +71,7 @@
 
       list.map(e => e + 'abc');
 
-[eslint](https://eslint.org/docs/rules/array-callback-return.md)
+[eslint](https://eslint.org/docs/rules/array-callback-return)
 
 **[⬆ 回到目录](#目录)**
 
@@ -102,7 +102,7 @@
         methodB() {console.log(this.name)}  
       }
 
-[eslint](https://eslint.org/docs/rules/class-methods-use-this.md)
+[eslint](https://eslint.org/docs/rules/class-methods-use-this)
 
 **[⬆ 回到目录](#目录)**
 
@@ -153,7 +153,7 @@
         this.a = 0;  
       }
 
-[eslint](https://eslint.org/docs/rules/consistent-return.md)
+[eslint](https://eslint.org/docs/rules/consistent-return)
 
 **[⬆ 回到目录](#目录)**
 
@@ -193,7 +193,7 @@
        // no default  
       }
 
-[eslint](https://eslint.org/docs/rules/default-case.md)
+[eslint](https://eslint.org/docs/rules/default-case)
 
 **[⬆ 回到目录](#目录)**
 
@@ -216,7 +216,7 @@
 
       obj.name
 
-[eslint](https://eslint.org/docs/rules/dot-notation.md)
+[eslint](https://eslint.org/docs/rules/dot-notation)
 
 **[⬆ 回到目录](#目录)**
 
@@ -249,7 +249,7 @@
 
       if (a === b) {}
 
-[eslint](https://eslint.org/docs/rules/eqeqeq.md)
+[eslint](https://eslint.org/docs/rules/eqeqeq)
 
 **[⬆ 回到目录](#目录)**
 
@@ -272,7 +272,7 @@
 
       customAlert('abcd')
 
-[eslint](https://eslint.org/docs/rules/no-alert.md)
+[eslint](https://eslint.org/docs/rules/no-alert)
 
 **[⬆ 回到目录](#目录)**
 
@@ -288,7 +288,7 @@
   会导致部分情况下代码无法被引擎优化  
   以后版本会被被es规范弃用
 
-[eslint](https://eslint.org/docs/rules/no-caller.md)
+[eslint](https://eslint.org/docs/rules/no-caller)
 
 **[⬆ 回到目录](#目录)**
 
@@ -336,7 +336,7 @@
          }  
       }
 
-[eslint](https://eslint.org/docs/rules/no-case-declarations.md)
+[eslint](https://eslint.org/docs/rules/no-case-declarations)
 
 **[⬆ 回到目录](#目录)**
 
@@ -363,7 +363,7 @@
       }  
       const foo = () => {}
 
-[eslint](https://eslint.org/docs/rules/no-empty-function.md)
+[eslint](https://eslint.org/docs/rules/no-empty-function)
 
 **[⬆ 回到目录](#目录)**
 
@@ -378,7 +378,7 @@
 
       const {a: {}} = foo;
 
-[eslint](https://eslint.org/docs/rules/no-empty-pattern.md)
+[eslint](https://eslint.org/docs/rules/no-empty-pattern)
 
 **[⬆ 回到目录](#目录)**
 
@@ -394,7 +394,7 @@
   1. eval的字符串有js注入的风险：比如让用户输入四则运算eval('3 + 4'),但是黑客输入js代码:eval('window.location = /hackServer?cookie=document.cookie')  
   2. 无法debug eval中的代码
 
-[eslint](https://eslint.org/docs/rules/no-eval.md)
+[eslint](https://eslint.org/docs/rules/no-eval)
 
 **[⬆ 回到目录](#目录)**
 
@@ -414,7 +414,7 @@
       Object.prototype.a = "a";  
       Array.prototype.a = "a";
 
-[eslint](https://eslint.org/docs/rules/no-extend-native.md)
+[eslint](https://eslint.org/docs/rules/no-extend-native)
 
 **[⬆ 回到目录](#目录)**
 
@@ -431,7 +431,7 @@
   无this函数不要用bind  
   自执行函数的this无法绑定
 
-[eslint](https://eslint.org/docs/rules/no-extra-bind.md)
+[eslint](https://eslint.org/docs/rules/no-extra-bind)
 
 **[⬆ 回到目录](#目录)**
 
@@ -462,7 +462,7 @@
        dosomething();  
        break;
 
-[eslint](https://eslint.org/docs/rules/no-fallthrough.md)
+[eslint](https://eslint.org/docs/rules/no-fallthrough)
 
 **[⬆ 回到目录](#目录)**
 
@@ -473,7 +473,7 @@
 
   禁止重新分配全局对象
 
-[eslint](https://eslint.org/docs/rules/no-global-assign.md)
+[eslint](https://eslint.org/docs/rules/no-global-assign)
 
 **[⬆ 回到目录](#目录)**
 
@@ -498,7 +498,7 @@
           alert("Hi!");  
       }, 100);
 
-[eslint](https://eslint.org/docs/rules/no-implied-eval.md)
+[eslint](https://eslint.org/docs/rules/no-implied-eval)
 
 **[⬆ 回到目录](#目录)**
 
@@ -513,7 +513,7 @@
 
   这个属性是SpiderMonkey拓展所使用的预留属性
 
-[eslint](https://eslint.org/docs/rules/no-iterator.md)
+[eslint](https://eslint.org/docs/rules/no-iterator)
 
 **[⬆ 回到目录](#目录)**
 
@@ -528,7 +528,7 @@
 
   label是弃用语法
 
-[eslint](https://eslint.org/docs/rules/no-labels.md)
+[eslint](https://eslint.org/docs/rules/no-labels)
 
 **[⬆ 回到目录](#目录)**
 
@@ -543,7 +543,7 @@
 
   消除混淆
 
-[eslint](https://eslint.org/docs/rules/no-lone-blocks.md)
+[eslint](https://eslint.org/docs/rules/no-lone-blocks)
 
 **[⬆ 回到目录](#目录)**
 
@@ -589,7 +589,7 @@
           a();  
       }
 
-[eslint](https://eslint.org/docs/rules/no-loop-func.md)
+[eslint](https://eslint.org/docs/rules/no-loop-func)
 
 **[⬆ 回到目录](#目录)**
 
@@ -600,7 +600,7 @@
 
   禁止在字符串变量中使用`\回车`的方法来书写多行字符串
 
-[eslint](https://eslint.org/docs/rules/no-multi-str.md)
+[eslint](https://eslint.org/docs/rules/no-multi-str)
 
 **[⬆ 回到目录](#目录)**
 
@@ -628,7 +628,7 @@
 
       const obj = new Func()
 
-[eslint](https://eslint.org/docs/rules/no-new.md)
+[eslint](https://eslint.org/docs/rules/no-new)
 
 **[⬆ 回到目录](#目录)**
 
@@ -653,7 +653,7 @@
           return a + b;  
       };
 
-[eslint](https://eslint.org/docs/rules/no-new-func.md)
+[eslint](https://eslint.org/docs/rules/no-new-func)
 
 **[⬆ 回到目录](#目录)**
 
@@ -688,7 +688,7 @@
       const str = 'abcd';  
       const str = String(1234)
 
-[eslint](https://eslint.org/docs/rules/no-new-wrappers.md)
+[eslint](https://eslint.org/docs/rules/no-new-wrappers)
 
 **[⬆ 回到目录](#目录)**
 
@@ -714,7 +714,7 @@
 
       var num = '071'
 
-[eslint](https://eslint.org/docs/rules/no-octal.md)
+[eslint](https://eslint.org/docs/rules/no-octal)
 
 **[⬆ 回到目录](#目录)**
 
@@ -739,7 +739,7 @@
       // unicode  
       var foo = "Copyright \u00A9";
 
-[eslint](https://eslint.org/docs/rules/no-octal-escape.md)
+[eslint](https://eslint.org/docs/rules/no-octal-escape)
 
 **[⬆ 回到目录](#目录)**
 
@@ -776,7 +776,7 @@
 
       function foo(bar) {const baz = bar}
 
-[eslint](https://eslint.org/docs/rules/no-param-reassign.md)
+[eslint](https://eslint.org/docs/rules/no-param-reassign)
 
 **[⬆ 回到目录](#目录)**
 
@@ -791,7 +791,7 @@
 
   js保留属性,表示指向对象的原型对象
 
-[eslint](https://eslint.org/docs/rules/no-proto.md)
+[eslint](https://eslint.org/docs/rules/no-proto)
 
 **[⬆ 回到目录](#目录)**
 
@@ -802,7 +802,7 @@
 
   禁止重复声明变量
 
-[eslint](https://eslint.org/docs/rules/no-redeclare.md)
+[eslint](https://eslint.org/docs/rules/no-redeclare)
 
 **[⬆ 回到目录](#目录)**
 
@@ -818,7 +818,7 @@
   4. 禁止使用对象的__defineGetter__和__defineSetter__方法,使用Object.definePropery代替  
   5. 禁止使用Math.pow.幂运算,使用**代替
 
-[eslint](https://eslint.org/docs/rules/no-restricted-properties.md)
+[eslint](https://eslint.org/docs/rules/no-restricted-properties)
 
 **[⬆ 回到目录](#目录)**
 
@@ -849,7 +849,7 @@
        return foo === bar + 2;  
       }
 
-[eslint](https://eslint.org/docs/rules/no-return-assign.md)
+[eslint](https://eslint.org/docs/rules/no-return-assign)
 
 **[⬆ 回到目录](#目录)**
 
@@ -865,7 +865,7 @@
   冗余的写法  
   处理async返回值和await处理参数的方式都是一样的.
 
-[eslint](https://eslint.org/docs/rules/no-return-await.md)
+[eslint](https://eslint.org/docs/rules/no-return-await)
 
 **[⬆ 回到目录](#目录)**
 
@@ -884,7 +884,7 @@
 
       location.href = "javascript:void(0)";
 
-[eslint](https://eslint.org/docs/rules/no-script-url.md)
+[eslint](https://eslint.org/docs/rules/no-script-url)
 
 **[⬆ 回到目录](#目录)**
 
@@ -903,7 +903,7 @@
 
       foo = foo;
 
-[eslint](https://eslint.org/docs/rules/no-self-assign.md)
+[eslint](https://eslint.org/docs/rules/no-self-assign)
 
 **[⬆ 回到目录](#目录)**
 
@@ -922,7 +922,7 @@
 
       self !== self
 
-[eslint](https://eslint.org/docs/rules/no-self-compare.md)
+[eslint](https://eslint.org/docs/rules/no-self-compare)
 
 **[⬆ 回到目录](#目录)**
 
@@ -937,7 +937,7 @@
 
   造成意外错误
 
-[eslint](https://eslint.org/docs/rules/no-sequences.md)
+[eslint](https://eslint.org/docs/rules/no-sequences)
 
 **[⬆ 回到目录](#目录)**
 
@@ -948,7 +948,7 @@
 
   throw只允许throw error对象
 
-[eslint](https://eslint.org/docs/rules/no-throw-literal.md)
+[eslint](https://eslint.org/docs/rules/no-throw-literal)
 
 **[⬆ 回到目录](#目录)**
 
@@ -959,7 +959,7 @@
 
   禁止未使用的表达式
 
-[eslint](https://eslint.org/docs/rules/no-unused-expressions.md)
+[eslint](https://eslint.org/docs/rules/no-unused-expressions)
 
 **[⬆ 回到目录](#目录)**
 
@@ -970,7 +970,7 @@
 
   禁止无效的字符串连接('a' + 'b' => 'ab')
 
-[eslint](https://eslint.org/docs/rules/no-useless-concat.md)
+[eslint](https://eslint.org/docs/rules/no-useless-concat)
 
 **[⬆ 回到目录](#目录)**
 
@@ -981,7 +981,7 @@
 
   禁止出现无效的转义符号('a\b')
 
-[eslint](https://eslint.org/docs/rules/no-useless-escape.md)
+[eslint](https://eslint.org/docs/rules/no-useless-escape)
 
 **[⬆ 回到目录](#目录)**
 
@@ -1005,7 +1005,7 @@
        return doSome()  
       }
 
-[eslint](https://eslint.org/docs/rules/no-useless-return.md)
+[eslint](https://eslint.org/docs/rules/no-useless-return)
 
 **[⬆ 回到目录](#目录)**
 
@@ -1024,7 +1024,7 @@
   console.log(void (a = 2));  
   console.log(a);
 
-[eslint](https://eslint.org/docs/rules/no-void.md)
+[eslint](https://eslint.org/docs/rules/no-void)
 
 **[⬆ 回到目录](#目录)**
 
@@ -1039,7 +1039,7 @@
 
   将对象的成员添加到当前作用域,可能出现问题
 
-[eslint](https://eslint.org/docs/rules/no-with.md)
+[eslint](https://eslint.org/docs/rules/no-with)
 
 **[⬆ 回到目录](#目录)**
 
@@ -1050,7 +1050,7 @@
 
   promise reject的参数必须使用error对象或自定义对象
 
-[eslint](https://eslint.org/docs/rules/prefer-promise-reject-errors.md)
+[eslint](https://eslint.org/docs/rules/prefer-promise-reject-errors)
 
 **[⬆ 回到目录](#目录)**
 
@@ -1076,7 +1076,7 @@
 
       var num = parseInt("071", 10);  // 71
 
-[eslint](https://eslint.org/docs/rules/radix.md)
+[eslint](https://eslint.org/docs/rules/radix)
 
 **[⬆ 回到目录](#目录)**
 
@@ -1099,7 +1099,7 @@
 
       if ( color === 'red')
 
-[eslint](https://eslint.org/docs/rules/yoda.md)
+[eslint](https://eslint.org/docs/rules/yoda)
 
 **[⬆ 回到目录](#目录)**
 

@@ -18,7 +18,7 @@
 
   当require在代码段中, 很难发现依赖关系
 
-[eslint](https://eslint.org/docs/rules/global-require.md)
+[eslint](https://eslint.org/docs/rules/global-require)
 
 **[⬆ 回到目录](#目录)**
 
@@ -33,7 +33,7 @@
 
   Buffer构造函数已弃用,存在安全性问题
 
-[eslint](https://eslint.org/docs/rules/no-buffer-constructor.md)
+[eslint](https://eslint.org/docs/rules/no-buffer-constructor)
 
 **[⬆ 回到目录](#目录)**
 
@@ -44,7 +44,7 @@
 
   禁止使用new在require前头
 
-[eslint](https://eslint.org/docs/rules/no-new-require.md)
+[eslint](https://eslint.org/docs/rules/no-new-require)
 
 **[⬆ 回到目录](#目录)**
 
@@ -60,7 +60,7 @@
 
   防止不同操作系统路径分割不一致
 
-[eslint](https://eslint.org/docs/rules/no-path-concat.md)
+[eslint](https://eslint.org/docs/rules/no-path-concat)
 
 **[⬆ 回到目录](#目录)**
 
