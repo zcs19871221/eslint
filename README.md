@@ -9,7 +9,7 @@
 - [错误语法](./doc/errors.md)
 - [es6](./doc/es6.md)
 - [node](./doc/node.md)
-- [代码样式](./doc/react.md)
+- [代码样式](./doc/style.md)
 - [变量](./doc/variables.md)
 
 # 如何使用
