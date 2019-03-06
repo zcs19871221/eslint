@@ -7,45 +7,48 @@
 3. [consistent-return](#consistent-return)
 4. [default-case](#default-case)
 5. [dot-notation](#dot-notation)
-6. [no-alert](#no-alert)
-7. [no-caller](#no-caller)
-8. [no-case-declarations](#no-case-declarations)
-9. [no-empty-function](#no-empty-function)
-10. [no-empty-pattern](#no-empty-pattern)
-11. [no-eval](#no-eval)
-12. [no-extend-native](#no-extend-native)
-13. [no-extra-bind](#no-extra-bind)
-14. [no-fallthrough](#no-fallthrough)
-15. [no-global-assign](#no-global-assign)
-16. [no-implied-eval](#no-implied-eval)
-17. [no-iterator](#no-iterator)
-18. [no-labels](#no-labels)
-19. [no-lone-blocks](#no-lone-blocks)
-20. [no-loop-func](#no-loop-func)
-21. [no-multi-str](#no-multi-str)
-22. [no-new](#no-new)
-23. [no-new-func](#no-new-func)
-24. [no-new-wrappers](#no-new-wrappers)
-25. [no-octal](#no-octal)
-26. [no-octal-escape](#no-octal-escape)
-27. [no-param-reassign](#no-param-reassign)
-28. [no-proto](#no-proto)
-29. [no-redeclare](#no-redeclare)
-30. [no-restricted-properties](#no-restricted-properties)
-31. [no-return-assign](#no-return-assign)
-32. [no-return-await](#no-return-await)
-33. [no-script-url](#no-script-url)
-34. [no-self-assign](#no-self-assign)
-35. [no-self-compare](#no-self-compare)
-36. [no-sequences](#no-sequences)
-37. [no-throw-literal](#no-throw-literal)
-38. [no-unused-expressions](#no-unused-expressions)
-39. [no-useless-concat](#no-useless-concat)
-40. [no-useless-escape](#no-useless-escape)
-41. [no-useless-return](#no-useless-return)
-42. [no-void](#no-void)
-43. [no-with](#no-with)
-44. [prefer-promise-reject-errors](#prefer-promise-reject-errors)
+6. [eqeqeq](#eqeqeq)
+7. [no-alert](#no-alert)
+8. [no-caller](#no-caller)
+9. [no-case-declarations](#no-case-declarations)
+10. [no-empty-function](#no-empty-function)
+11. [no-empty-pattern](#no-empty-pattern)
+12. [no-eval](#no-eval)
+13. [no-extend-native](#no-extend-native)
+14. [no-extra-bind](#no-extra-bind)
+15. [no-fallthrough](#no-fallthrough)
+16. [no-global-assign](#no-global-assign)
+17. [no-implied-eval](#no-implied-eval)
+18. [no-iterator](#no-iterator)
+19. [no-labels](#no-labels)
+20. [no-lone-blocks](#no-lone-blocks)
+21. [no-loop-func](#no-loop-func)
+22. [no-multi-str](#no-multi-str)
+23. [no-new](#no-new)
+24. [no-new-func](#no-new-func)
+25. [no-new-wrappers](#no-new-wrappers)
+26. [no-octal](#no-octal)
+27. [no-octal-escape](#no-octal-escape)
+28. [no-param-reassign](#no-param-reassign)
+29. [no-proto](#no-proto)
+30. [no-redeclare](#no-redeclare)
+31. [no-restricted-properties](#no-restricted-properties)
+32. [no-return-assign](#no-return-assign)
+33. [no-return-await](#no-return-await)
+34. [no-script-url](#no-script-url)
+35. [no-self-assign](#no-self-assign)
+36. [no-self-compare](#no-self-compare)
+37. [no-sequences](#no-sequences)
+38. [no-throw-literal](#no-throw-literal)
+39. [no-unused-expressions](#no-unused-expressions)
+40. [no-useless-concat](#no-useless-concat)
+41. [no-useless-escape](#no-useless-escape)
+42. [no-useless-return](#no-useless-return)
+43. [no-void](#no-void)
+44. [no-with](#no-with)
+45. [prefer-promise-reject-errors](#prefer-promise-reject-errors)
+46. [radix](#radix)
+47. [yoda](#yoda)
 
 <a id='array-callback-return'></a>
 ## array-callback-return
@@ -217,8 +220,8 @@
 
 **[⬆ 回到目录](#目录)**
 
-<a id='no-alert'></a>
-## no-alert
+<a id='eqeqeq'></a>
+## eqeqeq
 
 - 规则含义
 
@@ -245,6 +248,13 @@
 - 正确例子
 
       if (a === b) {}
+
+[eslint](https://eslint.org/docs/rules/eqeqeq.md)
+
+**[⬆ 回到目录](#目录)**
+
+<a id='no-alert'></a>
+## no-alert
 
 - 规则含义
 
@@ -1041,6 +1051,55 @@
   promise reject的参数必须使用error对象或自定义对象
 
 [eslint](https://eslint.org/docs/rules/prefer-promise-reject-errors.md)
+
+**[⬆ 回到目录](#目录)**
+
+<a id='radix'></a>
+## radix
+
+- 规则含义
+
+  parseInt函数必须提供第二个参数-进制基数
+
+- 规则原因
+
+  因为parseInt会根据输入自动检测是属于哪个进制,这可能会造成  
+  和意图不符合的意外错误,比如：  
+  var num = parseInt("071");      // 57  
+  var num = parseInt("071", 10);  // 71
+
+- 错误例子
+
+      var num = parseInt("071");      // 57
+
+- 正确例子
+
+      var num = parseInt("071", 10);  // 71
+
+[eslint](https://eslint.org/docs/rules/radix.md)
+
+**[⬆ 回到目录](#目录)**
+
+<a id='yoda'></a>
+## yoda
+
+- 规则含义
+
+  要求条件判断语句中先出现变量,后出现常量
+
+- 规则原因
+
+  增强可读性,比如if (color === 'red')可理解为如果颜色是红色的
+
+- 错误例子
+
+      if ('red' === color)
+
+- 正确例子
+
+      if ( color === 'red')
+
+[eslint](https://eslint.org/docs/rules/yoda.md)
 
 **[⬆ 回到目录](#目录)**
 

@@ -48,7 +48,7 @@ const createContent = (file, linkTemplate) => {
   const rulesName = [];
   let content = '';
   file.replace(
-    /\/\*\*([\s\S]*?)\*\/[\s\n]+'(.*?)':/g,
+    /\/\*\*([\s\S]*?)\*\/[\s\n]+'?(.*?)'?:/g,
     (match, doc, ruleName) => {
       rulesName.push(ruleName);
       const ruleTitle = `<a id='${ruleName}'></a>\n## ${ruleName}\n\n`;
