@@ -2,9 +2,15 @@
 
 基于 eslint,react 插件,import 插件,a11y 插件,参考了 airbnb 配置
 
-- [React 规范](./react.md)
-- [React 可访问性规范](./reactAccessbility.md)
-- [模块化规范](./imports.md)
+- [React 规范](./doc/react.md)
+- [React 可访问性规范](./doc/reactAccessbility.md)
+- [模块化规范](./doc/imports.md)
+- [最佳实践](./doc/best-practices.md)
+- [错误语法](./doc/errors.md)
+- [es6](./doc/es6.md)
+- [node](./doc/node.md)
+- [代码样式](./doc/react.md)
+- [变量](./doc/variables.md)
 
 # 如何使用
 

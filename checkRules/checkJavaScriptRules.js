@@ -11,6 +11,8 @@ const compareRules = require('./compareRules');
 const offRules = {
   'no-floating-decimal':
     '浮点数必须包含小数点前的0 - 没生效，而且prettier处理了',
+  'no-await-in-loop': '禁止在循环中使用await - 还是有需要的，关掉',
+  'no-console': 'node中有console方便',
 };
 
 const check = async function checkJavaScriptRules() {

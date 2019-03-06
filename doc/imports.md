@@ -75,13 +75,13 @@
 
 - 规则含义
 
-  如果模块有default和named导出，禁止导入时把default命名成和named冲突的变量。
+  如果模块有default和named导出,禁止导入时把default命名成和named冲突的变量.
 
 - 规则原因
 
   可能导致  
   - 混淆：熟悉导入模块的人以为default导入的是命名变量  
-  - 语法错误：本来想导入named模块，写错了变成导入default模块
+  - 语法错误：本来想导入named模块,写错了变成导入default模块
 
 - 错误例子
 
@@ -112,9 +112,9 @@
 
 - 规则原因
 
-  这样写法，大概率是语法写错了  
+  这样写法,大概率是语法写错了  
   写的人就是想引入default和named模块  
-  但是因为不熟悉语法，以为可以通过default[named]获取named模块。
+  但是因为不熟悉语法,以为可以通过default[named]获取named模块.
 
 - 错误例子
 
@@ -146,9 +146,9 @@
 
 - 规则原因
 
-  es的模块机制和commonJs的模块机制不同，  
-  es的模块是编译时生成接口，实际用到接口时再实时获取值。因此`import interface from module`可以理解成生成一个内置对象，属性就是interface，关联到模块中定义的interface，具体值是什么等用到这个interface时候再动态去模块中取。这就导致，如果你在module中改变了interface的引用，之后所有别的模块使用interface的引用也都变了，所以禁止使用var或let。当然class或function也可以改变引用，但是eslint有规则禁止改变函数和类的索引所以没问题。  
-  commonJs的模块是运行时候生成接口，当执行到`require('xx')`的时候，会去这个`xx`模块中执行，执行的时候直接执行值传递。因此commonJs原模块的索引改变，也不会影响引入该模块的模块。
+  es的模块机制和commonJs的模块机制不同,  
+  es的模块是编译时生成接口,实际用到接口时再实时获取值.因此`import interface from module`可以理解成生成一个内置对象,属性就是interface,关联到模块中定义的interface,具体值是什么等用到这个interface时候再动态去模块中取.这就导致,如果你在module中改变了interface的引用,之后所有别的模块使用interface的引用也都变了,所以禁止使用var或let.当然class或function也可以改变引用,但是eslint有规则禁止改变函数和类的索引所以没问题.  
+  commonJs的模块是运行时候生成接口,当执行到`require('xx')`的时候,会去这个`xx`模块中执行,执行的时候直接执行值传递.因此commonJs原模块的索引改变,也不会影响引入该模块的模块.
 
 - 错误例子
 
@@ -182,7 +182,7 @@
 
 - 规则原因
 
-  import语句会悬置，先使用import变量后import语句可能导致未知错误。
+  import语句会悬置,先使用import变量后import语句可能导致未知错误.
 
 [eslint](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/first.md)
 
@@ -197,7 +197,7 @@
 
 - 规则原因
 
-  增强可读性，减少读模块时间
+  增强可读性,减少读模块时间
 
 [eslint](https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/exports-last.md)
 
@@ -228,8 +228,8 @@
 
 - 规则原因
 
-  对于常用后缀文件，减少冗余  
-  对于不常用文件，写清后缀
+  对于常用后缀文件,减少冗余  
+  对于不常用文件,写清后缀
 
 - 错误例子
 
@@ -286,17 +286,17 @@
 
 - 规则含义
 
-  如果一个模块只有一个导出，使用default导出
+  如果一个模块只有一个导出,使用default导出
 
 - 规则原因
 
-  有人说，named导出`export {a,}`不是更好，  
-  如果我需要新增一个模块导出，直接在后面添加`export {a,b,c..}`不好吗？。  
-  对于小的项目来说，named导出可能会让你少敲几行代码。  
-  但是对于大项目，长期维护来说，export default鼓励的是把不同功能拆分成多个文件，  
-  单一职责原则：一个文件只做一件事。  
-  这有利于后续的维护和可读性。  
-  如果你要export别的模块，把它拆分成新的文件。
+  有人说,named导出`export {a,}`不是更好,  
+  如果我需要新增一个模块导出,直接在后面添加`export {a,b,c..}`不好吗？.  
+  对于小的项目来说,named导出可能会让你少敲几行代码.  
+  但是对于大项目,长期维护来说,export default鼓励的是把不同功能拆分成多个文件,  
+  单一职责原则：一个文件只做一件事.  
+  这有利于后续的维护和可读性.  
+  如果你要export别的模块,把它拆分成新的文件.
 
 - 错误例子
 
@@ -319,7 +319,7 @@
 
 - 规则原因
 
-  和环境耦合，不利于迁移和维护，使用相对地址
+  和环境耦合,不利于迁移和维护,使用相对地址
 
 - 错误例子
 
@@ -415,8 +415,8 @@
 
 - 规则原因
 
-  1. 造成紧耦合，不利于维护  
-  2. commonJs下，循环依赖会导致模块不正确加载
+  1. 造成紧耦合,不利于维护  
+  2. commonJs下,循环依赖会导致模块不正确加载
 
 - 错误例子
 
