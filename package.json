@@ -4,7 +4,7 @@
     "checkRule": "node checkRules/checkRule.js",
     "createDoc": "node createDoc/createAllDoc.js"
   },
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "author": "",
