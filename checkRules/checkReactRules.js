@@ -23,7 +23,6 @@ const offRules = {
   'react/jsx-sort-default-props': '强制要求defaultProps按照字母排序',
   'react/jsx-sort-props': '强制要求jsx中的属性按照字母排序',
   'react/void-dom-elements-no-children': '有no-children-prop就够了，关闭',
-  'react/jsx-uses-vars': '有no-var规范就够了',
 };
 
 const main = async () => {

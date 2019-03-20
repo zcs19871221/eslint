@@ -9,7 +9,12 @@ module.exports = {
      * @right
      * @group
      */
-    camelcase: 'error',
+    camelcase: [
+      'error',
+      {
+        properties: 'never',
+      },
+    ],
 
     /**
      * @meaning
@@ -171,7 +176,7 @@ module.exports = {
      * @right
      * @group
      */
-    'max-params': ['error', 3],
+    'max-params': ['error', 4],
 
     /**
      * @meaning
@@ -263,7 +268,6 @@ module.exports = {
      */
     'no-lonely-if': 'error',
 
-    // ,容易造成意外的全局变量
     /**
      * @meaning
      * 禁止使用链式分配 a = b = c
@@ -384,26 +388,6 @@ module.exports = {
         selector: 'WithStatement',
         message:
           '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
-      },
-    ],
-
-    /**
-     * @meaning
-     * 禁止使用悬挂下划线(第一个字母是_)
-     * @why
-     * 悬挂下划线一般表示私有成员
-     * 但是变量的含义应该通过名称来表示而不是约定符号，这样降低可读性
-     * @wrong
-     * @right
-     * @group
-     */
-    'no-underscore-dangle': [
-      'error',
-      {
-        allow: [],
-        allowAfterThis: false,
-        allowAfterSuper: false,
-        enforceInMethodNames: false,
       },
     ],
 

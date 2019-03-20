@@ -529,13 +529,16 @@ module.exports = {
      * }
      * // obj值改变
      * b(obj)
-     * 2. 突变arguments对象
+     * 2. 突变arguments对象,导致突变后对arguments的引用错误
      * function b(args) {
-     *  console.log(arguments[0]);
-     *  // 意外修改了args
-     *  args = 'dsff';
-     *  console.log(arguments[0]);
+     *  // 输出 { '0': 'test' }
+     *  console.log(arguments);
+     *  // 修改了args
+     *  args = 'aaaa';
+     *  // 输出 { '0': 'aaaa' }
+     *  console.log(arguments);     *
      * }
+     * b('test')
      * @wrong
      * function foo(bar) {bar = 13}
      * function foo(bar) {bar.value = 13}
@@ -549,6 +552,8 @@ module.exports = {
       {
         props: true,
         ignorePropertyModificationsFor: [
+          // for serviceworker
+          'registration',
           // for reduce accumulators
           'acc',
           // for reduce accumulators
@@ -756,7 +761,10 @@ module.exports = {
     /**
      * @meaning
      * 禁止未使用的表达式
+     * 主要目的禁止使用短路运算符替代if
+     * 以及意外的书写错误
      * @why
+     * 短路运算符降低可读性
      * @wrong
      * @right
      * @group
@@ -835,8 +843,11 @@ module.exports = {
 
     /**
      * @meaning
-     * promise reject的参数必须使用error对象或自定义对象
+     * promise-reject的参数必须使用error对象或自定义对象
      * @why
+     * reject表示拒绝的意思，一般用来表示程序的意外结果或错误
+     * 用Error能更明确语义，而且error保存栈调用信息，可以追踪到reject的位置，
+     * 而非error不不行
      * @wrong
      * @right
      * @group

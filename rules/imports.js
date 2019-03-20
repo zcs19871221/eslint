@@ -10,9 +10,11 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        extensions: ['.mjs', '.js', '.json'],
+        // 如果省略了后缀，那么按照下面顺序自动添加后缀然后查找
+        extensions: ['.js', '.mjs', '.jsx'],
       },
     },
+    // 解析器会把下面三种后缀进行模块化解析
     'import/extensions': ['.js', '.mjs', '.jsx'],
     'import/core-modules': [],
     'import/ignore': [
@@ -226,6 +228,23 @@ module.exports = {
 
     /**
      * @meaning
+     * 引用模块必须能够解析到
+     * 注意alias不支持，请在settings中设置alias插件
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'import/no-unresolved': [
+      'error',
+      {
+        commonjs: true,
+        caseSensitive: true,
+      },
+    ],
+
+    /**
+     * @meaning
      * 强制最后一个导入语句之后有一行空行
      * @why
      * 统一规范
@@ -376,7 +395,7 @@ module.exports = {
       'error',
       {
         importFunctions: [],
-        webpackChunknameFormat: '[0-9a-zA-Z-_/.]+',
+        webpackChunknameFormat: '[a-zA-Z]+-\\[request\\]',
       },
     ],
   },

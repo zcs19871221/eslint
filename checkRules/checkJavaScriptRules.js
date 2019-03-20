@@ -13,6 +13,7 @@ const offRules = {
     '浮点数必须包含小数点前的0 - 没生效，而且prettier处理了',
   'no-await-in-loop': '禁止在循环中使用await - 还是有需要的，关掉',
   'no-console': 'node中有console方便',
+  'no-underscore-dangle': '有原生方法是_开头的，必须能够使用',
 };
 
 const check = async function checkJavaScriptRules() {

@@ -62,3 +62,16 @@
 ## right
 
 正确例子
+
+# 关于后缀
+
+    import中的settings的import/resolver的extension表示如果文件a省略后缀，将按照a.js a.jsx a.json
+    的顺序尝试解析
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.json'],
+      },
+    }
+
+
+    import中的规则的extension表示，这些后缀是默认的，不允许出现

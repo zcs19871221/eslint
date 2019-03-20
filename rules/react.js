@@ -467,10 +467,6 @@ module.exports = {
       },
     ],
 
-    // 当使用a标签的target='_blank'属性时候,有安全隐患,新开的页面可以通过
-    // window.opener获取原始页面的windows对象,想象你打开了一个链接到一个恶意网站,
-    // 该网站通过window.opener.location='一个高仿钓鱼网站'窃取你的信息
-    // 因此当href是域名开头或者变量的时候,要求必须添加属性rel='noreferrer noopener'
     /**
      * @meaning
      * 使用有`target='_blank'`属性的a标签时候,必须加上rel='noreferrer noopener'属性
@@ -486,6 +482,15 @@ module.exports = {
      * <a target="_blank" href="path/in/the/host"></a>
      */
     'react/jsx-no-target-blank': ['error', { enforceDynamicLinks: 'always' }],
+
+    /**
+     * @meaning
+     * 对原生eslint规则no-unused-vars的补充
+     * @why
+     * 定义的模块名如果使用在jsx中的话，原生规则识别不出来，会报错
+     * 这个规则正确识别组件是否使用
+     */
+    'react/jsx-uses-vars': 'error',
 
     /**
      * @meaning
@@ -956,12 +961,12 @@ module.exports = {
   settings: {
     'import/resolver': {
       node: {
-        extensions: ['.js', '.jsx', '.json'],
+        extensions: ['.js', '.jsx'],
       },
     },
     react: {
       pragma: 'React',
-      version: '16.8',
+      version: 'detect',
     },
     // propTypes的包装函数,暂时不需要
     propWrapperFunctions: [],
