@@ -2,6 +2,45 @@ module.exports = {
   rules: {
     /**
      * @meaning
+     * 存储描述符设置set必须设置get
+     */
+    'accessor-pairs': ['error', { setWithoutGet: true, getWithoutSet: false }],
+
+    /**
+     * @meaning
+     * if条件最多不超过5个
+     */
+    complexity: ['error', { max: 4 }],
+
+    /**
+     * @meaning
+     * 如果else中出现return的话，强制要求省略else
+     * 如果else if结尾出现return的话，更改else if为if return
+     */
+    'no-else-return': ['error', { allowElseIf: false }],
+
+    /**
+     * @meaning
+     * 禁止使用!!或+进行隐式转换类型，使用Number String包装对象
+     * @why
+     * 降低可读性
+     */
+    'no-implicit-coercion': 'error',
+
+    /**
+     * @meaning
+     * /=形式的正则需要加转义，以免误认为是除法操作符号
+     */
+    'no-div-regex': 'error',
+
+    /**
+     * @meaning
+     * 文件中最多有一个类
+     */
+    'max-classes-per-file': 'error',
+
+    /**
+     * @meaning
      * 数组内置方法中需要返回值的回调函数必须包含return
      * 允许return后不跟随值语法(allowImplicit: true)
      * @why
@@ -423,6 +462,80 @@ module.exports = {
      * @group
      */
     'no-multi-str': 'error',
+
+    /**
+     * @meaning
+     * 禁止this出现在类或者类对象以外的地方
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-invalid-this': 'error',
+
+    /**
+     * @meaning
+     * 禁止出现未定义变量的数字
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-magic-numbers': [
+      'error',
+      {
+        ignore: [-1, 0, 1, 2, 3, 4, 5, 10, 24, 60, 365, 1000],
+        ignoreArrayIndexes: true,
+        enforceConst: true,
+        detectObjects: false,
+      },
+    ],
+
+    /**
+     * @meaning
+     * 禁止出现固定的循环条件
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-unmodified-loop-condition': 'error',
+
+    /**
+     * @meaning
+     * 禁止出现无效的call或apply（无效的意思是等价于直接调用函数）
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-useless-call': 'error',
+
+    /**
+     * @meaning
+     * 禁止出现无效的catch语句（捕获后直接抛出）
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-useless-catch': 'error',
+
+    /**
+     * @meaning
+     * 注释中禁止出现todo，fixme等语句）
+     * @why
+     * 这类语句标志着代码待完善或修复，如果出现，警告开发者去完成
+     * 如果已经完成，删除掉注释。
+     * 好的注释是需要不断维护的注释。一个过时的注释不如没有注释
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-warning-comments': [
+      'error',
+      { terms: ['todo', 'fixme', 'xxx'], location: 'start' },
+    ],
 
     /**
      * @meaning

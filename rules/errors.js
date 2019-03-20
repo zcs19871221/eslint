@@ -74,6 +74,23 @@ module.exports = {
 
     /**
      * @meaning
+     * 检查是否正则中有多个码点字符
+     */
+    'no-misleading-character-class': 'error',
+
+    /**
+     * @meaning
+     * 禁止+=中出现可能导致条件竞争的语法
+     * @why
+     * 如果有多个并行的a += await b语句，可能导致出错
+     * a += await b
+     * a += await c
+     * 这里a += 时候，执行到await的时候，会把当前a的值读取并等待结果做处理
+     * 这样有可能忽略并行对结果的改变
+     */
+    'require-atomic-updates': 'error',
+    /**
+     * @meaning
      * 禁止正则中的控制字符
      * @why
      * 控制字符是ASCII范围0-31中的特殊不可见字符。这些字符在JavaScript字符串中很少使用，因此包含这些字符的正则表达式很可能是错误的。
