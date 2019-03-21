@@ -8,9 +8,9 @@ module.exports = {
 
     /**
      * @meaning
-     * if条件最多不超过5个
+     * 语句复杂度最多不超过20条
      */
-    complexity: ['error', { max: 4 }],
+    complexity: 'error',
 
     /**
      * @meaning
@@ -484,7 +484,24 @@ module.exports = {
     'no-magic-numbers': [
       'error',
       {
-        ignore: [-1, 0, 1, 2, 3, 4, 5, 10, 24, 60, 365, 1000],
+        ignore: [
+          -1,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          10,
+          24,
+          60,
+          200,
+          404,
+          500,
+          365,
+          1000,
+          1024,
+        ],
         ignoreArrayIndexes: true,
         enforceConst: true,
         detectObjects: false,

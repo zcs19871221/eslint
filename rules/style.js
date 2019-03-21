@@ -55,14 +55,14 @@ module.exports = {
 
     /**
      * @meaning
-     * 最大可声明变量数目
+     * 一个函数中最多允许出现25条描述语句（包含定义，条件，返回）
      * @why
      * 强制重构
      * @wrong
      * @right
      * @group
      */
-    'max-statements': 'error',
+    'max-statements': ['error', 25, { ignoreTopLevelFunctions: true }],
 
     /**
      * @meaning
