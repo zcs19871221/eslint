@@ -13,6 +13,9 @@ module.exports = {
         // 如果省略了后缀，那么按照下面顺序自动添加后缀然后查找
         extensions: ['.js', '.mjs', '.jsx'],
       },
+      alias: {
+        extensions: ['.js', '.mjs', '.jsx'],
+      },
     },
     // 解析器会把下面三种后缀进行模块化解析
     'import/extensions': ['.js', '.mjs', '.jsx'],
