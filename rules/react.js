@@ -795,9 +795,6 @@ module.exports = {
      */
     'react/no-typos': 'error',
 
-    // 强制要求不要出现不必要的花括号,比如
-    // <Test p={'1234}>
-    // <Test p='1234'>
     /**
      * @meaning
      * 不允许花括号给字符串属性或文本节点使用
@@ -813,10 +810,6 @@ module.exports = {
       { props: 'never', children: 'never' },
     ],
 
-    // 强制要求使用解构获取所有props属性,再通过变量在render中使用
-    // wrong: render() { return <div>{this.props.name}</div>}
-    // wright: render() { const {name} = this.props; return <div>{name}</div>}
-    // 这样可读性更好,一下就可看到用了哪些属性,统一位置
     /**
      * @meaning
      * 强制要求使用解构获取所有props,state,context属性,再通过变量在render中使用
@@ -835,8 +828,6 @@ module.exports = {
      */
     'react/destructuring-assignment': ['error', 'always'],
 
-    // 在setState方法中禁止使用this.state,因为setState是异步、批量处理的,
-    // 使用this.state获取的状态不一定是上一次状态,使用第一个参数获取上一次状态
     /**
      * @meaning
      * setState方法中禁止使用this.state
@@ -940,6 +931,24 @@ module.exports = {
       {
         eventHandlerPrefix: 'handle',
         eventHandlerPropPrefix: 'on',
+      },
+    ],
+
+    /**
+     * @meaning
+     * 禁止使用...传递props
+     * @why
+     * 增强可读性
+     * @wrong
+     * <MyComponent handleChange={this.componentChanged} />
+     * @right
+     * <MyComponent onChange={this.handleChange} />
+     */
+    'react/jsx-props-no-spreading': [
+      'error',
+      {
+        html: 'enforce',
+        custom: 'enforce',
       },
     ],
 

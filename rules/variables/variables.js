@@ -46,6 +46,14 @@ module.exports = {
 
     /**
      * @meaning
+     * 变量必须初始化
+     * @why
+     * 增加可预测性
+     */
+    'init-declarations': 'error',
+
+    /**
+     * @meaning
      * 禁止使用未声明的变量
      * @why
      * @wrong

@@ -180,6 +180,16 @@ module.exports = {
 
     /**
      * @meaning
+     * 使用模板字符串不要用+
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'prefer-template': 'error',
+
+    /**
+     * @meaning
      * 不会改变引用的变量都是用const定义
      * @why
      * @wrong

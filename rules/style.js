@@ -55,6 +55,28 @@ module.exports = {
 
     /**
      * @meaning
+     * 最大可声明变量数目
+     * @why
+     * 强制重构
+     * @wrong
+     * @right
+     * @group
+     */
+    'max-statements': 'error',
+
+    /**
+     * @meaning
+     * 如果Object.assign的第一个参数是空对象，使用...操作符
+     * @why
+     * 强制重构
+     * @wrong
+     * @right
+     * @group
+     */
+    'prefer-object-spread': 'error',
+
+    /**
+     * @meaning
      * 变量名长度在2到20之间
      * @why
      * 非常短的变量名和非常长的变量名会让程序难以阅读和维护
@@ -432,6 +454,14 @@ module.exports = {
      * @group
      */
     'operator-assignment': ['error', 'always'],
+
+    /**
+     * @meaning
+     * 使用that保存this索引
+     * @why
+     * 统一，增加可读性
+     */
+    'consistent-this': 'error',
 
     /**
      * @meaning

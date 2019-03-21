@@ -47,5 +47,28 @@ module.exports = {
      * @group
      */
     'no-path-concat': 'error',
+
+    /**
+     * @meaning
+     * 回调必须使用return
+     * @why
+     * 防止意外的多次执行callback函数
+     */
+    'callback-return': 'error',
+
+    /**
+     * @meaning
+     * 回调的错误必须处理
+     * @why
+     */
+    'handle-callback-err': ['error', '^(err|error)$'],
+
+    /**
+     * @meaning
+     * require语句必须按照core,module,file的顺序引入
+     * @why
+     * 增加可读性
+     */
+    'no-mixed-requires': ['error', { grouping: true, allowCall: false }],
   },
 };
