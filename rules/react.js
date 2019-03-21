@@ -936,24 +936,6 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止使用...传递props
-     * @why
-     * 增强可读性
-     * @wrong
-     * <MyComponent handleChange={this.componentChanged} />
-     * @right
-     * <MyComponent onChange={this.handleChange} />
-     */
-    'react/jsx-props-no-spreading': [
-      'error',
-      {
-        html: 'enforce',
-        custom: 'enforce',
-      },
-    ],
-
-    /**
-     * @meaning
      * 强制fragment语法使用简写<></>
      * @why
      * 统一规范,减少冗余
