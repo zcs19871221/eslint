@@ -10,6 +10,7 @@ module.exports = {
     './rules/imports',
     './rules/react',
     './rules/react-accessibility',
+    './rules/compatibility',
   ]
     .map(require.resolve)
     .concat(['prettier', 'prettier/react']),

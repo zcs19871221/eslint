@@ -347,11 +347,6 @@ module.exports = {
      */
     'import/no-self-import': 'error',
 
-    // 禁止循环依赖
-    // a.js import b from 'b.js'
-    // b.js import a from 'a.js'
-    // 理论上,es6是支持循环引入的,但是为了可读性,以及移植到commonJs的话,
-    // 不要有循环引用
     /**
      * @meaning
      * 禁止循环依赖

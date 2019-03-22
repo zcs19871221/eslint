@@ -1,3 +1,4 @@
+const maxStatementNum = 25;
 module.exports = {
   rules: {
     /**
@@ -62,7 +63,11 @@ module.exports = {
      * @right
      * @group
      */
-    'max-statements': ['error', 25, { ignoreTopLevelFunctions: true }],
+    'max-statements': [
+      'error',
+      maxStatementNum,
+      { ignoreTopLevelFunctions: true },
+    ],
 
     /**
      * @meaning

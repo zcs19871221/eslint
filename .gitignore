@@ -1,3 +1,6 @@
-node_modules
 test
-.vscode
+node_modules
+.*
+!.eslintrc.js
+!.gitignore
+

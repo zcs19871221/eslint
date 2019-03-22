@@ -9,7 +9,10 @@ module.exports = {
   },
 
   rules: {
-    // 强制要求非预设方法使用this
+    /**
+     * @meaning
+     * 类中方法必须使用this，除了react组件的保留方法
+     */
     'class-methods-use-this': [
       'error',
       {
@@ -610,7 +613,6 @@ module.exports = {
       },
     ],
 
-    // 强制要求style属性的值必须是对象
     /**
      * @meaning
      * 强制要求style属性的值必须是对象
@@ -694,8 +696,6 @@ module.exports = {
       },
     ],
 
-    // 禁止引用别的组件,后直接使用组件的propTypes作为自己的propTypes
-    // 防止使用babel插件babel-plugin-transform-react-remove-prop-types时候出现问题
     /**
      * @meaning
      * 禁止直接引用别的组件的proptypes(可以通过import解构重命名使用)
@@ -712,8 +712,6 @@ module.exports = {
      */
     'react/forbid-foreign-prop-types': ['warn', { allowInPropTypes: true }],
 
-    // 强制要求defaultProps中的属性必须是notRequired
-    // 并且必须在PropTypes中有定义
     /**
      * @meaning
      * 必填(required)的props不允许出现在defaultProps中

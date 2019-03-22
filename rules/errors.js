@@ -438,7 +438,6 @@ module.exports = {
      */
     'no-unsafe-negation': 'error',
 
-    // ,使用Number.isNaN
     /**
      * @meaning
      * 禁止对NaN进行直接比较
@@ -456,10 +455,6 @@ module.exports = {
      */
     'use-isnan': 'error',
 
-    // 保证typeof和有效的字符串进行比较
-    // typeof的结果只能是
-    // string,object,undefined,symbol,number,boolean,function
-    // 之一
     /**
      * @meaning
      * 保证和typeof结果比较的是有效字符
