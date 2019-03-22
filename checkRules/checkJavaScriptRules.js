@@ -42,6 +42,7 @@ const offRules = {
   'sort-vars': '要求排序声明-没必要',
   'sort-imports': '要求排序引用-没必要',
   'prefer-numeric-literals': '意义不明',
+  'no-invalid-this': '在适当的环境使用this - 箭头函数不让用this，react不行',
   'func-name-matching':
     '要求函数名和分配的变量名一致 - 已经禁止使用var并且不能使用function定义函数了',
   'capitalized-comments':

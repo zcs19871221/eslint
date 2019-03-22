@@ -465,16 +465,6 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止this出现在类或者类对象以外的地方
-     * @why
-     * @wrong
-     * @right
-     * @group
-     */
-    'no-invalid-this': 'error',
-
-    /**
-     * @meaning
      * 禁止出现未定义变量的数字
      * @why
      * @wrong
