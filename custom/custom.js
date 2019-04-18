@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const chalk = require('chalk');
 const ask = require('./ask');
 const pkg = require('../package.json');
 
@@ -148,7 +149,9 @@ class Custom {
     await this.handleFeature();
     const env = await Custom.handleEnv();
     const install = this.getInstall();
-    console.log(`npm install --save-dev ${install.join(' ')}`);
+    console.log(
+      chalk.green.bold(`npm install --save-dev ${install.join(' ')}`),
+    );
     const config = {
       extends: Custom.uniq(this.getExtend()),
       root: true,

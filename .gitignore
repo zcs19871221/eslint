@@ -3,4 +3,5 @@ node_modules
 .*
 !.eslintrc.js
 !.gitignore
+!.browserslistrc
 
