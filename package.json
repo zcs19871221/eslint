@@ -1,10 +1,10 @@
 {
-  "name": "eslint-config-zcs1",
+  "name": "eslint-config-zcs",
   "scripts": {
     "checkRule": "node checkRules/checkRule.js",
     "createDoc": "node createDoc/createAllDoc.js"
   },
-  "version": "2.2.0",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "author": "",
