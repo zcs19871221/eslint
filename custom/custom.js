@@ -14,6 +14,7 @@ const reactPgName = 'eslint-plugin-react';
 
 const {
   name: pkgName,
+  version,
   devDependencies: {
     eslint,
     [babelParserName]: babelParser,
@@ -88,7 +89,11 @@ class Custom {
   }
 
   init() {
-    this.toInstall = [`eslint@${eslint}`, `${babelParserName}@${babelParser}`];
+    this.toInstall = [
+      `eslint@${eslint}`,
+      `${babelParserName}@${babelParser}`,
+      `${pkgName}@${version}`,
+    ];
     this.toExtend = [];
     this.parser = null;
     this.env = {};
