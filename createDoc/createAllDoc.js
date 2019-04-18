@@ -11,7 +11,7 @@ const main = () => {
       `https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/${ruleName}.md`,
   });
   createDoc({
-    rulePath: path.join(__dirname, '../rules/react-accessibility.js'),
+    rulePath: path.join(__dirname, '../rules/jsx-accessibility.js'),
     title: 'React 可访问性规范',
     outPutPath: path.join(__dirname, '../doc/reactAccessbility.md'),
     linkTemplate: ruleName =>

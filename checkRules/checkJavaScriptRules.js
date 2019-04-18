@@ -4,7 +4,7 @@ const errors = require('../rules/errors');
 const es6 = require('../rules/es6');
 const node = require('../rules/node');
 const style = require('../rules/style');
-const variable = require('../rules/variables/variables');
+const variable = require('../rules/variables');
 const queryEslintDocRules = require('./queryEslintDocRules');
 const compareRules = require('./compareRules');
 

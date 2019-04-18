@@ -1,4 +1,4 @@
-module.exports = [
+const conflusingBrowserGloabals = [
   'addEventListener',
   'blur',
   'close',
@@ -58,3 +58,20 @@ module.exports = [
   'toolbar',
   'top',
 ];
+
+module.exports = {
+  env: { browser: true },
+  rules: {
+    /**
+     * @meaning
+     * 禁止使用容易混淆的全局变量
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-restricted-globals': ['error', 'isFinite', 'isNaN'].concat(
+      conflusingBrowserGloabals,
+    ),
+  },
+};

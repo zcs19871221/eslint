@@ -5,11 +5,12 @@ module.exports = {
     './rules/errors',
     './rules/node',
     './rules/style',
-    './rules/variables/variables',
+    './rules/variables',
+    './rules/confusingBrowserGlobals',
     './rules/es6',
     './rules/imports',
     './rules/react',
-    './rules/react-accessibility',
+    './rules/jsx-accessibility',
     './rules/compatibility',
   ]
     .map(require.resolve)

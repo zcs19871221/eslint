@@ -1,4 +1,4 @@
-const myReactAccessRules = require('../rules/react-accessibility');
+const myReactAccessRules = require('../rules/jsx-accessibility');
 const compareRules = require('./compareRules');
 const queryWebDocRules = require('./queryWebDocRules');
 
@@ -9,7 +9,7 @@ const offRules = {
 module.exports = async () => {
   const webRules = await queryWebDocRules(
     'https://github.com/evcohen/eslint-plugin-jsx-a11y',
-    /<li>[\s\S]*?<a.*?href=.*?\/rules\/.*?>(.*?)<\/a>[\s\S]*?<\/li>/g,
+    /<li>[\s\S]*?<a.*?href=.*?\/rules\/.*?>(.*?)<\/a>[\s\S]*?<\/li>/gu,
   );
   compareRules({
     webRules,
@@ -17,6 +17,6 @@ module.exports = async () => {
       name.replace('jsx-a11y/', ''),
     ),
     offRules: Object.keys(offRules),
-    rulesPath: '/rules/react-accessibility',
+    rulesPath: '/rules/jsx-accessibility',
   });
 };

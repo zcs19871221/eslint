@@ -24,13 +24,13 @@ const createEslintDoc = () => {
       title: '代码样式',
     },
     {
-      rulePath: 'variables/variables',
+      rulePath: 'variables',
       title: '变量',
     },
   ];
   eslint.forEach(config => {
     const { rulePath, title } = config;
-    const realPath = path.join(__dirname, '../rules', rulePath + '.js');
+    const realPath = path.join(__dirname, '../rules', `${rulePath}.js`);
     const baseName = path.basename(realPath);
     const outPutPath = path.join(
       __dirname,

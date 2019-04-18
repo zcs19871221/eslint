@@ -1,5 +1,3 @@
-const confusingGlobals = require('./confusingGlobals');
-
 module.exports = {
   rules: {
     /**
@@ -20,9 +18,7 @@ module.exports = {
      * @right
      * @group
      */
-    'no-restricted-globals': ['error', 'isFinite', 'isNaN'].concat(
-      confusingGlobals,
-    ),
+    'no-restricted-globals': ['error', 'isFinite', 'isNaN'],
 
     /**
      * @meaning
