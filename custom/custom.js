@@ -44,7 +44,7 @@ class Custom {
       },
       compatibility: {
         file: `${pkgName}/rules/compatibility`,
-        install: [`${compatPgName}${compatPg}`],
+        install: [`${compatPgName}@${compatPg}`],
       },
       confusingBrowserGlobals: {
         file: `${pkgName}/rules/confusingBrowserGlobals`,
@@ -56,28 +56,28 @@ class Custom {
       imports: {
         file: `${pkgName}/rules/imports`,
         install: [
-          `${importPgName}${importPg}`,
-          `${importAliasPgName}${importAliasPg}`,
+          `${importPgName}@${importPg}`,
+          `${importAliasPgName}@${importAliasPg}`,
         ],
       },
       'jsx-accessibility': {
         file: `${pkgName}/rules/jsx-accessibility`,
-        install: [`${jsxPgName}${jsxPg}`],
+        install: [`${jsxPgName}@${jsxPg}`],
       },
       node: {
         file: `${pkgName}/rules/node`,
       },
       react: {
         file: `${pkgName}/rules/react`,
-        install: [`${reactPgName}${reactPg}`],
+        install: [`${reactPgName}@${reactPg}`],
       },
       prettier: {
         file: 'prettier',
-        install: [`${prettierConfigName}${prettierConfig}`],
+        install: [`${prettierConfigName}@${prettierConfig}`],
       },
       prettierReact: {
         file: 'prettier/react',
-        install: [`${prettierConfigName}${prettierConfig}`],
+        install: [`${prettierConfigName}@${prettierConfig}`],
       },
     };
     this.init();
@@ -88,7 +88,7 @@ class Custom {
   }
 
   init() {
-    this.toInstall = [`eslint${eslint}`, `${babelParserName}${babelParser}`];
+    this.toInstall = [`eslint@${eslint}`, `${babelParserName}@${babelParser}`];
     this.toExtend = [];
     this.parser = null;
     this.env = {};
