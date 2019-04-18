@@ -216,6 +216,4 @@ class Custom {
     }
   }
 }
-
-const custom = new Custom();
-custom.create();
+module.exports = Custom;
