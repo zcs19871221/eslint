@@ -155,6 +155,7 @@ class Custom {
     const env = await Custom.handleEnv();
     const install = this.getInstall();
     console.log(
+      chalk.green('按照如下安装依赖\n'),
       chalk.green.bold(`npm install --save-dev ${install.join(' ')}`),
     );
     const config = {

@@ -1,7 +1,5 @@
 # javaScript 和 React 规范
 
-基于 eslint,react 插件,import 插件,a11y 插件,参考了 airbnb 配置
-
 - [React 规范](./doc/react.md)
 - [React 可访问性规范](./doc/reactAccessbility.md)
 - [模块化规范](./doc/imports.md)
@@ -14,15 +12,23 @@
 
 # 如何使用
 
-    对应npm:eslint-config-zcs1
+## 安装
 
-# 如何更新插件
+`npm install eslint-config-zcs`
+
+## 创建 eslint 配置文件
+
+1. 全局安装`npm install -g eslint-config-zcs`
+2. 在需要创建的目录下，执行`eslint-zcs`
+3. 根据提示信息进行选择，最终在脚本执行路径下生成`.eslintrc.js`文件
+
+## 更新规则
 
 执行`npm run checkRule`,会把当前规则和 eslint 官网以及使用插件官网上的规则进行比较，按照提示更新 rule 文件夹
 
 **添加或修改规范后，必须严格按照下面样式更新 jsDoc 的注释，并重新生成文档**
 
-# 如何创建文档
+## 更新规范文档
 
 执行`npm run createDoc`
 根据 rule 文件夹下的 jsDoc 注释生成文档
@@ -63,7 +69,7 @@
 
 正确例子
 
-# 关于后缀
+# 关于文件后缀
 
     import中的settings的import/resolver的extension表示如果文件a省略后缀，将按照a.js a.jsx a.json
     的顺序尝试解析
