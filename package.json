@@ -4,9 +4,6 @@
     "checkRule": "node checkRules/checkRule.js",
     "createDoc": "node createDoc/createAllDoc.js"
   },
-  "bin": {
-    "eslint-zcs": "./custom.js"
-  },
   "version": "2.1.1",
   "description": "",
   "main": "index.js",
@@ -14,6 +11,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^10.0.1",
+    "chalk": "^2.4.2",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-import-resolver-alias": "^1.1.2",
@@ -23,9 +21,5 @@
     "eslint-plugin-react": "^7.10.0",
     "prettier": "^1.17.0",
     "request": "^2.88.0"
-  },
-  "dependencies": {
-    "chalk": "^2.4.2",
-    "inquirer": "^6.3.1"
   }
 }
