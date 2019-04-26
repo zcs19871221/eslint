@@ -35,7 +35,7 @@ const custom = ({
       extends: [
         'zcs/rules/best-practices',
         'zcs/rules/errors',
-        ${node ? "'zcs/rules/node,'" : ''}
+        ${node ? "'zcs/rules/node'," : ''}
         'zcs/rules/style',
         'zcs/rules/variables',
         ${es6 ? "'zcs/rules/es6'," : ''}
