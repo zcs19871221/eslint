@@ -1,14 +1,16 @@
 const getDepend = require('./getDepend');
 
-const createEnv = ({ jest, webpack, serviceworker }) => {
-  if ((serviceworker || webpack || serviceworker) === false) {
+const createEnv = ({ browser, jest, webpack, serviceworker }) => {
+  const commonjs = browser && webpack;
+  const useServiceworker = browser && serviceworker;
+  if ((jest || commonjs || useServiceworker) === false) {
     return '';
   }
   return `
     env: {
       ${jest ? 'jest: true,' : ''}
-      ${webpack ? 'commonjs: true,' : ''}
-      ${serviceworker ? 'serviceworker: true,' : ''}
+      ${commonjs ? 'commonjs: true,' : ''}
+      ${useServiceworker ? 'serviceworker: true,' : ''}
     },
   `;
 };
@@ -33,6 +35,7 @@ const custom = ({
       extends: [
         'zcs/rules/best-practices',
         'zcs/rules/errors',
+        ${node ? "'zcs/rules/node,'" : ''}
         'zcs/rules/style',
         'zcs/rules/variables',
         ${es6 ? "'zcs/rules/es6'," : ''}
@@ -53,7 +56,12 @@ const custom = ({
             },`
           : ''
       }
-      ${createEnv({ jest, webpack, serviceworker })}
+      ${createEnv({
+        browser,
+        jest,
+        webpack,
+        serviceworker,
+      })}
     };
   `;
   const depend = getDepend({ prettier, useImport, useComp, jsx, react });
