@@ -843,12 +843,17 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止在return中使用await语法
+     * 禁止使用`return await xxx`
+     * 直接return`return xxx`
      * @why
-     * 冗余的写法
-     * 处理async返回值和await处理参数的方式都是一样的.
+     * return await xxx 会造成性能开销:
+     * 对于xxx是promise来说,会额外计算xxx的then值,再包装成promise返回
+     * 对于xxx是普通value来说,await会把value作为promise来判断，发现普通值，包装成promise返回
+     * 所以如果最后一个值要return，直接写成`return xxx`
      * @wrong
+     * return await xxx;
      * @right
+     * return xxx;
      * @group
      */
     'no-return-await': 'error',
