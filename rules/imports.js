@@ -47,6 +47,38 @@ module.exports = {
      * hide
      */
     'import/default': 'error',
+    /**
+     * @meaning
+     * 导出的模块如果没有使用，会报错
+     * @why
+     * @wrong
+     * @right
+     * @group
+     * hide
+     */
+    'import/no-unused-modules': [
+      'error',
+      {
+        unusedExports: true,
+      },
+    ],
+
+    /**
+     * @meaning
+     * 禁止引入dev dependcy中的模块
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: false,
+        optionalDependencies: false,
+        peerDependencies: false,
+      },
+    ],
 
     /**
      * @meaning
@@ -243,6 +275,21 @@ module.exports = {
       {
         commonjs: true,
         caseSensitive: true,
+      },
+    ],
+    /**
+     * @meaning
+     * 引用模块必须能够解析到
+     * 注意alias不支持，请在settings中设置alias插件
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'import/no-unassigned-import': [
+      'error',
+      {
+        allow: ['**/*.css', '**/*.less'],
       },
     ],
 

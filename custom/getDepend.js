@@ -33,27 +33,27 @@ const getDepend = ({ prettier, useImport, useComp, jsx, react } = {}) => {
     throw new Error('eslint获取依赖参数有错误');
   }
   const toInstall = [
-    `eslint@${eslint}`,
-    `${babelParserName}@${babelParser}`,
-    `${pkgName}@${version}`,
+    `eslint@"${eslint}"`,
+    `${babelParserName}@"${babelParser}"`,
+    `${pkgName}@"${version}"`,
   ];
   if (prettier) {
-    toInstall.push(`${prettierConfigName}@${prettierConfig}`);
+    toInstall.push(`${prettierConfigName}@"${prettierConfig}"`);
   }
   if (useImport) {
     toInstall.push(
-      `${importPgName}@${importPg}`,
-      `${importAliasPgName}@${importAliasPg}`,
+      `${importPgName}@"${importPg}"`,
+      `${importAliasPgName}@"${importAliasPg}"`,
     );
   }
   if (useComp) {
-    toInstall.push(`${compatPgName}@${compatPg}`);
+    toInstall.push(`${compatPgName}@"${compatPg}"`);
   }
   if (jsx) {
-    toInstall.push(`${jsxPgName}@${jsxPg}`);
+    toInstall.push(`${jsxPgName}@"${jsxPg}"`);
   }
   if (react) {
-    toInstall.push(`${reactPgName}@${reactPg}`);
+    toInstall.push(`${reactPgName}@"${reactPg}"`);
   }
   return toInstall;
 };
