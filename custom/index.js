@@ -14,6 +14,7 @@ const createEnv = ({ browser, jest, webpack, serviceworker }) => {
     },
   `;
 };
+const ecmaYear = 2018;
 /* eslint-disable max-lines-per-function  */
 const custom = ({
   es6 = true,
@@ -27,6 +28,7 @@ const custom = ({
   webpack = false,
   serviceworker = false,
   atRoot = true,
+  ecamVersion = ecmaYear,
 } = {}) => {
   const useImport = node || (browser && es6);
   const useComp = browser && compat;
@@ -52,7 +54,7 @@ const custom = ({
       ${
         es6
           ? `parserOptions: {
-              ecmaVersion: 2018,
+              ecmaVersion: ${ecamVersion},
             },`
           : ''
       }

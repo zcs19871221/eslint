@@ -465,41 +465,6 @@ module.exports = {
 
     /**
      * @meaning
-     * 禁止出现未定义变量的数字
-     * @why
-     * @wrong
-     * @right
-     * @group
-     */
-    'no-magic-numbers': [
-      'error',
-      {
-        ignore: [
-          -1,
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          10,
-          24,
-          60,
-          200,
-          404,
-          500,
-          365,
-          1000,
-          1024,
-        ],
-        ignoreArrayIndexes: true,
-        enforceConst: true,
-        detectObjects: false,
-      },
-    ],
-
-    /**
-     * @meaning
      * 禁止出现固定的循环条件
      * @why
      * @wrong
@@ -675,62 +640,6 @@ module.exports = {
      * 字符串
      */
     'no-octal-escape': 'error',
-
-    /**
-     * @meaning
-     * 禁止改变函数参数引用或改变参数内部属性
-     * @why
-     * 1. 有可能突变外部对象
-     * const obj = {a:1}
-     * function b (args) {
-     *  args.a += 1;
-     * }
-     * // obj值改变
-     * b(obj)
-     * 2. 突变arguments对象,导致突变后对arguments的引用错误
-     * function b(args) {
-     *  // 输出 { '0': 'test' }
-     *  console.log(arguments);
-     *  // 修改了args
-     *  args = 'aaaa';
-     *  // 输出 { '0': 'aaaa' }
-     *  console.log(arguments);     *
-     * }
-     * b('test')
-     * @wrong
-     * function foo(bar) {bar = 13}
-     * function foo(bar) {bar.value = 13}
-     * @right
-     * function foo(bar) {const baz = bar}
-     * @group
-     * 函数
-     */
-    'no-param-reassign': [
-      'error',
-      {
-        props: true,
-        ignorePropertyModificationsFor: [
-          // for serviceworker
-          'registration',
-          // for reduce accumulators
-          'acc',
-          // for reduce accumulators
-          'accumulator',
-          // for e.returnvalue
-          'e',
-          // for Koa routing
-          'ctx',
-          // for Express requests
-          'req',
-          // for Express requests
-          'request',
-          // for Express responses
-          'res',
-          // for Express responses
-          'response',
-        ],
-      },
-    ],
 
     /**
      * @meaning

@@ -9,6 +9,8 @@ const queryEslintDocRules = require('./queryEslintDocRules');
 const compareRules = require('./compareRules');
 
 const offRules = {
+  'no-param-reassign': '神烦，只要注意不要突变，不要使用argument就好',
+  'no-magic-numbers': '神烦，而且不支持const x = 1 * 2 * 4,每个数都得定义',
   'no-floating-decimal':
     '浮点数必须包含小数点前的0 - 没生效，而且prettier处理了',
   'no-await-in-loop': '禁止在循环中使用await - 还是有需要的，关掉',
