@@ -14,7 +14,7 @@ module.exports = {
     './rules/compatibility',
   ]
     .map(require.resolve)
-    .concat(['prettier', 'prettier/react']),
+    .concat(['prettier']),
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',

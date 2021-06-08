@@ -8,9 +8,9 @@ const queryWebRules = () => {
       }
       const allRules = {};
       body.replace(
-        /<h2 id="(.*?)">.*?<\/h2>([\s\S]+?)(<\/table>)/g,
+        /<h2[^>]*>(.*?)<\/h2>([\s\S]+?)(<\/table>)/g,
         (match, id, ruleScope) => {
-          if (!['deprecated', 'removed'].includes(id)) {
+          if (!['deprecated', 'removed'].includes(id.toLowerCase())) {
             ruleScope.replace(/<a.*?>(.*?)<\/a>/g, (matched, rule) => {
               allRules[rule] = true;
             });

@@ -3,6 +3,7 @@ const compareRules = require('./compareRules');
 const queryWebDocRules = require('./queryWebDocRules');
 
 const offRules = {
+  'no-relative-packages': '禁止使用相对路径引用包',
   'no-relative-parent-imports': '禁止引用父级模块(../) - 没太必要',
   'no-restricted-paths':
     '限制哪些目录可以import(比如目录里包含客户端和服务端代码） - 目录无法统一',
@@ -28,7 +29,7 @@ module.exports = async () => {
   );
   compareRules({
     webRules,
-    usedRules: Object.keys(myRules.rules).map(name =>
+    usedRules: Object.keys(myRules.rules).map((name) =>
       name.replace('import/', ''),
     ),
     offRules: Object.keys(offRules),

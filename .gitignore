@@ -2,6 +2,7 @@ test
 node_modules
 .*
 !.eslintrc.js
+!.vscode
 !.gitignore
 !.browserslistrc
 

@@ -443,5 +443,16 @@ module.exports = {
         webpackChunknameFormat: '[a-zA-Z]+-\\[request\\]',
       },
     ],
+    /**
+     * @meaning
+     * 禁止某些情况下混用es模块和commonJs模块
+     * @why
+     * webpack有时候会报错
+     * @wrong
+     * @right
+     * @group
+     * module
+     */
+    'import/no-import-module-exports': ['error'],
   },
 };

@@ -1,4 +1,4 @@
-const prettierOffReactRules = require('eslint-config-prettier/react');
+const prettierOffReactRules = require('eslint-config-prettier');
 const myReactRules = require('../rules/react');
 const compareRules = require('./compareRules');
 const queryWebDocRules = require('./queryWebDocRules');
@@ -29,7 +29,7 @@ const offRules = {
 const main = async () => {
   const webRules = await queryWebDocRules(
     'https://github.com/yannickcr/eslint-plugin-react',
-    /<li>[\s\S]*?<a.*?>(react\/.*?)<\/a>[\s\S]*?<\/li>/gu,
+    /<a.*?>(react\/.*?)<\/a>/gu,
   );
   compareRules({
     webRules,

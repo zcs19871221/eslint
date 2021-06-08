@@ -451,21 +451,6 @@ module.exports = {
 
     /**
      * @meaning
-     * 保证emoji符号可访问
-     * @why
-     * 通过给emoji包装标签,并设置包装标签正确的role和aria属性,让视障人士可以正确了解emoji的含义
-     * @wrong
-     * <span>🐼</span>
-     * <i role="img" aria-label="Panda">🐼</i>
-     * @right
-     * <span role="img" aria-label="Snowman">&#9731;</span>
-     * <span role="img" aria-label="Panda">🐼</span>
-     * <span role="img" aria-labelledby="panda1">🐼</span>
-     */
-    'jsx-a11y/accessible-emoji': 'error',
-
-    /**
-     * @meaning
      * 强制要求拥有aria-activedescendant属性的元素设置tabIndex值
      * @why
      * aria-activedescendant的值是id,拥有aria-activedescendant属性的元素获得焦点后,
@@ -674,6 +659,12 @@ module.exports = {
         components: ['Link'],
         specialLink: ['to'],
         aspects: ['noHref', 'invalidHref', 'preferButton'],
+      },
+    ],
+    'jsx-a11y/autocomplete-valid': [
+      'warn',
+      {
+        inputComponents: ['Input', 'FormField'],
       },
     ],
   },
