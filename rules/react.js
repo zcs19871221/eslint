@@ -945,6 +945,77 @@ module.exports = {
      * <React.Fragment key="key"><Foo /></React.Fragment>
      */
     'react/jsx-fragments': 'error',
+
+    /**
+     * @meaning
+     * 强制一个元素的html形式的child元素之间必须有空格
+     * 参考这个例子 https://codepen.io/ariperkkio/pen/vYLodLB
+     * @why
+     * 不空格，容易混合到一起
+     * @wrong
+     * <div><a></a><a></a></div>
+     * @right
+     * <div><a></a> <a></a></div>
+     * 
+     * <div>
+     *  <a></a> 
+     *  <a></a>
+     * </div>
+     */
+    'react/no-adjacent-inline-elements': 'error',
+
+    /**
+     * @meaning
+     * 禁止使用可变的函数作为组件，比如
+     * render中动态生成Footer={() => <footer>footer</footer>}
+     * 在函数内定义的函数：
+     * const Component = () => {
+     *  const Footer = () => <footer>footer</footer>}
+     *  return <div><Footer/></div>
+     * }
+     * @why
+     * react reconciliation时(渲染前的diff)会判断两个类型是否一致，
+     * 当可变函数作为组件时候，每次re-render，类型都不一致，都要销毁dom及其所有子child重新渲染，会丢失所有内部state
+     * 
+     * @wrong
+     * function Component() {
+     *     function UnstableNestedComponent() {
+     *       return <div />;
+     *     }
+     *     return (
+     *       <div>
+     *         <UnstableNestedComponent />
+     *       </div>
+     *     );
+     *   }
+     * 
+     *  function SomeComponent({ footer: Footer }) {
+     *     return (
+     *       <div>
+     *         <Footer />
+     *       </div>
+     *     );
+     *   }
+     *   function Component() {
+     *     return (
+     *       <div>
+     *         <SomeComponent footer={() => <div />} />
+     *       </div>
+     *     );
+     *   }
+     * @right
+     * 1. 组件定义在外层
+     * 2. 用useCallBack处理组件
+     * 3. props这样传：<Component footer={<div/>}
+     */
+    'react/no-unstable-nested-components': 'error',
+
+    /**
+     * @meaning
+     * 禁止在react组件类中给react预留的静态方法增加public或get修饰符
+     */
+    'react/static-property-placement': 'error',
+    
   },
 
   settings: {

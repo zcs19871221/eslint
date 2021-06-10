@@ -4,8 +4,10 @@ const compareRules = require('./compareRules');
 const queryWebDocRules = require('./queryWebDocRules');
 
 const offRules = {
+  'react/function-component-definition': '要求函数组件的命名函数和匿名函数统一写法，比如命名函数统一用箭头函数，非命名用函数，这个用不着强制，而且有需要返回命名函数的时候return function xx() {}',
   'react/display-name': '必须设置display属性-不需要',
   'react/forbid-component-props': '禁止特定组件props-不需要',
+  'react/prefer-read-only-props': 'flow下要求用readonly 修饰符 - 不用flow',
   'react/forbid-dom-props': '禁止htmltag特定属性（比如id）-不需要',
   'react/forbid-elements': '禁止使用jsx元素-不需要',
   'react/no-did-mount-set-state': 'didmount中禁止setState',
