@@ -52,7 +52,7 @@ module.exports = {
      * @right
      * @group
      */
-    'id-blacklist': ['error', 'data', 'err', 'e', 'cb', 'callback'],
+    'id-denylist': ['error', 'data', 'err', 'e', 'cb', 'callback'],
 
     /**
      * @meaning
@@ -92,7 +92,7 @@ module.exports = {
     'id-length': [
       'error',
       {
-        min: 2,
+        min: 1,
         max: 30,
       },
     ],

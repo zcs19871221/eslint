@@ -2,15 +2,15 @@ const request = require('request');
 
 const queryWebRules = () => {
   return new Promise((resolve, reject) => {
-    request('https://eslint.org/docs/rules/', (error, res, body) => {
+    request('https://github.com/mysticatea/eslint-plugin-node', (error, res, body) => {
       if (error) {
         reject(error);
       }
       const allRules = {};
       body.replace(
-        /<h2[^>]*>(.*?)<\/h2>([\s\S]+?)(<\/table>)/gu,
+        /<h3[^>]*>(.*?)<\/h3>([\s\S]+?)(<\/table>)/gu,
         (match, id, ruleScope) => {
-          if (!['deprecated', 'removed'].includes(id.toLowerCase())) {
+          if (!id.toLowerCase().includes('deprecated')) {
             ruleScope.replace(/<a.*?>(.*?)<\/a>/gu, (matched, rule) => {
               allRules[rule] = true;
             });
@@ -21,4 +21,5 @@ const queryWebRules = () => {
     });
   });
 };
+queryWebRules()
 module.exports = queryWebRules;

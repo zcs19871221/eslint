@@ -71,14 +71,7 @@ module.exports = {
      * @right
      * @group
      */
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: false,
-        optionalDependencies: false,
-        peerDependencies: false,
-      },
-    ],
+    'import/no-extraneous-dependencies': 'error',
 
     /**
      * @meaning

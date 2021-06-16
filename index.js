@@ -11,7 +11,6 @@ module.exports = {
     './rules/imports',
     './rules/react',
     './rules/jsx-accessibility',
-    './rules/compatibility',
   ]
     .map(require.resolve)
     .concat(['prettier']),
@@ -24,5 +23,10 @@ module.exports = {
     commonjs: true,
     jest: true,
   },
-  rules: {},
+  overrides: [
+    {
+      files: ['**/*.ts?(x)'],
+      extends: ['./rules/typescript'],
+    },
+  ],
 };

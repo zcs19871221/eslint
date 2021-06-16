@@ -1,4 +1,4 @@
-const pkg = require('../package.json');
+const pkg = require('../package-lock.json');
 
 const babelParserName = 'babel-eslint';
 const prettierConfigName = 'eslint-config-prettier';

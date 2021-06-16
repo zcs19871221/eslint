@@ -2,13 +2,15 @@ const prettierOffRules = require('eslint-config-prettier');
 const bestPractices = require('../rules/best-practices');
 const errors = require('../rules/errors');
 const es6 = require('../rules/es6');
-const node = require('../rules/node');
 const style = require('../rules/style');
 const variable = require('../rules/variables');
 const queryEslintDocRules = require('./queryEslintDocRules');
 const compareRules = require('./compareRules');
 
 const offRules = {
+  'no-restricted-exports': 'import插件处理相似的',
+  'arrow-body-style': '强制用括号包起函数体还是不用，不开',
+  'no-nonoctal-decimal-escape': '\\8转义，没用',
   'no-param-reassign': '神烦，只要注意不要突变，不要使用argument就好',
   'no-magic-numbers': '神烦，而且不支持const x = 1 * 2 * 4,每个数都得定义',
   'no-floating-decimal':
@@ -56,7 +58,6 @@ const check = async function checkJavaScriptRules() {
     ...bestPractices.rules,
     ...errors.rules,
     ...es6.rules,
-    ...node.rules,
     ...style.rules,
     ...variable.rules,
   });

@@ -1015,6 +1015,24 @@ module.exports = {
      * 禁止在react组件类中给react预留的静态方法增加public或get修饰符
      */
     'react/static-property-placement': 'error',
+
+    /**
+     * @meaning
+     * 禁止在context中传入可变值
+     */
+    'react/jsx-no-constructed-context-values': 'error',
+
+    /**
+     * @meaning
+     * 禁止出现以javascript:开始的url，有可能有安全问题
+     */
+    'react/jsx-no-script-url': 'error',
+    
+    /**
+     * @meaning
+     * 禁止出现以无效的<></>标签，比如：
+     */
+    'react/jsx-no-useless-fragment': 'error',
     
   },
 

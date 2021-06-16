@@ -10,6 +10,7 @@
 - [代码样式](./doc/style.md)
 - [变量](./doc/variables.md)
 
+# node规范需要设置engine属性
 # 如何使用
 
 ## 安装

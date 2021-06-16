@@ -466,5 +466,78 @@ module.exports = {
      * @group
      */
     'valid-typeof': ['error', { requireStringLiterals: true }],
+
+    /**
+     * @meaning
+     * 禁止重复else if语句，更多是错误写法
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-dupe-else-if': 'error',
+
+    /**
+     * @meaning
+     * 检测可能失去精度的证书
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-loss-of-precision': 'error',
+
+    /**
+     * @meaning
+     * 禁止给import的模块重新assign变量，这些是只读的
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-import-assign': 'error',
+
+    /**
+     * @meaning
+     * 禁止在new Promise和setter内部函数return 具体的值。return 具体值一般是错误的
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-promise-executor-return': 'error',
+    'no-setter-return': 'error',
+
+    /**
+     * @meaning
+     * 如果循环内部的逻辑导致循环内部逻辑只执行一次，那么报错。
+     * 应该使用if，else重构或检查是否有逻辑错误
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-unreachable-loop': 'error',
+
+    /**
+     * @meaning
+     * 禁止不安全的?.操作符
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-unsafe-optional-chaining': 'error',
+
+    
+    /**
+     * @meaning
+     * 禁止正则中无效的分组捕获括号
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-useless-backreference': 'error',
   },
 };

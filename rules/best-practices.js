@@ -954,5 +954,67 @@ module.exports = {
      * @group
      */
     yoda: 'error',
+
+    /**
+     * @meaning
+     * switch 中的default必须出现在最后
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'default-case-last': 'error',
+
+    /**
+     * @meaning
+     * 函数参数中的默认参数放到最后
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'default-param-last': 'error',
+
+    /**
+     * @meaning
+     * getter和setter定义位置要求相邻
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'grouped-accessor-pairs': 'error',
+
+    /**
+     * @meaning
+     * 禁止在构造函数中执行return 值，如果return新对象，会替换new对象
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'no-constructor-return': 'error',
+
+    /**
+     * @meaning
+     * 禁止用RegExp构造静态的正则
+     * @why
+     * @wrong
+     * @right
+     * @group
+     */
+    'prefer-regex-literals': 'error',
+
+    /**
+     * @meaning
+     * 使用 ** 表达式计算次方而不是Math.pow()函数
+     * @why
+     * @wrong
+     * Math.pow(2, 3) //8
+     * @right
+     * 2 ** 3 //8
+     * @group
+     */
+    'prefer-exponentiation-operator': 'error',
   },
 };
