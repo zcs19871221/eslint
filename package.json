@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "chalk": "^2.4.2",
-    "request": "^2.88.2",
+    "request": "^2.88.2"
   },
   "engines": {
     "node": ">=14.0.0"
