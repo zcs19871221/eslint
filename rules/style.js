@@ -41,7 +41,7 @@ module.exports = {
      * @right
      * @group
      */
-    'func-style': 'error',
+    'func-style': 'off',
 
     /**
      * @meaning

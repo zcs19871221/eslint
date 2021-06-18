@@ -1,9 +1,6 @@
 module.exports = {
   plugins: ['node'],
-  extends: ['plugin:node/recommended'],
   rules: {
-    'node/no-missing-import': 'off',
-    'node/no-missing-require': 'off',
     /**
      * @meaning
      * 要求所有require语句在文件开始位置,
@@ -14,6 +11,12 @@ module.exports = {
      * @group
      */
     'node/global-require': 'error',
+
+    'node/no-path-concat': 'error',
+    'node/no-unsupported-features/node-builtins': 'error',
+    'node/shebang': 'error',
+    'node/no-deprecated-api': 'error',
+    'node/no-deprecated-api': 'error',
 
     /**
      * @meaning
@@ -90,7 +93,7 @@ module.exports = {
     'node/prefer-global/process': 'error',
     'node/prefer-promises/dns': 'error',
     'node/prefer-promises/fs': 'error',
-    'node/no-sync': 'error',
+    'node/no-sync': 'off',
 
     /**
      * @meaning
@@ -123,5 +126,8 @@ module.exports = {
      * 增加可读性
      */
     'node/prefer-global/url': 'error',
+  },
+  env: {
+    node: true,
   },
 };

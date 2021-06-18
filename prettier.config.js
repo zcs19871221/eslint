@@ -8,4 +8,5 @@ module.exports = {
   tabWidth: 2,
   // jsx闭合字符/>独立一行
   jsxBracketSameLine: false,
+  endOfLine: 'lf',
 };
