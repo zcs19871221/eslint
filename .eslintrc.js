@@ -1,5 +1,11 @@
 module.exports = {
-  extends: ["zcs/base", "zcs/rules/node", "zcs/rules/confusingBrowserGlobals"],
+  extends: [
+    "./base",
+    "./rules/node",
+    "./rules/confusingBrowserGlobals",
+    "./rules/react",
+    "./rules/jsx-accessibility",
+  ],
   overrides: [
     {
       files: ["**/*.ts?(x)"],
@@ -9,4 +15,9 @@ module.exports = {
       },
     },
   ],
+  settings: {
+    "import/resolver": {
+      alias: [["@Utils", "./bin"]],
+    },
+  },
 };

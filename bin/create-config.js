@@ -18,7 +18,7 @@ const TS = `overrides: [
 const alias = `settings: {
   'import/resolver': {
     alias: [
-      ['@Utils', 'src/utils'],
+      ['@Utils', './src/utils'],
     ]
   }
 }`;
