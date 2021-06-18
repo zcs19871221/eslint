@@ -1,11 +1,11 @@
 module.exports = {
-  extends: ["./index.js"],
+  extends: ["zcs/base", "zcs/rules/node", "zcs/rules/confusingBrowserGlobals"],
   overrides: [
     {
-      files: ['**/*.ts?(x)'],
+      files: ["**/*.ts?(x)"],
       parserOptions: {
         tsconfigRootDir: __dirname,
-        project: './tsconfig.json',
+        project: "./tsconfig.json",
       },
     },
   ],

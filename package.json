@@ -10,7 +10,10 @@
   "main": "index.js",
   "author": "",
   "license": "MIT",
-  "peerDependencies": {
+  "bin": {
+    "es-config": "bin/create-config.js"
+  },
+  "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
     "babel-eslint": "^10.1.0",
